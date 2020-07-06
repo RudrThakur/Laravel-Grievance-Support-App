@@ -4,7 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
-use App\Models\ServiceInfo;
+use App\ServiceInfo;
 
 class DropdownServiceProvider extends ServiceProvider
 {

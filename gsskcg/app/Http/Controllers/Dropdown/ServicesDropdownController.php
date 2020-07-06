@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Dropdown;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-use App\Models\ServiceInfo;
+use App\ServiceInfo;
 
 class ServicesDropdownController extends Controller
 {
