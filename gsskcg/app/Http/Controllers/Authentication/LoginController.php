@@ -25,6 +25,8 @@ class LoginController extends Controller
         
         else{
 
+            session()->flash('message', 'You Have been Logged In');
+
             return redirect()->route('home');
 
         }
