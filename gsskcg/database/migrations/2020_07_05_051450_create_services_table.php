@@ -15,6 +15,15 @@ class CreateServicesTable extends Migration
     {
         Schema::create('services', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('category');
+            $table->string('subcategory');
+            $table->string('block');
+            $table->string('department');
+            $table->string('floor');
+            $table->string('room');
+            $table->string('assetcode')->nullable();
+            $table->string('quantity');
+            $table->string('description');
             $table->timestamps();
         });
     }

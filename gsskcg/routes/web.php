@@ -29,6 +29,8 @@ Route::get('/user/index', 'Ticket\TicketController@index')->name('home');
 
 Route::get('/user/services', 'Ticket\ServicesController@create');
 
+Route::post('/user/request-service', 'Ticket\ServicesController@store');
+
 Route::get('/get-service-categories/{category}', 'Dropdown\ServicesDropdownController@subcategories');
 
 Route::get('/get-service-departments/{block}', 'Dropdown\ServicesDropdownController@departments');

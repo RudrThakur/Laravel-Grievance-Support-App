@@ -22,6 +22,23 @@
 
 </head>
 
+<style>
+    #flash-message {
+        position: absolute;
+        bottom: 20px;
+        right: 20px;
+        z-index: 10;
+        top: 0;
+        max-height: 60px;
+
+    }
+</style>
+<script>
+    setTimeout(function() {
+        $('#flash-message').fadeOut('slow');
+    }, 3000);
+</script>
+
 <body id="page-top">
     <!-- Page Wrapper -->
     <div id="wrapper">
@@ -34,6 +51,12 @@
             <div id="content">
 
                 @include('user.partials.navbar')
+
+                @if ($flash = session('message'))
+                <div id="flash-message" class="alert alert-success" role="alert">
+                    {{ $flash }}
+                </div>
+                @endif
 
                 @yield('content')
 

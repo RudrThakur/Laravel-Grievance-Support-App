@@ -69,7 +69,10 @@
     <div id="messages"></div>
     <div class="card">
       <div class="card-body">
-        <form id="services-form" data-route="">
+
+        @include('layouts.errors')
+
+        <form method="POST" action="/user/request-service">
           @csrf
           <div class="row">
             <div class="col-md-6 col-sm-12">
@@ -125,7 +128,7 @@
             <div class="col-md-6 col-sm-12">
               <div class="jumbotron small1 form-group text-center">
                 <label class="text-primary">Room Number</label>
-                <select name="room" id="room" class=" form-control" required>
+                <select name="room" id="room" class="form-control" required>
                   <option value="">Select Room</option>
                 </select>
               </div>
