@@ -40,3 +40,5 @@ Route::get('/get-service-departments/{block}', 'Dropdown\ServicesDropdownControl
 Route::get('/get-service-floors/{department}', 'Dropdown\ServicesDropdownController@floors');
 
 Route::get('/get-service-rooms/{block}/{department}/{floor}', 'Dropdown\ServicesDropdownController@rooms');
+
+Route::get('/service-details/{ticketId}', 'Ticket\TicketController@details');

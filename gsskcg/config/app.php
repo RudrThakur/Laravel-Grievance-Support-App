@@ -179,6 +179,7 @@ return [
          * My Service Providers
          */
         App\Providers\DropdownServiceProvider::class,
+        App\Providers\TicketServiceProvider::class,
 
     ],
 

@@ -4,6 +4,8 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
+use App\Ticket;
+
 class TicketServiceProvider extends ServiceProvider
 {
     /**
@@ -23,12 +25,12 @@ class TicketServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        view()->composer('user.services', function($view){
+
+        view()->composer('user.active-tickets', function($view){
 
             $view->with(
                 [
-                'categories' => ServiceInfo::distinct()->pluck('category'),
-                'blocks' => LocationInfo::distinct()->pluck('block')
+                'tickets' => Ticket::all()
                 ]
             );
 

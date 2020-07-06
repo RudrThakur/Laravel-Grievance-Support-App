@@ -14,5 +14,11 @@ class Ticket extends Model
         'worker',
         'priority',
         'fund'
-    ];      
+    ];   
+    
+    public function user(){
+        
+        return $this->belongsTo('App\User');
+        
+    }
 }
