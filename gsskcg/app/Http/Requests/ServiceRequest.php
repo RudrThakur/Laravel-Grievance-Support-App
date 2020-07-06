@@ -3,7 +3,9 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+
 use App\Service;
+use App\Ticket;
 
 
 class ServiceRequest extends FormRequest
@@ -39,23 +41,24 @@ class ServiceRequest extends FormRequest
         ];
     }
 
-    public function persist(){
+    public function persist(ServiceRequest $request){
 
-        
-        $service = Service::create(
+        $ticket = Ticket::create(['user_id' => auth()->id(), 'type' => 'Service']);
 
-            $this->only(['category',
-            'subcategory',
-            'block',
-            'department',
-            'floor',
-            'room',
-            'assetcode',
-            'quantity',
-            'description'])
-            
-        );
+        $service = new Service;
 
+        $service->ticket_id = $ticket->id;
+        $service->category = $request->category;
+        $service->subcategory = $request->subcategory;
+        $service->block = $request->block;
+        $service->department = $request->department;
+        $service->floor = $request->floor;
+        $service->room = $request->room;
+        $service->assetcode = $request->assetcode;
+        $service->quantity = $request->quantity;
+        $service->description = $request->description;
+
+        $service->save();
 
     }
 }

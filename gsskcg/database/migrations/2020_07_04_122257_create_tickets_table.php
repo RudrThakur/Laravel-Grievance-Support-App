@@ -15,6 +15,14 @@ class CreateTicketsTable extends Migration
     {
         Schema::create('tickets', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->string('type');
+            $table->string('holder')->default('Admin');
+            $table->string('status')->default('Pending');
+            $table->string('worker')->nullable();
+            $table->string('priority')->nullable();
+            $table->string('fund')->nullable();
             $table->timestamps();
         });
     }

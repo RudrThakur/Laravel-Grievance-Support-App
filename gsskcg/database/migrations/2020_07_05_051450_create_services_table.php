@@ -15,6 +15,8 @@ class CreateServicesTable extends Migration
     {
         Schema::create('services', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('ticket_id');
+            $table->foreign('ticket_id')->references('id')->on('tickets')->onDelete('cascade');
             $table->string('category');
             $table->string('subcategory');
             $table->string('block');

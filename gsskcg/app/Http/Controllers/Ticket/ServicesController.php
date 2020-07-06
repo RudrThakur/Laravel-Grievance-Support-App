@@ -15,10 +15,10 @@ class ServicesController extends Controller
 
     public function store(ServiceRequest $request){
 
-        $request->persist();
+        $request->persist($request);
 
         session()->flash('message', 'Your Service Request Has Been Submitted');
-        
+
         return redirect()->route('home');
 
     }

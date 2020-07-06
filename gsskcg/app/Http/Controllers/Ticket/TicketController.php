@@ -18,4 +18,10 @@ class TicketController extends Controller
         return view('user.index');
 
     }
+
+    public function activeTickets(){
+
+        return view('user.active-tickets');
+        
+    }
 }

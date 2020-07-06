@@ -40,10 +40,12 @@
 </script>
 
 <body id="page-top">
+
     <!-- Page Wrapper -->
     <div id="wrapper">
 
         @include('user.partials.sidebar')
+
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
 
@@ -62,10 +64,12 @@
 
                 @include('user.partials.modals.logout')
 
-                @include('user.partials.footer')
 
             </div>
             <!-- End of Main Content -->
+
+            @include('user.partials.footer')
+
         </div>
         <!-- End of Content Wrapper -->
 

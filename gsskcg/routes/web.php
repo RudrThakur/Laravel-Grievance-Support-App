@@ -27,6 +27,8 @@ Route::get('/logout', 'Authentication\LoginController@destroy');
 
 Route::get('/user/index', 'Ticket\TicketController@index')->name('home');
 
+Route::get('/user/active-tickets', 'Ticket\TicketController@activeTickets')->name('home');
+
 Route::get('/user/services', 'Ticket\ServicesController@create');
 
 Route::post('/user/request-service', 'Ticket\ServicesController@store');
