@@ -41,22 +41,22 @@ class ServiceRequest extends FormRequest
         ];
     }
 
-    public function persist(ServiceRequest $request){
+    public function persist(){
 
         $ticket = Ticket::create(['user_id' => auth()->id(), 'type' => 'Service']);
 
         $service = new Service;
 
         $service->ticket_id = $ticket->id;
-        $service->category = $request->category;
-        $service->subcategory = $request->subcategory;
-        $service->block = $request->block;
-        $service->department = $request->department;
-        $service->floor = $request->floor;
-        $service->room = $request->room;
-        $service->assetcode = $request->assetcode;
-        $service->quantity = $request->quantity;
-        $service->description = $request->description;
+        $service->category = $this->category;
+        $service->subcategory = $this->subcategory;
+        $service->block = $this->block;
+        $service->department = $this->department;
+        $service->floor = $this->floor;
+        $service->room = $this->room;
+        $service->assetcode = $this->assetcode;
+        $service->quantity = $this->quantity;
+        $service->description = $this->description;
 
         $service->save();
 

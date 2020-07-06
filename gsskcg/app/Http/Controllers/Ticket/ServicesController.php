@@ -15,7 +15,7 @@ class ServicesController extends Controller
 
     public function store(ServiceRequest $request){
 
-        $request->persist($request);
+        $request->persist();
 
         session()->flash('message', 'Your Service Request Has Been Submitted');
 
