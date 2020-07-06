@@ -25,11 +25,9 @@
 <style>
     #flash-message {
         position: absolute;
-        bottom: 20px;
-        right: 20px;
-        z-index: 10;
-        top: 0;
-        max-height: 60px;
+        bottom: 0;
+        margin: 20px;
+        right: 0;
 
     }
 </style>
@@ -40,7 +38,11 @@
 </script>
 
 <body id="page-top">
-
+    @if ($flash = session('message'))
+    <div id="flash-message" class="alert alert-success" role="alert">
+        {{ $flash }}
+    </div>
+    @endif
     <!-- Page Wrapper -->
     <div id="wrapper">
 
@@ -53,12 +55,6 @@
             <div id="content">
 
                 @include('user.partials.navbar')
-
-                @if ($flash = session('message'))
-                <div id="flash-message" class="alert alert-success" role="alert">
-                    {{ $flash }}
-                </div>
-                @endif
 
                 @yield('content')
 

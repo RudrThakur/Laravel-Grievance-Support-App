@@ -34,6 +34,8 @@ class LoginController extends Controller
 
         auth()->logout();
 
+        session()->flash('message', 'You Have been Logged Out Successfully');
+
         return redirect()->route('login');
 
     }

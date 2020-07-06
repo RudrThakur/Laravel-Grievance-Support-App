@@ -12,7 +12,7 @@
 <script type="text/javascript">
   $(function(){
    
-    $(document).on('click', '.show', function () {
+    $('.show').on('click', function () {
       var ticketId = $(this).attr('id');
     
          $.ajax({
