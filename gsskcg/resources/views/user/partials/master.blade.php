@@ -23,7 +23,9 @@
 </head>
 
 <body id="page-top">
+
     @include('layouts.flash')
+
     <!-- Page Wrapper -->
     <div id="wrapper">
 

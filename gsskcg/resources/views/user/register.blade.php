@@ -43,6 +43,14 @@
               <form class="user" method="POST" action="/register">
                 @csrf
                 <div class="form-group">
+                  <select class="form-control" id="role_id" name="role_id">
+                    <option value="">Select Role</option>
+                    @foreach($roles as $role)
+                    <option value="{{ $role->id }}">{{ $role->role}}</option>
+                    @endforeach
+                  </select>
+                </div>
+                <div class="form-group">
                   <input type="text" class="form-control form-control-user" id="name" name="name" placeholder="Name"
                     required>
                 </div>

@@ -6,6 +6,7 @@ use Illuminate\Support\ServiceProvider;
 
 use App\ServiceInfo;
 use App\LocationInfo;
+use App\RoleInfo;
 
 class DropdownServiceProvider extends ServiceProvider
 {
@@ -32,6 +33,16 @@ class DropdownServiceProvider extends ServiceProvider
                 [
                 'categories' => ServiceInfo::distinct()->pluck('category'),
                 'blocks' => LocationInfo::distinct()->pluck('block')
+                ]
+            );
+
+        });
+
+        view()->composer('user.register', function($view){
+
+            $view->with(
+                [
+                'roles' => RoleInfo::distinct()->get()
                 ]
             );
 

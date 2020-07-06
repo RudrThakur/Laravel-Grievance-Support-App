@@ -16,13 +16,7 @@ class TicketController extends Controller
         $this->middleware('auth');
     }
     
-    public function index(){
-        
-        return view('user.index');
-
-    }
-
-    public function activeTickets(){
+    public function active(){
 
         return view('user.active-tickets');
         

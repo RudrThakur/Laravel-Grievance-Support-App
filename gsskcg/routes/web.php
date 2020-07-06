@@ -25,9 +25,9 @@ Route::post('/login', 'Authentication\LoginController@store');
 
 Route::get('/logout', 'Authentication\LoginController@destroy');
 
-Route::get('/user/index', 'Ticket\TicketController@index')->name('home');
+Route::get('/user/index', 'User\UserController@index');
 
-Route::get('/user/active-tickets', 'Ticket\TicketController@activeTickets')->name('home');
+Route::get('/user/active-tickets', 'Ticket\TicketController@active');
 
 Route::get('/user/services', 'Ticket\ServicesController@create');
 
@@ -42,3 +42,5 @@ Route::get('/get-service-floors/{department}', 'Dropdown\ServicesDropdownControl
 Route::get('/get-service-rooms/{block}/{department}/{floor}', 'Dropdown\ServicesDropdownController@rooms');
 
 Route::get('/service-details/{ticketId}', 'Ticket\TicketController@details');
+
+Route::get('/admin/index', 'Admin\AdminController@index');

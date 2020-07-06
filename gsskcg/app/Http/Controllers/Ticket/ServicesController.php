@@ -19,7 +19,7 @@ class ServicesController extends Controller
 
         session()->flash('message', 'Your Service Request Has Been Submitted');
 
-        return redirect()->route('home');
+        return redirect()->to('/user/active-tickets');
 
     }
 }
