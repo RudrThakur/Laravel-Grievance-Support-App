@@ -5,6 +5,7 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 
 use App\ServiceInfo;
+use App\LocationInfo;
 
 class DropdownServiceProvider extends ServiceProvider
 {
@@ -28,7 +29,10 @@ class DropdownServiceProvider extends ServiceProvider
         view()->composer('user.services', function($view){
 
             $view->with(
-                'categories', ServiceInfo::distinct()->pluck('category')
+                [
+                'categories' => ServiceInfo::distinct()->pluck('category'),
+                'blocks' => LocationInfo::distinct()->pluck('block')
+                ]
             );
 
         });

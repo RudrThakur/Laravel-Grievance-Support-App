@@ -30,3 +30,9 @@ Route::get('/user/index', 'Ticket\TicketController@index')->name('home');
 Route::get('/user/services', 'Ticket\ServicesController@create');
 
 Route::get('/get-service-categories/{category}', 'Dropdown\ServicesDropdownController@subcategories');
+
+Route::get('/get-service-departments/{block}', 'Dropdown\ServicesDropdownController@departments');
+
+Route::get('/get-service-floors/{department}', 'Dropdown\ServicesDropdownController@floors');
+
+Route::get('/get-service-rooms/{block}/{department}/{floor}', 'Dropdown\ServicesDropdownController@rooms');

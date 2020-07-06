@@ -19,6 +19,37 @@
           }
       });
   });
+
+  $("#block").change(function(){
+      $.ajax({
+          url: "/get-service-departments/" + $(this).val(),
+          method: 'GET',
+          success: function(Response) {
+              $('#department').html(Response.html);
+          }
+      });
+  });
+
+  $("#department").change(function(){
+      $.ajax({
+          url: "/get-service-floors/" + $(this).val(),
+          method: 'GET',
+          success: function(Response) {
+              $('#floor').html(Response.html);
+          }
+      });
+  });
+
+  $("#floor").change(function(){
+      $.ajax({
+          url: "/get-service-rooms/" + $('#block').val() + "/" + $('#department').val() + "/"+ $(this).val(),
+          method: 'GET',
+          success: function(Response) {
+              $('#room').html(Response.html);
+          }
+      });
+  });
+
 </script>
 @endsection
 
@@ -67,9 +98,9 @@
                 <label class="text-primary">Block</label>
                 <select name="block" id="block" class="form-control" required>
                   <option value="">Select Block</option>
-                  {{-- @foreach($blocks as $block)
-                  <option value="{{ $block['id']}}">{{ $block['blockname']}}</option>
-                  @endforeach --}}
+                  @foreach($blocks as $block)
+                  <option value="{{ $block }}">{{ $block }}</option>
+                  @endforeach
                 </select>
               </div>
             </div>
@@ -93,9 +124,9 @@
             </div>
             <div class="col-md-6 col-sm-12">
               <div class="jumbotron small1 form-group text-center">
-                <label class="text-primary">RoomNo</label>
-                <select name="roomnumber" id="roomnumber" class="form-control" required>
-                  <option value="">Select Room Number</option>
+                <label class="text-primary">Room Number</label>
+                <select name="room" id="room" class=" form-control" required>
+                  <option value="">Select Room</option>
                 </select>
               </div>
             </div>
@@ -120,8 +151,7 @@
               <div class="jumbotron small1 form-group text-center">
                 <label class="text-primary">Description</label>
                 <textarea col="2" name="description" maxlength="200" class="form-control" id="description"
-                  placeholder="Enter Description (Less than 150 Characters)" required>eg: not working well
-                                </textarea>
+                  placeholder="Enter Description (Less than 150 Characters)" required></textarea>
               </div>
             </div>
           </div>
