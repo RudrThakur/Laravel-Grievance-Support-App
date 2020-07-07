@@ -2,6 +2,50 @@
 
 @section('title', 'Admin - Tickets')
 
+@section('scripts')
+
+<script type="text/javascript">
+    $(function(){
+   
+    $('.show').on('click', function () {
+      var ticketId = $(this).attr('id');
+    
+         $.ajax({
+          url : "/service-details/" + ticketId,
+          type: "get",
+          dataType: "json",
+          success:function(data)
+          {
+         
+            $('.modal-title').text('Service Details');
+            $('#service-details-modal').modal('show'); 
+            $('#service-ticketId').html(data.ticket.id);
+            $('#service-category').html(data.service.category);
+            $('#service-user-name').html(data.ticket.user.name);
+            $('#service-department').html(data.service.department);
+            $('#service-subcategory').html(data.service.subcategory);
+            $('#service-holder').html(data.ticket.holder);
+            $('#service-block').html(data.service.block);
+            $('#service-floor').html(data.service.floor);
+            $('#service-room').html(data.service.room);
+            $('#service-quantity').html(data.service.quantity);
+            $('#service-assetcode').html(data.service.assetcode);
+            $('#service-created_at').html(data.ticket.created_at);
+            $('#service-updated_at').html(data.ticket.updated_at);
+            $('#service-status').html(data.ticket.status);
+            $('#service-userId').html(data.ticket.user.id);
+            $('#service-description').html(data.service.description);    
+    
+          },error:function(error){ 
+           console.log(error);
+          }
+         });
+      });
+});
+
+</script>
+@endsection
+
 @section('content')
 <!-- ============================================================== -->
 <!-- Container fluid  -->
@@ -23,20 +67,37 @@
                     <table class="table table-bordered table-hover">
                         <thead>
                             <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">First</th>
-                                <th scope="col">Last</th>
-                                <th scope="col">Handle</th>
+                                <th scope="col">Ticket Id</th>
+                                <th scope="col">Type</th>
+                                <th scope="col">User Id</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Status</th>
+                                <th scope="col">Current Holder</th>
+                                <th scope="col">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {{ $tickets }}
+                            @foreach($tickets as $ticket)
+                            <tr>
+                                <th scope="row">{{ $ticket->id }}</th>
+                                <td>{{ $ticket->type }}</td>
+                                <td>{{ $ticket->user->id }}</td>
+                                <td>{{ $ticket->user->name }}</td>
+                                <td>{{ $ticket->status }}</td>
+                                <td>{{ $ticket->holder }}</td>
+                                <td><a href="#" name="show" id="{{ $ticket->id }}"
+                                        class="show btn btn-outline-primary btn-sm"><i class="fas fa-eye"></i></a></td>
+                            </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
     </div>
+
+    @include('user.partials.modals.service-details')
+
     <!-- ============================================================== -->
     <!-- End PAge Content -->
     <!-- ============================================================== -->

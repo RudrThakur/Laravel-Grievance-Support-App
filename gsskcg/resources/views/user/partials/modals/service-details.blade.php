@@ -10,13 +10,13 @@
                     <tr>
                         <th>Ticket Id</th>
                         <td id="service-ticketId"></td>
-                        <th>Raised By</th>
+                        <th>User Name</th>
                         <td id="service-user-name"></td>
                     </tr>
                     <tr>
                         <th>Department</th>
                         <td id="service-department"></td>
-                        <th>Staff Id</th>
+                        <th>User Id</th>
                         <td id="service-userId"></td>
                     </tr>
                     <tr>
@@ -56,6 +56,8 @@
                         <td id="service-updated_at"></td>
                     </tr>
                 </table>
+
+
             </div>
         </div>
     </div>

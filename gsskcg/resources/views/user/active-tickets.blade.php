@@ -3,12 +3,15 @@
 @section('title', 'My Active Tickets')
 
 @section('styles')
+
 <style>
 
 </style>
+
 @endsection
 
 @section('scripts')
+
 <script type="text/javascript">
   $(function(){
    
@@ -48,10 +51,11 @@
       });
 });
 
-
 </script>
 @endsection
+
 @section('content')
+
 <!-- Begin Page Content -->
 <div class="container-fluid">
 
