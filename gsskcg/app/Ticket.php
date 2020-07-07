@@ -12,7 +12,7 @@ class Ticket extends Model
         'holder',
         'status',
         'worker',
-        'priority',
+        'priority_id',
         'fund'
     ];   
     
@@ -25,6 +25,12 @@ class Ticket extends Model
     public function type(){
         
         return $this->belongsTo('App\TicketInfo');
+
+    }
+
+    public function priority(){
         
+        return $this->belongsTo('App\PriorityInfo');
+
     }
 }

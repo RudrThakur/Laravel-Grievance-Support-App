@@ -22,7 +22,8 @@ class CreateTicketsTable extends Migration
             $table->string('holder')->default('Admin');
             $table->string('status')->default('Pending');
             $table->string('worker')->nullable();
-            $table->string('priority')->nullable();
+            $table->unsignedBigInteger('priority_id')->nullable();
+            $table->foreign('priority_id')->references('id')->on('priority_infos')->onDelete('cascade');
             $table->string('fund')->nullable();
             $table->timestamps();
         });
