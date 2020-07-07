@@ -6,6 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 
 use App\Service;
 use App\Ticket;
+use App\TicketInfo;
 
 
 class ServiceRequest extends FormRequest
@@ -43,7 +44,9 @@ class ServiceRequest extends FormRequest
 
     public function persist(){
 
-        $ticket = Ticket::create(['user_id' => auth()->id(), 'type' => 'Service']);
+        $ticketTypeId = TicketInfo::where('type', 'Service')->first()->id;
+
+        $ticket = Ticket::create(['user_id' => auth()->id(), 'type_id' => $ticketTypeId]);
 
         $service = new Service;
 

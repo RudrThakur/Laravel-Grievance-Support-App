@@ -101,7 +101,7 @@
             @foreach($tickets as $ticket)
             <tr>
               <td>{{ $ticket->id }}</td>
-              <td>{{ $ticket->type }}</td>
+              <td>{{ $ticket->type->type }}</td>
               <td>{{ $ticket->holder }}</td>
               <td>{{ $ticket->status }}</td>
               <td>{{ $ticket->worker }}</td>

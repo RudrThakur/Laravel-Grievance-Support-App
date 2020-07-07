@@ -114,7 +114,7 @@
                             @foreach($tickets as $ticket)
                             <tr>
                                 <th scope="row">{{ $ticket->id }}</th>
-                                <td>{{ $ticket->type }}</td>
+                                <td>{{ $ticket->type->type }}</td>
                                 <td>{{ $ticket->user->id }}</td>
                                 <td>{{ $ticket->user->name }}</td>
                                 <td>{{ $ticket->status }}</td>

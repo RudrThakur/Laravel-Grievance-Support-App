@@ -8,7 +8,7 @@ class Ticket extends Model
 {
     protected $fillable = [
         'user_id',
-        'type',
+        'type_id',
         'holder',
         'status',
         'worker',
@@ -19,6 +19,12 @@ class Ticket extends Model
     public function user(){
         
         return $this->belongsTo('App\User');
+        
+    }
+
+    public function type(){
+        
+        return $this->belongsTo('App\TicketInfo');
         
     }
 }
