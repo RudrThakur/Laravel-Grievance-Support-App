@@ -15,7 +15,7 @@
 <script type="text/javascript">
   $(function(){
    
-    $('.show').on('click', function () {
+    $('.service-show').on('click', function () {
       var ticketId = $(this).attr('id');
     
          $.ajax({
@@ -24,8 +24,6 @@
           dataType: "json",
           success:function(data)
           {
-         
-            $('.modal-title').text('Service Details');
             $('#service-details-modal').modal('show'); 
             $('#service-ticketId').html(data.ticket.id);
             $('#service-category').html(data.service.category);
@@ -52,6 +50,7 @@
 });
 
 </script>
+
 @endsection
 
 @section('content')
@@ -109,8 +108,8 @@
               <td>{{ $ticket->priority }}</td>
               <td>{{ $ticket->created_at }}</td>
               <td>{{ $ticket->updated_at }}</td>
-              <td><a href="#" name="show" id="{{ $ticket->id }}" class="show btn btn-outline-primary btn-sm"><i
-                    class="fas fa-eye"></i></a></td>
+              <td><a href="javascript:void(0)" id="{{ $ticket->id }}"
+                  class="service-show btn btn-outline-primary btn-sm"><i class="fas fa-eye"></i></a></td>
             </tr>
             @endforeach
           </tbody>
@@ -119,7 +118,7 @@
     </div>
   </div>
 
-  @include('user.partials.modals.service-details')
+  @include('layouts.modals.service-details')
 
 </div>
 <!-- /.container-fluid -->

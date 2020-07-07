@@ -41,7 +41,7 @@
 
                 @yield('content')
 
-                @include('user.partials.modals.logout')
+                @include('layouts.modals.logout')
 
 
             </div>

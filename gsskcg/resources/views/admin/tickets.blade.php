@@ -7,7 +7,7 @@
 <script type="text/javascript">
     $(function(){
    
-    $('.show').on('click', function () {
+    $('.service-show').on('click', function () {
       var ticketId = $(this).attr('id');
     
          $.ajax({
@@ -16,8 +16,6 @@
           dataType: "json",
           success:function(data)
           {
-         
-            $('.modal-title').text('Service Details');
             $('#service-details-modal').modal('show'); 
             $('#service-ticketId').html(data.ticket.id);
             $('#service-category').html(data.service.category);
@@ -41,9 +39,45 @@
           }
          });
       });
+
+      $('.service-action').on('click', function () {
+      var ticketId = $(this).attr('id');
+        $('#service-action-modal').modal('show'); 
+        //  $.ajax({
+        //   url : "/service-details/" + ticketId,
+        //   type: "get",
+        //   dataType: "json",
+        //   success:function(data)
+        //   {
+         
+           
+        //     $('#service-ticketId').html(data.ticket.id);
+        //     $('#service-category').html(data.service.category);
+        //     $('#service-user-name').html(data.ticket.user.name);
+        //     $('#service-department').html(data.service.department);
+        //     $('#service-subcategory').html(data.service.subcategory);
+        //     $('#service-holder').html(data.ticket.holder);
+        //     $('#service-block').html(data.service.block);
+        //     $('#service-floor').html(data.service.floor);
+        //     $('#service-room').html(data.service.room);
+        //     $('#service-quantity').html(data.service.quantity);
+        //     $('#service-assetcode').html(data.service.assetcode);
+        //     $('#service-created_at').html(data.ticket.created_at);
+        //     $('#service-updated_at').html(data.ticket.updated_at);
+        //     $('#service-status').html(data.ticket.status);
+        //     $('#service-userId').html(data.ticket.user.id);
+        //     $('#service-description').html(data.service.description);    
+    
+        //   },error:function(error){ 
+        //    console.log(error);
+        //   }
+        //  });
+      });
+
 });
 
 </script>
+
 @endsection
 
 @section('content')
@@ -85,8 +119,13 @@
                                 <td>{{ $ticket->user->name }}</td>
                                 <td>{{ $ticket->status }}</td>
                                 <td>{{ $ticket->holder }}</td>
-                                <td><a href="#" name="show" id="{{ $ticket->id }}"
-                                        class="show btn btn-outline-primary btn-sm"><i class="fas fa-eye"></i></a></td>
+                                <td><a href="javascript:void(0)" id="{{ $ticket->id }}"
+                                        class="service-show btn btn-outline-primary btn-sm"><i
+                                            class="fas fa-eye"></i></a>
+                                    <a href="javascript:void(0)" id="{{ $ticket->id }}"
+                                        class="service-action btn btn-outline-primary btn-sm"><i
+                                            class="fas fa-tasks"></i></a>
+                                </td>
                             </tr>
                             @endforeach
                         </tbody>
@@ -96,7 +135,9 @@
         </div>
     </div>
 
-    @include('user.partials.modals.service-details')
+    @include('layouts.modals.service-details')
+
+    @include('admin.partials.modals.service-action')
 
     <!-- ============================================================== -->
     <!-- End PAge Content -->

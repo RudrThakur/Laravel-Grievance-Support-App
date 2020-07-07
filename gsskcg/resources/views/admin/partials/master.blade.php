@@ -76,6 +76,8 @@
             <!-- ============================================================== -->
             @yield('content')
 
+            @include('layouts.modals.logout')
+
             @include('admin.partials.footer')
 
 
