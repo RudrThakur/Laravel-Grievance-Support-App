@@ -22,7 +22,11 @@ class RegistrationController extends Controller
             'name' => 'required',
             'email' => 'required|email',
             'password' => 'required|confirmed'
-        ]);
+        ],
+        [
+            'role_id.required' => 'Role is required',
+        ]
+        );
 
         $user = User::create(request(['role_id', 'name', 'email', 'password']));
 
