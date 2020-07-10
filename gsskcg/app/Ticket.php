@@ -10,8 +10,8 @@ class Ticket extends Model
         'user_id',
         'type_id',
         'authority_id',
-        'status',
-        'worker',
+        'status_id',
+        'worker_id',
         'priority_id',
         'fund'
     ];   
@@ -37,6 +37,18 @@ class Ticket extends Model
     public function authority(){
         
         return $this->belongsTo('App\AuthorityInfo');
+
+    }
+
+    public function status(){
+
+        return $this->belongsTo('App\StatusInfo');
+
+    }
+
+    public function worker(){
+
+        return $this->belongsTo('App\User');
         
     }
 }

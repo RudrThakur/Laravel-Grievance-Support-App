@@ -30,7 +30,12 @@ class TicketServiceProvider extends ServiceProvider
 
             $view->with(
                 [
-                'tickets' => Ticket::all()
+                'tickets' => Ticket::with('authority')
+                                    ->with('user')
+                                    ->with('status')
+                                    ->with('worker')
+                                    ->with('priority')
+                                    ->get(),
                 ]
             );
 

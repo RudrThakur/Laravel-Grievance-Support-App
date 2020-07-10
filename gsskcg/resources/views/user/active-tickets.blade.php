@@ -38,7 +38,7 @@
             $('#service-assetcode').html(data.service.assetcode);
             $('#service-created_at').html(data.ticket.created_at);
             $('#service-updated_at').html(data.ticket.updated_at);
-            $('#service-status').html(data.ticket.status);
+            $('#service-status').html(data.ticket.status.status);
             $('#service-userId').html(data.ticket.user.id);
             $('#service-description').html(data.service.description);    
     
@@ -103,9 +103,9 @@
               <td>{{ $ticket->id }}</td>
               <td>{{ $ticket->type->type }}</td>
               <td>{{ $ticket->authority->authority }}</td>
-              <td>{{ $ticket->status }}</td>
-              <td>{{ $ticket->worker }}</td>
-              <td>{{ $ticket->priority }}</td>
+              <td>{{ $ticket->status->status }}</td>
+              <td>{{ $ticket->worker ? $ticket->worker : '' }}</td>
+              <td>{{ $ticket->priority ? $ticket->priority->priority : '' }}</td>
               <td>{{ $ticket->created_at }}</td>
               <td>{{ $ticket->updated_at }}</td>
               <td><a href="javascript:void(0)" id="{{ $ticket->id }}"

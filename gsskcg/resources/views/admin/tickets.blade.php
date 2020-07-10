@@ -30,7 +30,7 @@
             $('#service-assetcode').html(data.service.assetcode);
             $('#service-created_at').html(data.ticket.created_at);
             $('#service-updated_at').html(data.ticket.updated_at);
-            $('#service-status').html(data.ticket.status);
+            $('#service-status').html(data.ticket.status.status);
             $('#service-userId').html(data.ticket.user.id);
             $('#service-description').html(data.service.description);    
     
@@ -117,7 +117,7 @@
                                 <td>{{ $ticket->type->type }}</td>
                                 <td>{{ $ticket->user->id }}</td>
                                 <td>{{ $ticket->user->name }}</td>
-                                <td>{{ $ticket->status }}</td>
+                                <td>{{ $ticket->status->status }}</td>
                                 <td>{{ $ticket->authority->authority }}</td>
                                 <td><a href="javascript:void(0)" id="{{ $ticket->id }}"
                                         class="service-show btn btn-outline-primary btn-sm"><i
