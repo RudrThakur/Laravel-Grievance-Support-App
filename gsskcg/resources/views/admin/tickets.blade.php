@@ -118,7 +118,7 @@
                                 <td>{{ $ticket->user->id }}</td>
                                 <td>{{ $ticket->user->name }}</td>
                                 <td>{{ $ticket->status }}</td>
-                                <td>{{ $ticket->holder }}</td>
+                                <td>{{ $ticket->authority->authority }}</td>
                                 <td><a href="javascript:void(0)" id="{{ $ticket->id }}"
                                         class="service-show btn btn-outline-primary btn-sm"><i
                                             class="fas fa-eye"></i></a>

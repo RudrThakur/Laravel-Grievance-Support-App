@@ -9,7 +9,7 @@ class Ticket extends Model
     protected $fillable = [
         'user_id',
         'type_id',
-        'holder',
+        'authority_id',
         'status',
         'worker',
         'priority_id',
@@ -32,5 +32,11 @@ class Ticket extends Model
         
         return $this->belongsTo('App\PriorityInfo');
 
+    }
+
+    public function authority(){
+        
+        return $this->belongsTo('App\AuthorityInfo');
+        
     }
 }

@@ -19,7 +19,8 @@ class CreateTicketsTable extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->unsignedBigInteger('type_id');
             $table->foreign('type_id')->references('id')->on('ticket_infos')->onDelete('cascade');
-            $table->string('holder')->default('Admin');
+            $table->unsignedBigInteger('authority_id')->default(1);
+            $table->foreign('authority_id')->references('id')->on('authority_infos')->onDelete('cascade');
             $table->string('status')->default('Pending');
             $table->string('worker')->nullable();
             $table->unsignedBigInteger('priority_id')->nullable();

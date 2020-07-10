@@ -7,6 +7,7 @@ use Illuminate\Support\ServiceProvider;
 use App\ServiceInfo;
 use App\LocationInfo;
 use App\RoleInfo;
+use App\PriorityInfo;
 
 class DropdownServiceProvider extends ServiceProvider
 {
@@ -43,6 +44,16 @@ class DropdownServiceProvider extends ServiceProvider
             $view->with(
                 [
                 'roles' => RoleInfo::distinct()->get()
+                ]
+            );
+
+        });
+
+        view()->composer(['admin.partials.modals.service-action'], function($view){
+
+            $view->with(
+                [
+                'priorities' => PriorityInfo::all()
                 ]
             );
 

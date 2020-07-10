@@ -30,7 +30,7 @@
             $('#service-user-name').html(data.ticket.user.name);
             $('#service-department').html(data.service.department);
             $('#service-subcategory').html(data.service.subcategory);
-            $('#service-holder').html(data.ticket.holder);
+            $('#service-holder').html(data.ticket.authority.authority);
             $('#service-block').html(data.service.block);
             $('#service-floor').html(data.service.floor);
             $('#service-room').html(data.service.room);
@@ -102,7 +102,7 @@
             <tr>
               <td>{{ $ticket->id }}</td>
               <td>{{ $ticket->type->type }}</td>
-              <td>{{ $ticket->holder }}</td>
+              <td>{{ $ticket->authority->authority }}</td>
               <td>{{ $ticket->status }}</td>
               <td>{{ $ticket->worker }}</td>
               <td>{{ $ticket->priority }}</td>
