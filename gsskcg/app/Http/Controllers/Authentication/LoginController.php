@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\User;
+use App\RoleInfo;
 
 class LoginController extends Controller
 {
@@ -29,7 +30,7 @@ class LoginController extends Controller
 
             session()->flash('message', 'You Have been Logged In');
 
-            if (User::where('id', auth()->id())->first()->role_id == 1)
+            if (User::where('id', auth()->id())->first()->role->role == "Admin")
             return redirect()->to('/admin/index');
 
             else
