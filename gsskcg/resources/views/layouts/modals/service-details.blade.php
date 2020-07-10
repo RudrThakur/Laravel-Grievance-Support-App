@@ -50,6 +50,12 @@
                         <td id="service-description" colspan="2"></td>
                     </tr>
                     <tr>
+                        <th>Worker Assigned</th>
+                        <td id="service-worker"></td>
+                        <th>Priority</th>
+                        <td id="service-priority" colspan="2"></td>
+                    </tr>
+                    <tr>
                         <th>Created At</th>
                         <td id="service-created_at"></td>
                         <th>Updated At</th>

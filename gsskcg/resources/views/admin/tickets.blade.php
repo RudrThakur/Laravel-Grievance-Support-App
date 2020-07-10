@@ -6,7 +6,7 @@
 
 <script type="text/javascript">
     $(function(){
-   
+        
     $('.service-show').on('click', function () {
       var ticketId = $(this).attr('id');
     
@@ -33,6 +33,8 @@
             $('#service-status').html(data.ticket.status.status);
             $('#service-userId').html(data.ticket.user.id);
             $('#service-description').html(data.service.description);    
+            $('#service-worker').html(data.ticket.worker.name);  
+            $('#service-priority').html(data.ticket.priority.priority);  
     
           },error:function(error){ 
            console.log(error);
@@ -103,7 +105,7 @@
                             <tr>
                                 <th scope="col">Ticket Id</th>
                                 <th scope="col">Type</th>
-                                <th scope="col">User Id</th>
+                                <th scope="col">Priority</th>
                                 <th scope="col">Name</th>
                                 <th scope="col">Status</th>
                                 <th scope="col">Current Holder</th>
@@ -115,7 +117,7 @@
                             <tr>
                                 <th scope="row">{{ $ticket->id }}</th>
                                 <td>{{ $ticket->type->type }}</td>
-                                <td>{{ $ticket->user->id }}</td>
+                                <td>{{ $ticket->priority ? $ticket->priority->priority : 'Not Set' }}</td>
                                 <td>{{ $ticket->user->name }}</td>
                                 <td>{{ $ticket->status->status }}</td>
                                 <td>{{ $ticket->authority->authority }}</td>
