@@ -46,3 +46,7 @@ Route::get('/service-details/{ticketId}', 'Ticket\TicketController@details');
 Route::get('/admin/index', 'Admin\AdminController@index');
 
 Route::get('/admin/tickets', 'Admin\AdminController@tickets');
+
+Route::get('/admin/create-user', function () {
+    return view('admin.create-user');
+});

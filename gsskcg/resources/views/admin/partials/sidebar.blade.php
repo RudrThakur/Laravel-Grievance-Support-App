@@ -1,7 +1,4 @@
 <!-- ============================================================== -->
-<!-- End Topbar header -->
-<!-- ============================================================== -->
-<!-- ============================================================== -->
 <!-- Left Sidebar - style you can find in sidebar.scss  -->
 <!-- ============================================================== -->
 <aside class="left-sidebar" data-sidebarbg="skin6">
@@ -10,9 +7,7 @@
         <!-- Sidebar navigation-->
         <nav class="sidebar-nav">
             <ul id="sidebarnav">
-                <!-- User Profile-->
                 <li>
-                    <!-- User Profile-->
                     <div class="user-profile d-flex no-block dropdown m-t-20">
                         <div class="user-pic"><img src="{{ asset('admin/assets/images/users/1.jpg') }}" alt="users"
                                 class="rounded-circle" width="40" /></div>
@@ -41,22 +36,57 @@
                             </div>
                         </div>
                     </div>
-                    <!-- End User Profile-->
                 </li>
                 <li class="p-15 m-t-10"><a href="javascript:void(0)"
                         class="btn btn-block create-btn text-white no-block d-flex align-items-center"><i
                             class="fa fa-plus-square"></i> <span class="hide-menu m-l-5">Create New</span> </a>
                 </li>
-                <!-- User Profile-->
                 <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                         href="/admin/index" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span
                             class="hide-menu">Dashboard</span></a></li>
                 <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                         href="/admin/tickets" aria-expanded="false"><i class="mdi mdi-face"></i><span
                             class="hide-menu">Tickets</span></a></li>
-                <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                        href="table-basic.html" aria-expanded="false"><i class="mdi mdi-border-all"></i><span
-                            class="hide-menu">Table</span></a></li>
+                <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="#"
+                        data-toggle="collapse" data-target="#collapse-user-menu" aria-expanded="true"
+                        aria-controls="collapse-user-menu"><i class="mdi mdi-border-all"></i><span
+                            class="hide-menu">User</span></a>
+                    <div id="collapse-user-menu" class="collapse" aria-labelledby="collapse-user-menu">
+                        <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/admin/create-user"
+                            aria-expanded="false"><i class="mdi mdi-face"></i><span class="hide-menu">Create
+                                User</span></a>
+                        <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/admin/manage-users"
+                            aria-expanded="false"><i class="mdi mdi-face"></i><span class="hide-menu">Manage
+                                Users</span></a>
+                    </div>
+                </li>
+                <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="#"
+                        data-toggle="collapse" data-target="#collapse-role-menu" aria-expanded="true"
+                        aria-controls="collapse-role-menu"><i class="mdi mdi-border-all"></i><span
+                            class="hide-menu">Role</span></a>
+                    <div id="collapse-role-menu" class="collapse" aria-labelledby="collapse-role-menu">
+                        <a class="sidebar-link waves-effect waves-dark sidebar-link" href="#" aria-expanded="false"><i
+                                class="mdi mdi-face"></i><span class="hide-menu">Create
+                                Role</span></a>
+                        <a class="sidebar-link waves-effect waves-dark sidebar-link" href="#" aria-expanded="false"><i
+                                class="mdi mdi-face"></i><span class="hide-menu">Manage
+                                Roles</span></a>
+                    </div>
+                </li>
+                <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="#"
+                        data-toggle="collapse" data-target="#collapse-ticket-status-menu" aria-expanded="true"
+                        aria-controls="collapse-role-menu"><i class="mdi mdi-border-all"></i><span
+                            class="hide-menu">Ticket Status</span></a>
+                    <div id="collapse-ticket-status-menu" class="collapse"
+                        aria-labelledby="collapse-ticket-status-menu">
+                        <a class="sidebar-link waves-effect waves-dark sidebar-link" href="#" aria-expanded="false"><i
+                                class="mdi mdi-face"></i><span class="hide-menu">Create
+                                Status</span></a>
+                        <a class="sidebar-link waves-effect waves-dark sidebar-link" href="#" aria-expanded="false"><i
+                                class="mdi mdi-face"></i><span class="hide-menu">Manage
+                                Statuses</span></a>
+                    </div>
+                </li>
                 <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                         href="icon-material.html" aria-expanded="false"><i class="mdi mdi-face"></i><span
                             class="hide-menu">Icon</span></a></li>
