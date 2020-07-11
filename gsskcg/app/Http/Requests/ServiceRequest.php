@@ -30,6 +30,7 @@ class ServiceRequest extends FormRequest
     {
         return [
 
+            'priority_id' => 'required',
             'category' => 'required',
             'subcategory' => 'required',
             'block' => 'required',
@@ -42,6 +43,12 @@ class ServiceRequest extends FormRequest
         ];
     }
 
+    public function messages(){
+        return [
+            'priority_id.required' => 'Priority is required',
+        ];
+    }
+
     public function persist(){
 
         $ticketTypeId = TicketInfo::where('type', 'Service')->first()->id;
@@ -51,6 +58,7 @@ class ServiceRequest extends FormRequest
         $service = new Service;
 
         $service->ticket_id = $ticket->id;
+        $service->priority_id = $this->priority_id;
         $service->category = $this->category;
         $service->subcategory = $this->subcategory;
         $service->block = $this->block;

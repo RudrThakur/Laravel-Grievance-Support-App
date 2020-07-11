@@ -150,11 +150,22 @@
             </div>
           </div>
           <div class="row">
-            <div class="col-12">
+            <div class="col-md-6 col-sm-12">
               <div class="jumbotron small1 form-group text-center">
                 <label class="text-primary">Description</label>
                 <textarea col="2" name="description" maxlength="200" class="form-control" id="description"
                   placeholder="Enter Description (Less than 150 Characters)" required></textarea>
+              </div>
+            </div>
+            <div class="col-md-6 col-sm-12">
+              <div class="jumbotron small1 form-group text-center">
+                <label class="text-primary">Select Priority</label>
+                <select class="form-control" id="priority_id" name="priority_id" required>
+                  <option value="">Select Priority</option>
+                  @foreach($priorities as $priority)
+                  <option value="{{ $priority->id }}">{{ $priority->priority }}</option>
+                  @endforeach
+                </select>
               </div>
             </div>
           </div>

@@ -24,12 +24,12 @@ class TicketController extends Controller
 
     public function details(Request $request){
 
-        return ['service' => Service::where('ticket_id', $request->ticketId)->first(),
+        return ['service' => Service::with('priority')
+                                    ->where('ticket_id', $request->ticketId)->first(),
+                                    
                 'ticket' => Ticket::with('authority')
                                     ->with('user')
                                     ->with('status')
-                                    ->with('worker')
-                                    ->with('priority')
                                     ->where('id', $request->ticketId)
                                     ->first(),
                 ];

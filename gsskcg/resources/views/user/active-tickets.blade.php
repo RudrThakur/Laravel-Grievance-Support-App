@@ -41,8 +41,8 @@
             $('#service-status').html(data.ticket.status.status);
             $('#service-userId').html(data.ticket.user.id);
             $('#service-description').html(data.service.description);    
-            $('#service-worker').html(data.ticket.worker.name);  
-            $('#service-priority').html(data.ticket.priority.priority);  
+            // $('#service-worker').html(data.service.worker.name);  
+            $('#service-priority').html(data.service.priority.priority);  
     
           },error:function(error){ 
            console.log(error);
@@ -78,7 +78,6 @@
               <th>Type</th>
               <th>Current Holder</th>
               <th>Status</th>
-              <th>Priority</th>
               <th>Created At</th>
               <th>Updated At</th>
               <th>Action</th>
@@ -90,7 +89,6 @@
               <th>Type</th>
               <th>Current Holder</th>
               <th>Status</th>
-              <th>Priority</th>
               <th>Created At</th>
               <th>Updated At</th>
               <th>Action</th>
@@ -104,7 +102,6 @@
               <td>{{ $ticket->type->type }}</td>
               <td>{{ $ticket->authority->authority }}</td>
               <td>{{ $ticket->status->status }}</td>
-              <td>{{ $ticket->priority ? $ticket->priority->priority : 'Not Set' }}</td>
               <td>{{ $ticket->created_at }}</td>
               <td>{{ $ticket->updated_at }}</td>
               <td><a href="javascript:void(0)" id="{{ $ticket->id }}"

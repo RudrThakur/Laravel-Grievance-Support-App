@@ -17,6 +17,8 @@ class CreateServicesTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('ticket_id');
             $table->foreign('ticket_id')->references('id')->on('tickets')->onDelete('cascade');
+            $table->unsignedBigInteger('priority_id')->nullable();
+            $table->foreign('priority_id')->references('id')->on('priority_infos')->onDelete('cascade');
             $table->string('category');
             $table->string('subcategory');
             $table->string('block');

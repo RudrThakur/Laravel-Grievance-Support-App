@@ -33,7 +33,8 @@ class DropdownServiceProvider extends ServiceProvider
             $view->with(
                 [
                 'categories' => ServiceInfo::distinct()->pluck('category'),
-                'blocks' => LocationInfo::distinct()->pluck('block')
+                'blocks' => LocationInfo::distinct()->pluck('block'),
+                'priorities' => PriorityInfo::all()
                 ]
             );
 
@@ -44,16 +45,6 @@ class DropdownServiceProvider extends ServiceProvider
             $view->with(
                 [
                 'roles' => RoleInfo::distinct()->get()
-                ]
-            );
-
-        });
-
-        view()->composer(['admin.partials.modals.service-action'], function($view){
-
-            $view->with(
-                [
-                'priorities' => PriorityInfo::all()
                 ]
             );
 

@@ -180,6 +180,7 @@ return [
          */
         App\Providers\DropdownServiceProvider::class,
         App\Providers\TicketServiceProvider::class,
+        App\Providers\CheckboxServiceProvider::class,
 
     ],
 

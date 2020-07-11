@@ -12,16 +12,18 @@
                 <form>
                     @csrf
                     <div class="form-group">
-                        <select class="form-control" id="priority_id" name="priority_id">
-                            <option value="">Set Priority</option>
-                            @foreach($priorities as $priority)
-                            <option value="{{ $priority->id }}">{{ $priority->priority}}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="recipient-name" class="col-form-label">If Any Funding Required :</label>
+                        <label for="recipient-name" class="col-form-label">If Any Funding Required</label>
                         <input type="text" class="form-control" id="fund" name="fund" placeholder="Enter Amount">
+                    </div>
+                    <label for="recipient-name" class="col-form-label">Approval(s) Required</label>
+                    <br>
+                    <div class="form-check-inline">
+                        @foreach($authorities as $authority)
+                        <label class="form-check-label" for="{{ $authority->authority }}">
+                            <input type="checkbox" class="form-check-input m-2" id="{{ $authority->authority }}"
+                                name="authorities[]" value="{{ $authority->id }}">{{ $authority->authority }}
+                        </label>
+                        @endforeach
                     </div>
                     <div class="form-group">
                         <label for="message-text" class="col-form-label">Message:</label>

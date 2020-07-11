@@ -8,6 +8,7 @@ class Service extends Model
 {
     protected $fillable = [
         'ticket_id',
+        'priority_id',
         'category',
         'subcategory',
         'block',
@@ -24,4 +25,11 @@ class Service extends Model
         return $this->belongsTo('App\Ticket');
 
     }
+
+    public function priority(){
+
+        return $this->belongsTo('App\PriorityInfo');
+
+    }
+
 }
