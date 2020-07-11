@@ -51,31 +51,33 @@ $(function() {
     /* ----------------------------------------------------------------------
                                 Service Action - Modal
     ---------------------------------------------------------------------- */
-
+    var serviceId;
     $('.service-action').on('click', function() {
-        var ticketId = $(this).attr('id');
+        serviceId = $(this).attr('id');
         $('#service-action-modal').modal('show');
-        $('#service-action-form').submit(function(event) {
-            $.ajax({
-                url: "/service-action/" + ticketId,
-                type: "post",
-                dataType: "json",
-                success: function(data) {
-                    $("#service-action-errors-box").hide();
-                    $("#service-action-errors").html('');
-                    $("#service-action-success-box").show();
-                },
-                error: function(error) {
-                    $("#service-action-success-box").hide();
-                    $("#service-action-errors-box").show();
-                    $.each(error.responseJSON.errors, function(field, message) {
-                        $("#service-action-errors").html('<li>' + message + '</li>');
-                    })
-                }
-            });
-            event.preventDefault();
+    });
 
+    $('#service-action-form').submit(function(event) {
+        $.ajax({
+            url: "/service-action/" + serviceId,
+            type: "post",
+            data: $(this).serialize(),
+            success: function(data) {
+                $('#service-action-form')[0].reset();
+                $("#service-action-errors-box").hide();
+                $("#service-action-errors").html('');
+                $("#service-action-success-box").show();
+            },
+            error: function(error) {
+                $("#service-action-success-box").hide();
+                $("#service-action-errors-box").show();
+                $.each(error.responseJSON.errors, function(field, message) {
+                    $("#service-action-errors").html('<li>' + message + '</li>');
+                })
+            }
         });
+        event.preventDefault();
+
     });
 
     $('#service-action-modal').on('hidden.bs.modal', function() {

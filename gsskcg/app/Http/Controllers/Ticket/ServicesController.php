@@ -24,7 +24,9 @@ class ServicesController extends Controller
 
     }
 
-    public function action(ServiceActionRequest $request){
+    public function serviceaction(ServiceActionRequest $request){
+
+        $request->persist();
 
     }
 }

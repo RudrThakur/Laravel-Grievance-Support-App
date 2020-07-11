@@ -51,4 +51,4 @@ Route::get('/admin/create-user', function () {
     return view('admin.create-user');
 });
 
-Route::post('/service-action/{ticketId}', 'Ticket\ServicesController@action');
+Route::post('/service-action/{serviceId}', 'Ticket\ServicesController@serviceaction');
