@@ -82,5 +82,6 @@ $(function() {
         $("#service-action-errors-box").hide();
         $("#service-action-errors").html('');
         $("#service-action-success-box").hide();
+        $('#service-action-form')[0].reset();
     });
 });
