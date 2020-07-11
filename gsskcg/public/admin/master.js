@@ -69,7 +69,7 @@ $(function() {
                     $("#service-action-success-box").hide();
                     $("#service-action-errors-box").show();
                     $.each(error.responseJSON.errors, function(field, message) {
-                        $("#service-action-errors").append('<li>' + message + '</li>');
+                        $("#service-action-errors").html('<li>' + message + '</li>');
                     })
                 }
             });
