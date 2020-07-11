@@ -24,7 +24,7 @@ class RegistrationController extends Controller
             'password' => 'required|confirmed'
         ],
         [
-            'role_id.required' => 'Role is required',
+            'role_id.required' => 'The role field is required',
         ]
         );
 

@@ -9,6 +9,12 @@
                 </button>
             </div>
             <div class="modal-body">
+                <div class="alert alert-danger" id="service-action-errors-box">
+                    <ul id="service-action-errors"></ul>
+                </div>
+                <div class="alert alert-success" id="service-action-success-box">
+                    <p>Service Action Was Successful</p>
+                </div>
                 <form id="service-action-form">
                     <div class="form-group">
                         <label for="recipient-name" class="col-form-label">If Any Funding Required</label>

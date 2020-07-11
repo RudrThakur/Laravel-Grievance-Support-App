@@ -61,14 +61,26 @@ $(function() {
                 type: "post",
                 dataType: "json",
                 success: function(data) {
-                    console.log(data);
+                    $("#service-action-errors-box").hide();
+                    $("#service-action-errors").html('');
+                    $("#service-action-success-box").show();
                 },
                 error: function(error) {
-                    console.log(error);
+                    $("#service-action-success-box").hide();
+                    $("#service-action-errors-box").show();
+                    $.each(error.responseJSON.errors, function(field, message) {
+                        $("#service-action-errors").append('<li>' + message + '</li>');
+                    })
                 }
             });
             event.preventDefault();
 
         });
+    });
+
+    $('#service-action-modal').on('hidden.bs.modal', function() {
+        $("#service-action-errors-box").hide();
+        $("#service-action-errors").html('');
+        $("#service-action-success-box").hide();
     });
 });

@@ -45,7 +45,7 @@ class ServiceRequest extends FormRequest
 
     public function messages(){
         return [
-            'priority_id.required' => 'Priority is required',
+            'priority_id.required' => 'The priority field is required',
         ];
     }
 
