@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
 
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('admin/assets/images/favicon.png') }}">
@@ -18,13 +19,11 @@
     <link href="{{ asset('admin/assets/libs/chartist/dist/chartist.min.css') }}" rel="stylesheet">
     <!-- Custom CSS -->
     <link href="{{ asset('admin/dist/css/style.min.css') }}" rel="stylesheet">
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-<![endif]-->
+    <!-- Master CSS -->
+    <link href="{{ asset('admin/master.css') }}" rel="stylesheet">
+
 </head>
+
 
 <body>
     <!-- ============================================================== -->
@@ -110,10 +109,10 @@
 
     </script>
     <script src="{{ asset('admin/dist/js/pages/dashboards/dashboard1.js') }}"></script>
+
+    <!-- Master JS -->
+    <script src="{{ asset('admin/master.js') }}"></script>
+
 </body>
-
-@yield('styles')
-
-@yield('scripts')
 
 </html>

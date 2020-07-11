@@ -20,6 +20,7 @@ class CreateServiceActionsTable extends Migration
             $table->unsignedBigInteger('worker_id')->nullable();
             $table->foreign('worker_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('approvals')->nullable();
+            $table->string('adminremarks')->nullable();
             $table->string('fund')->nullable();
             $table->timestamps();
         });

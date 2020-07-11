@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
+use App\User;
 use App\ServiceInfo;
 use App\LocationInfo;
 use App\RoleInfo;
@@ -45,6 +46,16 @@ class DropdownServiceProvider extends ServiceProvider
             $view->with(
                 [
                 'roles' => RoleInfo::distinct()->get()
+                ]
+            );
+
+        });
+
+        view()->composer('admin.partials.modals.service-action', function($view){
+
+            $view->with(
+                [
+                'workers' => User::where('role_id', RoleInfo::where('role', 'Worker')->first()->id)->get()
                 ]
             );
 

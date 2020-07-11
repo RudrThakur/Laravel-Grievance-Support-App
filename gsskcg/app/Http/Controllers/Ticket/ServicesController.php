@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\Http\Requests\ServiceRequest;
+use App\Http\Requests\ServiceActionRequest;
 
 class ServicesController extends Controller
 {
@@ -20,6 +21,10 @@ class ServicesController extends Controller
         session()->flash('message', 'Your Service Request Has Been Submitted');
 
         return redirect()->to('/user/active-tickets');
+
+    }
+
+    public function action(ServiceActionRequest $request){
 
     }
 }

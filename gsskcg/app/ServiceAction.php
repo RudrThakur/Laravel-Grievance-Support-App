@@ -10,6 +10,7 @@ class ServiceAction extends Model
         'service_id',
         'worker_id',
         'approvals',
+        'adminremarks',
         'fund',
     ];
 }
