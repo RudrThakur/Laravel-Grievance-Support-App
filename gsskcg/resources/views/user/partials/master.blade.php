@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
 
     <title>@yield('title')</title>
 
@@ -19,6 +20,9 @@
 
     <!-- Custom styles for this template-->
     <link href="{{ asset('user/css/sb-admin-2.min.css') }}" rel="stylesheet">
+
+    <!-- Master CSS -->
+    <link href="{{ asset('admin/master.css') }}" rel="stylesheet">
 
 </head>
 
@@ -77,10 +81,10 @@
     <script src="{{ asset('user/js/demo/chart-area-demo.js') }}"></script>
     <script src="{{ asset('user/js/demo/chart-pie-demo.js') }}"></script>
 
+    <!-- Master JS -->
+    <script src="{{ asset('user/master.js') }}"></script>
+
+
 </body>
-
-@yield('styles')
-
-@yield('scripts')
 
 </html>

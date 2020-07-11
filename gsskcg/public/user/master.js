@@ -10,6 +10,50 @@ $(function() {
     });
 
     /* ----------------------------------------------------------------------
+                                Services - Page
+    ---------------------------------------------------------------------- */
+
+    $("#category").change(function() {
+        $.ajax({
+            url: "/get-service-categories/" + $(this).val(),
+            method: 'GET',
+            success: function(Response) {
+                $('#subcategory').html(Response.html);
+            }
+        });
+    });
+
+    $("#block").change(function() {
+        $.ajax({
+            url: "/get-service-departments/" + $(this).val(),
+            method: 'GET',
+            success: function(Response) {
+                $('#department').html(Response.html);
+            }
+        });
+    });
+
+    $("#department").change(function() {
+        $.ajax({
+            url: "/get-service-floors/" + $(this).val(),
+            method: 'GET',
+            success: function(Response) {
+                $('#floor').html(Response.html);
+            }
+        });
+    });
+
+    $("#floor").change(function() {
+        $.ajax({
+            url: "/get-service-rooms/" + $('#block').val() + "/" + $('#department').val() + "/" + $(this).val(),
+            method: 'GET',
+            success: function(Response) {
+                $('#room').html(Response.html);
+            }
+        });
+    });
+
+    /* ----------------------------------------------------------------------
                                 Service Details - Modal
     ---------------------------------------------------------------------- */
 
@@ -38,7 +82,7 @@ $(function() {
                 $('#service-status').html(data.ticket.status.status);
                 $('#service-userId').html(data.ticket.user.id);
                 $('#service-description').html(data.service.description);
-                // $('#service-worker').html(data.ticket.worker.name);  
+                // $('#service-worker').html(data.service.worker.name);  
                 $('#service-priority').html(data.service.priority.priority);
 
             },
@@ -48,27 +92,4 @@ $(function() {
         });
     });
 
-    /* ----------------------------------------------------------------------
-                                Service Action - Modal
-    ---------------------------------------------------------------------- */
-
-    $('.service-action').on('click', function() {
-        var ticketId = $(this).attr('id');
-        $('#service-action-modal').modal('show');
-        $('#service-action-form').submit(function(event) {
-            $.ajax({
-                url: "/service-action/" + ticketId,
-                type: "post",
-                dataType: "json",
-                success: function(data) {
-                    console.log(data);
-                },
-                error: function(error) {
-                    console.log(error);
-                }
-            });
-            event.preventDefault();
-
-        });
-    });
 });

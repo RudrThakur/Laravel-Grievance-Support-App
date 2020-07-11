@@ -2,57 +2,6 @@
 
 @section('title', 'Services')
 
-@section('styles')
-<style>
-
-</style>
-@endsection
-
-@section('scripts')
-<script type="text/javascript">
-  $("#category").change(function(){
-      $.ajax({
-          url: "/get-service-categories/" + $(this).val(),
-          method: 'GET',
-          success: function(Response) {
-              $('#subcategory').html(Response.html);
-          }
-      });
-  });
-
-  $("#block").change(function(){
-      $.ajax({
-          url: "/get-service-departments/" + $(this).val(),
-          method: 'GET',
-          success: function(Response) {
-              $('#department').html(Response.html);
-          }
-      });
-  });
-
-  $("#department").change(function(){
-      $.ajax({
-          url: "/get-service-floors/" + $(this).val(),
-          method: 'GET',
-          success: function(Response) {
-              $('#floor').html(Response.html);
-          }
-      });
-  });
-
-  $("#floor").change(function(){
-      $.ajax({
-          url: "/get-service-rooms/" + $('#block').val() + "/" + $('#department').val() + "/"+ $(this).val(),
-          method: 'GET',
-          success: function(Response) {
-              $('#room').html(Response.html);
-          }
-      });
-  });
-
-</script>
-@endsection
-
 @section('content')
 
 <!-- Begin Page Content -->
@@ -62,7 +11,6 @@
   <h1 class="h3 mb-1 text-gray-800">Services</h1>
   <p class="mb-4">Fill the form below to make a Service Request.
   </p>
-
 
   <!-- The Modal for raising the ticket-->
   <div id="service-form-box">
