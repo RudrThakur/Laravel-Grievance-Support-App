@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests\ServiceRequest;
 use App\Http\Requests\ServiceActionRequest;
+use App\Service;
 
 class ServicesController extends Controller
 {
@@ -27,6 +28,13 @@ class ServicesController extends Controller
     public function action(ServiceActionRequest $request){
 
         $request->persist();
+
+    }
+
+    public function details($serviceId){
+
+        return Service::with('priority')
+                ->where('ticket_id', $serviceId)->first();
 
     }
 }

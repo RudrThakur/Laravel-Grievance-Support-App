@@ -41,7 +41,9 @@ Route::get('/get-service-floors/{department}', 'Dropdown\ServicesDropdownControl
 
 Route::get('/get-service-rooms/{block}/{department}/{floor}', 'Dropdown\ServicesDropdownController@rooms');
 
-Route::get('/service-details/{ticketId}', 'Ticket\TicketController@details');
+Route::get('/service-details/{serviceId}', 'Ticket\ServicesController@details');
+
+Route::get('/ticket-details/{ticketId}', 'Ticket\TicketController@details');
 
 Route::get('/admin/index', 'Admin\AdminController@index');
 

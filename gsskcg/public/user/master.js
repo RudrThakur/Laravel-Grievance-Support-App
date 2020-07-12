@@ -61,7 +61,7 @@ $(function() {
         var ticketId = $(this).attr('id');
 
         $.ajax({
-            url: "/service-details/" + ticketId,
+            url: "/ticket-details/" + ticketId,
             type: "get",
             dataType: "json",
             success: function(data) {
