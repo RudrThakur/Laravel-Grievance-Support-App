@@ -8,6 +8,7 @@ use App\Service;
 use App\Ticket;
 use App\TicketInfo;
 
+use App\Events\NewTicketAdded;
 
 class ServiceRequest extends FormRequest
 {
@@ -70,6 +71,8 @@ class ServiceRequest extends FormRequest
         $service->description = $this->description;
 
         $service->save();
+        
+        event(new NewTicketAdded($ticket));
 
     }
 }

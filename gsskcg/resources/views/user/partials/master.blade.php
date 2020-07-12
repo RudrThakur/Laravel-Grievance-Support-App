@@ -22,7 +22,7 @@
     <link href="{{ asset('user/css/sb-admin-2.min.css') }}" rel="stylesheet">
 
     <!-- Master CSS -->
-    <link href="{{ asset('admin/master.css') }}" rel="stylesheet">
+    <link href="{{ asset('user/master.css') }}" rel="stylesheet">
 
 </head>
 

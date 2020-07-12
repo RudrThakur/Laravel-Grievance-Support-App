@@ -13,8 +13,8 @@
     }, 3000);
 </script>
 
-@if ($flash = session('message'))
+@if (session('message'))
 <div id="flash-message" class="alert alert-success" role="alert">
-    {{ $flash }}
+    {{ session('message') }}
 </div>
 @endif
