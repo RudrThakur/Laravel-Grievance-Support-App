@@ -71,8 +71,9 @@ class ServiceRequest extends FormRequest
         $service->description = $this->description;
 
         $service->save();
-        
-        event(new NewTicketAdded($ticket));
+
+        $newTicket = app('App\Http\Controllers\Ticket\TicketController')->details($ticket->id)['ticket'];
+        event(new NewTicketAdded($newTicket));
 
     }
 }
