@@ -11,6 +11,11 @@ use App\Http\Controllers\User\TicketController;
 
 class ServiceController extends Controller
 {
+    public function __construct(){
+
+        $this->middleware('auth');
+    }
+    
     public function create(){
         return view('user.service');
     }

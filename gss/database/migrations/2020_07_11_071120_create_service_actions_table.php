@@ -15,7 +15,7 @@ class CreateServiceActionsTable extends Migration
     {
         Schema::create('service_actions', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('service_id');
+            $table->unsignedBigInteger('service_id')->unique();
             $table->foreign('service_id')->references('id')->on('services')->onDelete('cascade');
             $table->unsignedBigInteger('worker_id')->nullable();
             $table->foreign('worker_id')->references('id')->on('users')->onDelete('cascade');

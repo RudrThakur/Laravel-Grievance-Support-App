@@ -43,15 +43,30 @@ class ServiceActionRequest extends FormRequest
 
     public function persist(){
 
-        $serviceAction = new ServiceAction;
+        $currentServiceAction = ServiceAction::where('service_id', $this->serviceId)->first();
 
-        $serviceAction->service_id = $this->serviceId;
-        $serviceAction->worker_id = $this->worker_id;
-        $serviceAction->approvals = implode(',', $this->authorities);
-        $serviceAction->adminremarks = $this->adminremarks;
-        $serviceAction->fund = $this->fund;
+        if(empty($currentServiceAction)){
+            $serviceAction = new ServiceAction;
 
-        $serviceAction->save();
+            $serviceAction->service_id = $this->serviceId;
+            $serviceAction->worker_id = $this->worker_id;
+            $serviceAction->approvals = implode(',', $this->authorities);
+            $serviceAction->adminremarks = $this->adminremarks;
+            $serviceAction->fund = $this->fund;
+    
+            $serviceAction->save();
+        }
+       
+        else{
+         
+            $currentServiceAction->service_id = $this->serviceId;
+            $currentServiceAction->worker_id = $this->worker_id;
+            $currentServiceAction->approvals = implode(',', $this->authorities);
+            $currentServiceAction->adminremarks = $this->adminremarks;
+            $currentServiceAction->fund = $this->fund;
+    
+            $currentServiceAction->save();
+        }
 
     }
 }

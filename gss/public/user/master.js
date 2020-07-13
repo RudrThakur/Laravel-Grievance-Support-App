@@ -97,11 +97,17 @@ $(function() {
     ---------------------------------------------------------------------- */
     var serviceId;
     $('.service-action').on('click', function() {
-        serviceId = $(this).attr('id');
+
+        serviceId = $(this).attr('id'); // If Triggered from Service-Details Modal
         $('#service-action-modal').modal('show');
     });
 
     $('#service-action-form').submit(function(event) {
+
+        if (!serviceId) { // If Triggered from Service-Details Page
+            serviceId = $('#service-id').html();
+        }
+
         $.ajax({
             url: "/service-action/" + serviceId,
             type: "post",
@@ -110,14 +116,15 @@ $(function() {
                 $('#service-action-form')[0].reset();
                 $("#service-action-errors-box").hide();
                 $("#service-action-errors").html('');
-                $("#service-action-success-box").show();
+                $("#service-action-success-box").fadeIn('slow').delay(3000).fadeOut('slow');
             },
             error: function(error) {
-                $("#service-action-success-box").hide();
-                $("#service-action-errors-box").show();
                 $.each(error.responseJSON.errors, function(field, message) {
                     $("#service-action-errors").html('<li>' + message + '</li>');
-                })
+                });
+                $('#service-action-errors').html('<li>Status: ' + error.statusText + '</li>');
+                $("#service-action-success-box").hide();
+                $("#service-action-errors-box").fadeIn('slow').delay(3000).fadeOut('slow');
             }
         });
         event.preventDefault();

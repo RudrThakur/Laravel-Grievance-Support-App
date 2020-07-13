@@ -3,7 +3,12 @@
 @section('title','Service Details')
 
 @section('content')
-
+<div class="alert alert-danger service-action-alerts" id="service-action-errors-box">
+    <ul id="service-action-errors"></ul>
+</div>
+<div class="alert alert-success service-action-alerts" id="service-action-success-box">
+    <p>Service Action Was Successful</p>
+</div>
 <div class="card">
     <div class="card-body row">
         <div class="col-lg-5 col-xl-5 col-md-12 col-12">
@@ -25,6 +30,10 @@
                     <tr>
                         <th>User Id</th>
                         <td>{{ $ticket->user_id }}</td>
+                    </tr>
+                    <tr>
+                        <th>Service-ID</th>
+                        <td id="service-id">{{ $service->id }}</td>
                     </tr>
                     <tr>
                         <th>Service Category</th>
@@ -85,33 +94,25 @@
                     <div class="col-lg-12 col-xl-12 col-md-12 col-12">
                         <table id="adminaction-table" class="table data-table">
                             <tbody>
-                                {{-- @if($basicTicket->authority_id) --}}
                                 <tr>
                                     <th>Current Holder</th>
-                                    {{-- <td>{{ $basicTicket->authority->authorityname }}</td> --}}
+                                    <td>{{ $ticket->authority->authority }}</td>
                                 </tr>
-                                {{-- @endif --}}
-                                {{-- @if($basicTicket->priority_id) --}}
                                 <tr>
                                     <th>Priority</th>
-                                    {{-- <td>{{ $basicTicket->priority->priorityname }}</td> --}}
+                                    <td>{{ $service->priority->priority }}</td>
                                 </tr>
-                                {{-- @endif --}}
-                                {{-- @if($basicTicket->worker_id) --}}
                                 <tr>
                                     <th>Worker Assigned</th>
-                                    {{-- <td>{{ $basicTicket->worker->workername }}</td> --}}
+                                    <td>{{ $ticket->worker ? $ticket->worker->name : 'No Data Available'}}</td>
                                 </tr>
-                                {{-- @endif --}}
-                                {{-- @if($basicTicket->fund) --}}
                                 <tr>
                                     <th>Fund Amount</th>
-                                    {{-- <td>{{ $basicTicket->fund }}</td>
-                                </tr> --}}
-                                {{-- @endif --}}
+                                    <td>{{ $service->fund ? $service->fund : 'No Data Available'}}</td>
+                                </tr>
                                 <tr>
                                     <th>Status</th>
-                                    {{-- <td>{{ $basicTicket->status->state }}</td> --}}
+                                    <td>{{ $ticket->status->status }}</td>
                                 </tr>
                             </tbody>
                         </table>
