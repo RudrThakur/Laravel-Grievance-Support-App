@@ -1,6 +1,6 @@
 @extends('user.partials.master')
 
-@section('title', 'Active Tickets')
+@section('title', 'Tickets')
 
 @section('content')
 

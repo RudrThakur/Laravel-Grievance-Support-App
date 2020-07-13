@@ -81,6 +81,42 @@
 
     <!-- Heading -->
     <div class="sidebar-heading">
+        Settings
+    </div>
+
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseRoles" aria-expanded="true"
+            aria-controls="collapseUtilities">
+            <i class="fas fa-fw fa-wrench"></i>
+            <span>Roles</span>
+        </a>
+        <div id="collapseRoles" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Roles :</h6>
+                <a class="collapse-item" href="{{ route('service') }}">Create Role</a>
+                <a class="collapse-item" href="utilities-border.html">Manage Roles</a>
+            </div>
+        </div>
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePermissions"
+            aria-expanded="true" aria-controls="collapseUtilities">
+            <i class="fas fa-fw fa-wrench"></i>
+            <span>Permissions</span>
+        </a>
+        <div id="collapsePermissions" class="collapse" aria-labelledby="headingUtilities"
+            data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Permissions :</h6>
+                <a class="collapse-item" href="{{ route('service') }}">Create Permission</a>
+                <a class="collapse-item" href="utilities-border.html">Manage Permissions</a>
+            </div>
+        </div>
+    </li>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider">
+
+    <!-- Heading -->
+    <div class="sidebar-heading">
         Addons
     </div>
 
