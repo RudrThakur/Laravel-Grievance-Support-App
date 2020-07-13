@@ -51,6 +51,7 @@ class CreatePermissionInfosTable extends Migration
             'self_tickets' => true,
             'delete_self_tickets' => true,
             'close_self_tickets' => true,
+            'create_tickets' => true,
             ],
         ]
         );
