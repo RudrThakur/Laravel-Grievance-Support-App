@@ -9,6 +9,7 @@ use App\Ticket;
 use App\TicketInfo;
 
 use App\Events\NewTicketAdded;
+use App\Http\Controllers\User\TicketController;
 
 class ServiceRequest extends FormRequest
 {
@@ -72,7 +73,8 @@ class ServiceRequest extends FormRequest
 
         $service->save();
 
-        $newTicket = app('App\Http\Controllers\User\TicketController')->details($ticket->id)['ticket'];
+        $newTicket = TicketController::details($ticket->id);
+
         event(new NewTicketAdded($newTicket));
 
     }
