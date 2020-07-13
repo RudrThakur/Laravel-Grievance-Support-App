@@ -33,19 +33,6 @@ class TicketServiceProvider extends ServiceProvider
                 'tickets' => Ticket::with('authority')
                                     ->with('user')
                                     ->with('status')
-                                    ->where('user_id', auth()->id())
-                                    ->get(),
-                ]
-            );
-        });
-
-        view()->composer(['admin.tickets'], function($view){
-
-            $view->with(
-                [
-                'tickets' => Ticket::with('authority')
-                                    ->with('user')
-                                    ->with('status')
                                     ->get(),
                 ]
             );

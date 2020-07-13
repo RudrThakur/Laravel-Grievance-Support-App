@@ -54,7 +54,7 @@ class ServiceRequest extends FormRequest
 
         $ticketTypeId = TicketInfo::where('type', 'Service')->first()->id;
 
-        $ticket = Ticket::create(['user_id' => auth()->id(), 'type_id' => $ticketTypeId]);
+        $ticket = Ticket::create(['user_id' => auth()->user()->id, 'type_id' => $ticketTypeId]);
 
         $service = new Service;
 
