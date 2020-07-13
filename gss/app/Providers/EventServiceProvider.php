@@ -7,7 +7,9 @@ use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Event;
 use App\Events\NewTicketAdded;
+use App\Events\ServiceActionEvent;
 use App\Listeners\SendNewTicketNotificationEmail;
+use App\Listeners\SendServiceActionNotificationEmail;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -22,6 +24,9 @@ class EventServiceProvider extends ServiceProvider
         ],
         NewTicketAdded::class => [
             SendNewTicketNotificationEmail::class,
+        ],
+        ServiceActionEvent::class => [
+            SendServiceActionNotificationEmail::class,
         ],
     ];
 

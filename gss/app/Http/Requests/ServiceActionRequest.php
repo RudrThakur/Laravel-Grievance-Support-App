@@ -5,6 +5,8 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use App\ServiceAction;
 
+use App\Events\ServiceActionEvent;
+
 class ServiceActionRequest extends FormRequest
 {
     /**
@@ -50,22 +52,34 @@ class ServiceActionRequest extends FormRequest
 
             $serviceAction->service_id = $this->serviceId;
             $serviceAction->worker_id = $this->worker_id;
-            $serviceAction->approvals = implode(',', $this->authorities);
+
+            if($this->authorities){
+                $serviceAction->approvals = implode(',', $this->authorities);
+            }
+
             $serviceAction->adminremarks = $this->adminremarks;
             $serviceAction->fund = $this->fund;
     
             $serviceAction->save();
+
+            event(new ServiceActionEvent($serviceAction->toArray()));
         }
        
         else{
          
             $currentServiceAction->service_id = $this->serviceId;
             $currentServiceAction->worker_id = $this->worker_id;
-            $currentServiceAction->approvals = implode(',', $this->authorities);
+
+            if($this->authorities){
+                $currentServiceAction->approvals = implode(',', $this->authorities);
+            }
+ 
             $currentServiceAction->adminremarks = $this->adminremarks;
             $currentServiceAction->fund = $this->fund;
     
             $currentServiceAction->save();
+           
+            event(new ServiceActionEvent($currentServiceAction->toArray()));
         }
 
     }
