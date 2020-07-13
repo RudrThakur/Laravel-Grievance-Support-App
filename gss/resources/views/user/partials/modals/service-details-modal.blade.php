@@ -6,7 +6,7 @@
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
-                <table class="table table-bordered  table-responsive w-100  d-md-table" id="service-details-table">
+                <table class="table table-bordered  table-responsive w-100  d-md-table">
                     <tr>
                         <th>Ticket Id</th>
                         <td id="service-ticketId"></td>
@@ -62,8 +62,6 @@
                         <td id="service-updated_at"></td>
                     </tr>
                 </table>
-
-
             </div>
         </div>
     </div>

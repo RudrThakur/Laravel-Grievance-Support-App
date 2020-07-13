@@ -24,7 +24,7 @@ class CheckboxServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        view()->composer('user.partials.service-action', function($view){
+        view()->composer('user.partials.forms.service-action-form', function($view){
 
             $view->with(
                 [

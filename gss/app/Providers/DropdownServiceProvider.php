@@ -51,7 +51,7 @@ class DropdownServiceProvider extends ServiceProvider
 
         });
 
-        view()->composer('user.partials.service-action', function($view){
+        view()->composer('user.partials.forms.service-action-form', function($view){
 
             $view->with(
                 [

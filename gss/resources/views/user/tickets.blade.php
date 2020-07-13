@@ -64,9 +64,9 @@
     </div>
   </div>
 
-  @include('user.partials.service-details')
+  @include('user.partials.modals.service-details-modal')
 
-  @include('user.partials.service-action')
+  @include('user.partials.modals.service-action-modal')
 
 </div>
 <!-- /.container-fluid -->

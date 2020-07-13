@@ -42,7 +42,7 @@ A New Ticket has been raised with the following details :<br>
 @endcomponent
 
 @component('mail::button', [
-'url' => url('www.google.com')
+'url' => url('/service-action/'.$newTicket->id)
 ])
 Take Action
 @endcomponent

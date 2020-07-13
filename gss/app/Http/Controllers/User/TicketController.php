@@ -23,7 +23,7 @@ class TicketController extends Controller
         
     }
 
-    public function details($ticketId){
+    public static function details($ticketId){
 
         return ['service' => Service::with('priority')
                                     ->where('ticket_id', $ticketId)->first(),

@@ -6,7 +6,9 @@
         <div class="sidebar-brand-icon rotate-n-15">
             <i class="fas fa-laugh-wink"></i>
         </div>
-        <div class="sidebar-brand-text mx-3">GSS&nbsp;<sup>User</sup></div>
+        <div class="sidebar-brand-text mx-3">GSS
+            <sup>{{ auth()->user()->role->role }}</sup>
+        </div>
     </a>
 
     <!-- Divider -->

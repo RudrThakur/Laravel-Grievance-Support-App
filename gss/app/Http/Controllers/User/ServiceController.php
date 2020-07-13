@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\ServiceRequest;
 use App\Http\Requests\ServiceActionRequest;
 use App\Service;
+use App\Http\Controllers\User\TicketController;
 
 class ServiceController extends Controller
 {
@@ -33,7 +34,16 @@ class ServiceController extends Controller
     public function details($serviceId){
 
         return Service::with('priority')
-                ->where('ticket_id', $serviceId)->first();
+                ->where('id', $serviceId)->first();
 
     }
+
+    public function index($serviceId){
+
+        $ticketId = Service::where('id', $serviceId)->first()->ticket_id;
+
+        return view('user.service-details')->with(TicketController::details($ticketId));
+
+    }
+
 }
