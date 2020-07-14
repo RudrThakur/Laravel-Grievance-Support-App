@@ -9,6 +9,7 @@ use App\ServiceInfo;
 use App\LocationInfo;
 use App\Role;
 use App\PriorityInfo;
+use App\UsersRole;
 
 class DropdownServiceProvider extends ServiceProvider
 {
@@ -53,9 +54,13 @@ class DropdownServiceProvider extends ServiceProvider
 
         view()->composer('user.partials.forms.service-action-form', function($view){
 
+            $workerRoleId = Role::where('name', 'Worker')->first()->id;
+            $workersIdList = UsersRole::where('role_id', $workerRoleId)->get()->pluck('user_id');
+            $workersList = User::whereIn('id', $workersIdList)->get();
+            
             $view->with(
                 [
-                'workers' => User::where('role_id', Role::where('role', 'Worker')->first()->id)->get()
+                'workers' => $workersList
                 ]
             );
 
