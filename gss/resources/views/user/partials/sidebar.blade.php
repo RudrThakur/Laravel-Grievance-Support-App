@@ -7,7 +7,7 @@
             <i class="fas fa-laugh-wink"></i>
         </div>
         <div class="sidebar-brand-text mx-3">GSS
-            <sup>{{ auth()->user()->role->role }}</sup>
+            <sup>{{ auth()->user()->roles->first()->name }}</sup>
         </div>
     </a>
 
@@ -55,10 +55,7 @@
 
     <!-- Nav Item - Utilities Collapse Menu -->
 
-    @if($roleBasedPermissions->keyBy('role_id')->get(auth()->user()->role->id) ||
-    $userBasedPermissions->keyBy('user_id')->get(auth()->user()->id))
-    @if($roleBasedPermissions->keyBy('role_id')->get(auth()->user()->role->id)->create_tickets ||
-    $userBasedPermissions->keyBy('user_id')->get(auth()->user()->id)->create_tickets)
+    @if(auth()->user()->can('create-ticket'))
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
             aria-expanded="true" aria-controls="collapseUtilities">
@@ -75,7 +72,6 @@
             </div>
         </div>
     </li>
-    @endif
     @endif
 
     <!-- Divider -->

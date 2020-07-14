@@ -7,7 +7,7 @@ use Illuminate\Support\ServiceProvider;
 use App\User;
 use App\ServiceInfo;
 use App\LocationInfo;
-use App\RoleInfo;
+use App\Role;
 use App\PriorityInfo;
 
 class DropdownServiceProvider extends ServiceProvider
@@ -45,7 +45,7 @@ class DropdownServiceProvider extends ServiceProvider
 
             $view->with(
                 [
-                'roles' => RoleInfo::distinct()->get()
+                'roles' => Role::distinct()->get()
                 ]
             );
 
@@ -55,7 +55,7 @@ class DropdownServiceProvider extends ServiceProvider
 
             $view->with(
                 [
-                'workers' => User::where('role_id', RoleInfo::where('role', 'Worker')->first()->id)->get()
+                'workers' => User::where('role_id', Role::where('role', 'Worker')->first()->id)->get()
                 ]
             );
 

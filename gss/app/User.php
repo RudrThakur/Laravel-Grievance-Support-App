@@ -5,10 +5,12 @@ namespace App;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Permissions\HasPermissionsTrait;
 
 class User extends Authenticatable
 {
     use Notifiable;
+    use HasPermissionsTrait;
 
     /**
      * The attributes that are mass assignable.
@@ -16,7 +18,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'role_id', 'name', 'email', 'password',
+         'name', 'email', 'password',
     ];
 
     /**
@@ -41,9 +43,9 @@ class User extends Authenticatable
         $this->attributes['password'] = bcrypt($value);
     }
 
-    public function role(){
-
-        return $this->belongsTo('App\RoleInfo');
-        
+    public function role() {
+     
+        return $this->belongsTo('App\Role','users_roles');
+            
     }
 }

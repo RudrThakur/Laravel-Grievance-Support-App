@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRoleInfosTable extends Migration
+class CreateRolesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,26 +13,25 @@ class CreateRoleInfosTable extends Migration
      */
     public function up()
     {
-        Schema::create('role_infos', function (Blueprint $table) {
+        Schema::create('roles', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('role')->unique();
+            $table->string('name'); // edit posts
+            $table->string('slug'); //edit-posts
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();
         });
 
-        // Insert some stuff
-        DB::table('role_infos')->insert(
+        // Seed
+        DB::table('roles')->insert(
         [
-                [ 
-                    'role' => 'Admin',
-                ],
-                [ 
-                    'role' => 'User',
-                ],
-                [ 
-                    'role' => 'Worker',
-                ],
-        ]);
+            [ 'name' => 'Admin',
+            'slug' => 'admin'],
+            [ 'name' => 'Faculty',
+            'slug' => 'faculty'],
+            [ 'name' => 'Worker',
+            'slug' => 'worker'],
+        ]
+        );
     }
 
     /**
@@ -42,6 +41,6 @@ class CreateRoleInfosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('role_infos');
+        Schema::dropIfExists('roles');
     }
 }

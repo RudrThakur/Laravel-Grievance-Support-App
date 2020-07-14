@@ -28,7 +28,9 @@ class RegisterController extends Controller
         ]
         );
 
-        $user = User::create(request(['role_id', 'name', 'email', 'password']));
+        $user = User::create(request(['name', 'email', 'password']));
+
+        $user->roles()->attach(request('role_id'));
 
         auth()->login($user);
 
