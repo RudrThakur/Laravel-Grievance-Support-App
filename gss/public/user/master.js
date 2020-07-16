@@ -71,7 +71,7 @@ $(function() {
                 $('#service-user-name').html(data.ticket.user.name);
                 $('#service-department').html(data.service.department);
                 $('#service-subcategory').html(data.service.subcategory);
-                $('#service-holder').html(data.ticket.authority.authority);
+                $('#service-holder').html(data.ticket.authority.name);
                 $('#service-block').html(data.service.block);
                 $('#service-floor').html(data.service.floor);
                 $('#service-room').html(data.service.room);

@@ -27,7 +27,7 @@ class Ticket extends Model
 
     public function authority(){
         
-        return $this->belongsTo('App\AuthorityInfo');
+        return $this->belongsTo('App\Authority');
 
     }
 

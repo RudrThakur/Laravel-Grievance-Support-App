@@ -20,7 +20,7 @@ class CreateTicketsTable extends Migration
             $table->unsignedBigInteger('type_id');
             $table->foreign('type_id')->references('id')->on('ticket_infos')->onDelete('cascade');
             $table->unsignedBigInteger('authority_id')->default(1);
-            $table->foreign('authority_id')->references('id')->on('authority_infos')->onDelete('cascade');
+            $table->foreign('authority_id')->references('id')->on('authorities')->onDelete('cascade');
             $table->unsignedBigInteger('status_id')->default(1);
             $table->foreign('status_id')->references('id')->on('status_infos')->onDelete('cascade');
             $table->timestamps();

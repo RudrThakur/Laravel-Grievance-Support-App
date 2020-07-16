@@ -47,7 +47,7 @@
             <tr>
               <td>{{ $ticket->id }}</td>
               <td>{{ $ticket->type->type }}</td>
-              <td>{{ $ticket->authority->authority }}</td>
+              <td>{{ $ticket->authority->name }}</td>
               <td>{{ $ticket->status->status }}</td>
               <td>{{ $ticket->created_at }}</td>
               <td>{{ $ticket->updated_at }}</td>

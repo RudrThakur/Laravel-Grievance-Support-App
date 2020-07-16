@@ -8,9 +8,9 @@
     <br>
     <div class="form-check-inline my-3">
         @foreach($authorities as $authority)
-        <label class="form-check-label" for="{{ $authority->authority }}">
-            <input type="checkbox" class="form-check-input m-2" id="{{ $authority->authority }}" name="authorities[]"
-                value="{{ $authority->id }}">{{ $authority->authority }}
+        <label class="form-check-label" for="{{ $authority->slug }}">
+            <input type="checkbox" class="form-check-input m-2" id="{{ $authority->slug }}" name="authorities[]"
+                value="{{ $authority->id }}">{{ $authority->name }}
         </label>
         @endforeach
     </div>

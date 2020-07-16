@@ -16,14 +16,6 @@ Your Ticket has been recieved and the admin has responded :<br>
                 {{ $serviceAction['fund'] }}</th>
         </tr>
         @endif
-        @if($serviceAction['approvals'])
-        <tr style="border-bottom: 1px solid black">
-            <th style="padding: 5px;
-            text-align: left;border-bottom: 1px solid black; ">Approvals Required</th>
-            <td style="padding: 5px;
-            text-align: left;border-left: 1px solid black; ">{{ $serviceAction['approvals'] }}</td>
-        </tr>
-        @endif
         @if($serviceAction['worker_id'])
         <tr style="border-bottom: 1px solid black">
             <th style="padding: 5px;

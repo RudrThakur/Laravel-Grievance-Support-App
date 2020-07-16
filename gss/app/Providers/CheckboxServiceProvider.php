@@ -3,7 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use App\AuthorityInfo;
+use App\Authority;
 
 class CheckboxServiceProvider extends ServiceProvider
 {
@@ -28,7 +28,7 @@ class CheckboxServiceProvider extends ServiceProvider
 
             $view->with(
                 [
-                'authorities' => AuthorityInfo::where('authority', '!=', 'Admin')->get(),
+                'authorities' => Authority::all(),
                 ]
             );
 

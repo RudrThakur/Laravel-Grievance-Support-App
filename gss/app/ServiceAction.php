@@ -13,4 +13,10 @@ class ServiceAction extends Model
         'adminremarks',
         'fund',
     ];
+
+    public function authorities(){
+
+        return $this->belongsToMany('App\Authority', 'service_actions_authorities');
+        
+    }
 }
