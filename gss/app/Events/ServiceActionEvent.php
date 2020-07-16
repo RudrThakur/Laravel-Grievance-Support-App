@@ -15,16 +15,18 @@ class ServiceActionEvent
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     public $serviceAction;
+    public $serviceActionAuthorities;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct($serviceAction)
+    public function __construct($serviceAction, $serviceActionAuthorities)
     {
         
         $this->serviceAction = $serviceAction;
+        $this->serviceActionAuthorities = $serviceActionAuthorities;
 
     }
 

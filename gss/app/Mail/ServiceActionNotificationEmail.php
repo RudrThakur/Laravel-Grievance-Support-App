@@ -12,15 +12,17 @@ class ServiceActionNotificationEmail extends Mailable
     use Queueable, SerializesModels;
 
     public $serviceAction;
+    public $serviceActionAuthorities;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($serviceAction)
+    public function __construct($serviceAction, $serviceActionAuthorities)
     {
         $this->serviceAction = $serviceAction;
+        $this->serviceActionAuthorities = $serviceActionAuthorities;
     }
 
     /**

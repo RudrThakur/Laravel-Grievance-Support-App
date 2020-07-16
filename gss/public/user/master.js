@@ -122,7 +122,7 @@ $(function() {
                 $.each(error.responseJSON.errors, function(field, message) {
                     $("#service-action-errors").html('<li>' + message + '</li>');
                 });
-                $('#service-action-errors').html('<li>Status: ' + error.statusText + '</li>');
+
                 $("#service-action-success-box").hide();
                 $("#service-action-errors-box").fadeIn('slow').delay(3000).fadeOut('slow');
             }

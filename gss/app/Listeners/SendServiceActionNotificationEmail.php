@@ -29,7 +29,7 @@ class SendServiceActionNotificationEmail
     public function handle(ServiceActionEvent $event)
     {
         Mail::to('rudrakshacmkt777@gmail.com')->send(
-            new ServiceActionNotificationEmail($event->serviceAction)
+            new ServiceActionNotificationEmail($event->serviceAction, $event->serviceActionAuthorities)
         );
     }
 }

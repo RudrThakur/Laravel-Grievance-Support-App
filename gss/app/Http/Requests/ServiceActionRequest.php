@@ -5,6 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use App\ServiceAction;
 use App\ServiceActionsAuthority;
+use App\Authority;
 use App\Events\ServiceActionEvent;
 
 class ServiceActionRequest extends FormRequest
@@ -64,8 +65,14 @@ class ServiceActionRequest extends FormRequest
                     $serviceAction->authorities()->attach($authority);
                 }
             }
+            else{
+                ServiceActionsAuthority::where('service_action_id', $serviceAction->id)->delete(); // Delete Existing Entries
+            }
 
-            event(new ServiceActionEvent($serviceAction->toArray()));
+            $serviceActionAuthoritiesIds = ServiceActionsAuthority::where('service_action_id', $serviceAction->id)->get()->pluck('authority_id');
+            $serviceActionAuthorities = Authority::whereIn('id', $serviceActionAuthoritiesIds)->get()->pluck('name');
+
+            event(new ServiceActionEvent($serviceAction->toArray(), $serviceActionAuthorities->toArray()));
         }
        
         else{
@@ -78,17 +85,20 @@ class ServiceActionRequest extends FormRequest
     
             $currentServiceAction->save();
 
+            ServiceActionsAuthority::where('service_action_id', $currentServiceAction->id)->delete(); // Delete Existing Entries
+
             if($this->authorities){
-                
-                ServiceActionsAuthority::where('service_action_id', $currentServiceAction->id)->delete(); // Delete Existing Entries
                 
                 foreach($this->authorities as $authority){
                     $currentServiceAction->authorities()->attach($authority);
                 }
                 
             }
-           
-            event(new ServiceActionEvent($currentServiceAction->toArray()));
+
+            $currentServiceActionAuthoritiesIds = ServiceActionsAuthority::where('service_action_id', $currentServiceAction->id)->get()->pluck('authority_id');
+            $currentServiceActionAuthorities = Authority::whereIn('id', $currentServiceActionAuthoritiesIds)->get()->pluck('name');
+
+            event(new ServiceActionEvent($currentServiceAction->toArray(), $currentServiceActionAuthorities->toArray()));
         }
 
     }
