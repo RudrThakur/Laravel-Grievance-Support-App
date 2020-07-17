@@ -10,6 +10,7 @@ use App\Events\NewTicketAdded;
 use App\Events\ServiceActionEvent;
 use App\Listeners\SendNewTicketNotificationEmail;
 use App\Listeners\SendServiceActionNotificationEmail;
+use App\Listeners\SendServiceApprovalEmail;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -27,6 +28,7 @@ class EventServiceProvider extends ServiceProvider
         ],
         ServiceActionEvent::class => [
             SendServiceActionNotificationEmail::class,
+            SendServiceApprovalEmail::class,
         ],
     ];
 

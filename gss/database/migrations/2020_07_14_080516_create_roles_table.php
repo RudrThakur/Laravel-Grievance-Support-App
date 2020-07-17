@@ -30,6 +30,12 @@ class CreateRolesTable extends Migration
             'slug' => 'faculty'],
             [ 'name' => 'Worker',
             'slug' => 'worker'],
+            [ 'name' => 'Registrar',
+            'slug' => 'registrar'],
+            [ 'name' => 'Principal',
+            'slug' => 'principal'],
+            [ 'name' => 'Director',
+            'slug' => 'director'],
         ]
         );
     }

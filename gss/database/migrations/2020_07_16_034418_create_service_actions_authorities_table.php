@@ -16,6 +16,7 @@ class CreateServiceActionsAuthoritiesTable extends Migration
         Schema::create('service_actions_authorities', function (Blueprint $table) {
             $table->unsignedBigInteger('service_action_id');
             $table->unsignedBigInteger('authority_id');
+            $table->boolean('approved')->nullable();
 
             //FOREIGN KEY CONSTRAINTS
             $table->foreign('service_action_id')->references('id')->on('service_actions')->onDelete('cascade');
