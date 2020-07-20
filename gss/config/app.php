@@ -182,6 +182,7 @@ return [
         App\Providers\TicketServiceProvider::class,
         App\Providers\CheckboxServiceProvider::class,
         App\Providers\PermissionServiceProvider::class,
+        App\Providers\ServiceRepositoryServiceProvider::class,
 
     ],
 

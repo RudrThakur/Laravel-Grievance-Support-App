@@ -3,19 +3,24 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Repositories\ServiceRepositoryInterface;
 use App\Http\Requests\ServiceRequest;
 use App\Http\Requests\ServiceActionRequest;
 use App\Service;
-use App\Http\Controllers\User\TicketController;
 
 class ServiceController extends Controller
 {
-    public function __construct(){
+
+    private  $serviceRepositoryInterface;
+
+    public function __construct(ServiceRepositoryInterface $serviceRepositoryInterface){
 
         $this->middleware('auth');
+
+        $this->serviceRepositoryInterface = $serviceRepositoryInterface;
+
     }
-    
+
     public function create(){
         return view('user.service');
     }
@@ -38,8 +43,7 @@ class ServiceController extends Controller
 
     public function details($serviceId){
 
-        return Service::with('priority')
-                ->where('id', $serviceId)->first();
+        return $this->serviceRepositoryInterface->findById($serviceId);
 
     }
 
