@@ -21,9 +21,9 @@ class CreateServiceActionsAuthoritiesTable extends Migration
             //FOREIGN KEY CONSTRAINTS
             $table->foreign('service_action_id')->references('id')->on('service_actions')->onDelete('cascade');
             $table->foreign('authority_id')->references('id')->on('authorities')->onDelete('cascade');
- 
+
             //SETTING THE PRIMARY KEYS
-            $table->primary(['service_action_id','authority_id'], 'service_actions_authorities_primary');
+            $table->primary(['service_action_id', 'authority_id'], 'service_actions_authorities_primary');
 
         });
     }

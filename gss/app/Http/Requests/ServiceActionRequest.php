@@ -56,7 +56,7 @@ class ServiceActionRequest extends FormRequest
 
             $serviceAction->adminremarks = $this->adminremarks;
             $serviceAction->fund = $this->fund;
-  
+
             $serviceAction->save();
 
             if($this->authorities){
@@ -74,25 +74,25 @@ class ServiceActionRequest extends FormRequest
 
             event(new ServiceActionEvent($serviceAction->toArray(), $serviceActionAuthorities->toArray()));
         }
-       
+
         else{
-         
+
             $currentServiceAction->service_id = $this->serviceId;
             $currentServiceAction->worker_id = $this->worker_id;
 
             $currentServiceAction->adminremarks = $this->adminremarks;
             $currentServiceAction->fund = $this->fund;
-    
+
             $currentServiceAction->save();
 
             ServiceActionsAuthority::where('service_action_id', $currentServiceAction->id)->delete(); // Delete Existing Entries
 
             if($this->authorities){
-                
+
                 foreach($this->authorities as $authority){
                     $currentServiceAction->authorities()->attach($authority);
                 }
-                
+
             }
 
             $currentServiceActionAuthoritiesIds = ServiceActionsAuthority::where('service_action_id', $currentServiceAction->id)->get()->pluck('authority_id');

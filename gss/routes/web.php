@@ -50,3 +50,5 @@ Route::post('/service-action/{serviceId}', 'User\ServiceController@action');
 Route::get('/service-action/{serviceId}', 'User\ServiceController@index');
 
 Route::get('/roles', 'User\PermissionController@Permission');
+
+Route::get('/service-action/{action}/{serviceActionId}/{authorityId}', 'User\ServiceActionController@create');

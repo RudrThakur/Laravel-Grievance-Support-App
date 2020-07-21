@@ -1,7 +1,7 @@
 @component('mail::message')
 
 # Hello, {{ $recipientRole }} <br>
-A New Ticket has been forwarded by the Admin to you for approval :<br>
+A New Ticket has been forwarded to you for approval :<br>
 
 @component('mail::panel')
 <div class="table-responsive-lg">
@@ -49,13 +49,13 @@ A New Ticket has been forwarded by the Admin to you for approval :<br>
 @endcomponent
 
 @component('mail::button', [
-'url' => url('/tickets')
+'url' => url('/service-action/1/'.$serviceAction['id'].'/'.$recipient['id'])
 ])
 Approve
 @endcomponent
 
 @component('mail::button', [
-'url' => url('/tickets')
+'url' => url('/service-action/0/'.$serviceAction['id'].'/'.$recipient['id'])
 ])
 Deny
 @endcomponent
