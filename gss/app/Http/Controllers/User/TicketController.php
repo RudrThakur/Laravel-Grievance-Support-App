@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\ServiceAction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
@@ -16,23 +17,36 @@ class TicketController extends Controller
 
         $this->middleware('auth');
     }
-    
+
     public function all(){
 
         return view('user.tickets');
-        
+
     }
 
-    public static function details($ticketId){
+    public function details($ticketId){
 
-        return ['service' => Service::with('priority')
-                                    ->where('ticket_id', $ticketId)->first(),
-                                    
-                'ticket' => Ticket::with('authority')
+        $ticket = Ticket::with('authority')
                                     ->with('user')
                                     ->with('status')
                                     ->where('id', $ticketId)
-                                    ->first(),
+                                    ->firstOrFail();
+
+        $service = Service::with('priority')
+                                    ->where('ticket_id', $ticketId)->firstOrFail();
+
+        $serviceAction = ServiceAction::with('worker')
+                                                ->where('service_id', $service->id)
+                                                ->firstOrFail();
+
+        return [
+
+                'service' => $service,
+
+                'ticket' => $ticket,
+
+                'serviceAction' => $serviceAction,
+
                 ];
 
     }

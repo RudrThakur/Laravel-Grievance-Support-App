@@ -6,7 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Repositories\ServiceRepositoryInterface;
 use App\Http\Requests\ServiceRequest;
 use App\Http\Requests\ServiceActionRequest;
-use App\Service;
+use App\Ticket;
+use App\ServiceAction;
 
 class ServiceController extends Controller
 {
@@ -41,17 +42,20 @@ class ServiceController extends Controller
 
     }
 
-    public function details($serviceId){
-
-        return $this->serviceRepositoryInterface->findById($serviceId);
-
-    }
-
     public function index($serviceId){
 
-        $ticketId = Service::where('id', $serviceId)->first()->ticket_id;
+        $service = $this->serviceRepositoryInterface->findById($serviceId);
 
-        return view('user.service-details')->with(TicketController::details($ticketId));
+        $ticket = Ticket::where('id', $service->ticket_id)->firstOrFail();
+
+        $serviceAction = ServiceAction::where('service_id', $serviceId)->firstOrFail();
+
+        return view('user.service-details', [
+                                                    'service' => $service,
+                                                    'ticket' => $ticket,
+                                                    'serviceAction' => $serviceAction,
+
+                                                    ]);
 
     }
 

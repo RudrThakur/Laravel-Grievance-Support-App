@@ -1,6 +1,6 @@
 @component('mail::message')
 
-# Hello, {{ $recipientRole }} <br>
+# Hello, {{ $recipient->roles->first()->name }} <br>
 A New Ticket has been forwarded to you for approval :<br>
 
 @component('mail::panel')
@@ -49,15 +49,9 @@ A New Ticket has been forwarded to you for approval :<br>
 @endcomponent
 
 @component('mail::button', [
-'url' => url('/service-action/1/'.$serviceAction['id'].'/'.$recipient['id'])
+'url' => url('/service-action/'.$serviceAction['id'])
 ])
-Approve
-@endcomponent
-
-@component('mail::button', [
-'url' => url('/service-action/0/'.$serviceAction['id'].'/'.$recipient['id'])
-])
-Deny
+Take Action
 @endcomponent
 
 Thanks,<br>

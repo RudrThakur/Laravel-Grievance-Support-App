@@ -2,9 +2,9 @@
 
 namespace App\Providers;
 
+use App\Ticket;
 use Illuminate\Support\ServiceProvider;
 
-use App\Ticket;
 
 class TicketServiceProvider extends ServiceProvider
 {
@@ -30,7 +30,7 @@ class TicketServiceProvider extends ServiceProvider
 
             $view->with(
                 [
-                'tickets' => Ticket::with('authority')
+                    'tickets' => Ticket::with('authority')
                                     ->with('user')
                                     ->with('status')
                                     ->get(),

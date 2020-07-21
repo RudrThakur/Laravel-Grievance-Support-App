@@ -10,7 +10,7 @@ $(function() {
     });
 
     /* ----------------------------------------------------------------------
-                                Service- Page
+                                Service - Page
     ---------------------------------------------------------------------- */
 
     $("#category").change(function() {
@@ -65,6 +65,7 @@ $(function() {
             type: "get",
             dataType: "json",
             success: function(data) {
+                
                 $('#service-details-modal').modal('show');
                 $('#service-ticketId').html(data.ticket.id);
                 $('#service-category').html(data.service.category);
@@ -82,7 +83,7 @@ $(function() {
                 $('#service-status').html(data.ticket.status.status);
                 $('#service-userId').html(data.ticket.user.id);
                 $('#service-description').html(data.service.description);
-                // $('#service-worker').html(data.service.worker.name);  
+                $('#service-worker').html(data.serviceAction.worker.name);
                 $('#service-priority').html(data.service.priority.priority);
 
             },
@@ -117,6 +118,10 @@ $(function() {
                 $("#service-action-errors-box").hide();
                 $("#service-action-errors").html('');
                 $("#service-action-success-box").fadeIn('slow').delay(3000).fadeOut('slow');
+
+                if (document.URL.includes("service-details") ) { // If Action was taken from Service-Details Page
+                     setInterval('location.reload()', 5000);
+                }
             },
             error: function(error) {
                 $.each(error.responseJSON.errors, function(field, message) {

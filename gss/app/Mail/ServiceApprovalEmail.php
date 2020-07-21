@@ -14,20 +14,18 @@ class ServiceApprovalEmail extends Mailable
     public $serviceAction;
     public $serviceActionAuthorities;
     public $recipient;
-    public $recipientRole;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($serviceAction, $serviceActionAuthorities, $recipient, $recipientRole)
+    public function __construct($serviceAction, $serviceActionAuthorities, $recipient)
     {
 
         $this->serviceAction = $serviceAction;
         $this->serviceActionAuthorities = $serviceActionAuthorities;
         $this->recipient = $recipient;
-        $this->recipientRole = $recipientRole;
 
     }
 

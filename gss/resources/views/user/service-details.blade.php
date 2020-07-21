@@ -12,24 +12,37 @@
 <div class="card">
     <div class="card-body row">
         <div class="col-lg-5 col-xl-5 col-md-12 col-12">
-            <h6 class="text-center">Ticket - Details</h6>
-            <table id="advanced_table" class="table data-table">
-                <tbody>
+             <h6 class="text-center">Ticket - Details</h6>
+                 <table id="advanced_table" class="table data-table">
+                    <tbody>
                     <tr>
                         <th>Ticket-ID</th>
                         <td>{{ $ticket->id }}</td>
                     </tr>
-                    <tr>
+                     <tr>
                         <th>User Name</th>
                         <td>{{ $ticket->user->name }}</td>
                     </tr>
                     <tr>
-                        <th>Department</th>
-                        <td>{{ $service->department }}</td>
-                    </tr>
-                    <tr>
                         <th>User Id</th>
                         <td>{{ $ticket->user_id }}</td>
+                    </tr>
+                     <tr>
+                        <th>Created At</th>
+                        <td>{{ $ticket->created_at->toFormattedDateString() }}</td>
+                    </tr>
+                     <tr>
+                        <th>Updated At</th>
+                        <td>{{ $ticket->updated_at->diffForHumans() }}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            <h6 class="text-center">Service - Details</h6>
+            <table id="advanced_table" class="table data-table">
+                <tbody>
+                    <tr>
+                        <th>Department</th>
+                        <td>{{ $service->department }}</td>
                     </tr>
                     <tr>
                         <th>Service-ID</th>
@@ -77,12 +90,12 @@
                     <tr>
                         <th>Created At</th>
                         <td>
-                            {{ $service->created_at }}</td>
+                            {{ $service->created_at->toFormattedDateString() }}</td>
                     </tr>
                     <tr>
                         <th>Updated At</th>
                         <td>
-                            {{ $service->updated_at }}</td>
+                            {{ $service->updated_at->diffForHumans() }}</td>
                     </tr>
                 </tbody>
             </table>
@@ -92,11 +105,12 @@
             <div class="card">
                 <div class="card-body row">
                     <div class="col-lg-12 col-xl-12 col-md-12 col-12">
+                        <h6 class="text-center">Prior Service Action</h6>
                         <table id="adminaction-table" class="table data-table">
                             <tbody>
                                 <tr>
                                     <th>Current Holder</th>
-                                    <td>{{ $ticket->authority->authority }}</td>
+                                    <td>{{ $ticket->authority->name }}</td>
                                 </tr>
                                 <tr>
                                     <th>Priority</th>
@@ -104,11 +118,11 @@
                                 </tr>
                                 <tr>
                                     <th>Worker Assigned</th>
-                                    <td>{{ $ticket->worker ? $ticket->worker->name : 'No Data Available'}}</td>
+                                    <td>{{ $serviceAction->worker ? $serviceAction->worker->name : 'No Data Available'}}</td>
                                 </tr>
                                 <tr>
                                     <th>Fund Amount</th>
-                                    <td>{{ $service->fund ? $service->fund : 'No Data Available'}}</td>
+                                    <td>{{ $serviceAction->fund ? $serviceAction->fund : 'No Data Available'}}</td>
                                 </tr>
                                 <tr>
                                     <th>Status</th>

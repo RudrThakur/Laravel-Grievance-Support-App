@@ -37,12 +37,11 @@ class SendServiceApprovalEmail
         $recipients = User::whereIn('id', $userIds)->get();
 
         foreach($recipients as $recipient){
-            $recipientRoleId = UsersRole::where('user_id', $recipient->id)->first()->role_id;
-            $recipientRole = Role::where('id', $recipientRoleId)->first()->name;
-           
+
             Mail::to($recipient->email)->send(
-                new ServiceApprovalEmail($event->serviceAction, $event->serviceActionAuthorities, $recipient, $recipientRole)
+                new ServiceApprovalEmail($event->serviceAction, $event->serviceActionAuthorities, $recipient)
             );
+
         }
     }
 }

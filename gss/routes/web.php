@@ -47,8 +47,6 @@ Route::get('/ticket-details/{ticketId}', 'User\TicketController@details');
 
 Route::post('/service-action/{serviceId}', 'User\ServiceController@action');
 
-Route::get('/service-action/{serviceId}', 'User\ServiceController@index');
+Route::get('/service-details/{serviceId}', 'User\ServiceController@index');
 
 Route::get('/roles', 'User\PermissionController@Permission');
-
-Route::get('/service-action/{action}/{serviceActionId}/{authorityId}', 'User\ServiceActionController@create');
