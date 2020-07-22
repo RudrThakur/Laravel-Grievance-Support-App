@@ -38,7 +38,7 @@ details<br>
             <th style="padding: 5px;
             text-align: left;border-bottom: 1px solid black; ">Current Holder</th>
             <td style="padding: 5px;
-            text-align: left;border-left: 1px solid black;">{{ $newTicket['ticket']->authority->authority }}</td>
+            text-align: left;border-left: 1px solid black;">{{ $newTicket['ticket']->authority->name }}</td>
         </tr>
     </table>
     <br>

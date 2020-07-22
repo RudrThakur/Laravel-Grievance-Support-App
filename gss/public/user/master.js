@@ -10,7 +10,7 @@ $(function() {
     });
 
     /* ----------------------------------------------------------------------
-                                Service - Page
+                                Service Request - Page
     ---------------------------------------------------------------------- */
 
     $("#category").change(function() {
@@ -65,7 +65,7 @@ $(function() {
             type: "get",
             dataType: "json",
             success: function(data) {
-                
+
                 $('#service-details-modal').modal('show');
                 $('#service-ticketId').html(data.ticket.id);
                 $('#service-category').html(data.service.category);

@@ -19,11 +19,11 @@ class NewTicketAdded
     /**
      * Create a new event instance.
      *
-     * @return void
+     * @param $newTicket
      */
     public function __construct($newTicket)
     {
-        
+
         $this->newTicket = $newTicket;
 
     }
@@ -35,6 +35,6 @@ class NewTicketAdded
      */
     public function broadcastOn()
     {
-        // 
+        //
     }
 }

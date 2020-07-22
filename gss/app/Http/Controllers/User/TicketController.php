@@ -24,7 +24,23 @@ class TicketController extends Controller
 
     }
 
-    public function details($ticketId){
+    public static function detail($ticketId){
+
+         $ticket = Ticket::with('authority')
+                                    ->with('user')
+                                    ->with('status')
+                                    ->with('type')
+                                    ->where('id', $ticketId)
+                                    ->firstOrFail();
+
+        $service = Service::with('priority')
+                                    ->where('ticket_id', $ticketId)->firstOrFail();
+
+        return ['ticket' => $ticket,
+                'service' => $service];
+    }
+
+    public static function show($ticketId){
 
         $ticket = Ticket::with('authority')
                                     ->with('user')

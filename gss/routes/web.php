@@ -25,7 +25,7 @@ Route::post('/login', 'User\LoginController@store');
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/logout', 'User\LoginController@destroy');
+Route::get('/logout', 'User\LoginController@destroy')->name('logout');
 
 Route::get('/tickets', 'User\TicketController@all')->name('tickets');
 
@@ -33,20 +33,22 @@ Route::get('/service', 'User\ServiceController@create')->name('service');
 
 Route::post('/service-request', 'User\ServiceController@store')->name('service-request');
 
-Route::get('/get-service-categories/{category}', 'User\ServiceDropdownController@subcategories');
+Route::get('/get-service-categories/{category}', 'User\ServiceDropdownController@subcategories');//AJAX Route
 
-Route::get('/get-service-departments/{block}', 'User\ServiceDropdownController@departments');
+Route::get('/get-service-departments/{block}', 'User\ServiceDropdownController@departments');//AJAX Route
 
-Route::get('/get-service-floors/{department}', 'User\ServiceDropdownController@floors');
+Route::get('/get-service-floors/{department}', 'User\ServiceDropdownController@floors');//AJAX Route
 
-Route::get('/get-service-rooms/{block}/{department}/{floor}', 'User\ServiceDropdownController@rooms');
+Route::get('/get-service-rooms/{block}/{department}/{floor}', 'User\ServiceDropdownController@rooms');//AJAX Route
 
 Route::get('/index', 'User\UserController@index')->name('index');
 
-Route::get('/ticket-details/{ticketId}', 'User\TicketController@details');
+Route::get('/ticket-details/{ticketId}', 'User\TicketController@show');
 
-Route::post('/service-action/{serviceId}', 'User\ServiceController@action');
+Route::get('/service-action/{serviceActionId}', 'User\ServiceActionController@index');
+
+Route::post('/service-action/{serviceId}', 'User\ServiceActionController@create');//AJAX Route
 
 Route::get('/service-details/{serviceId}', 'User\ServiceController@index');
 
-Route::get('/roles', 'User\PermissionController@Permission');
+Route::get('/roles', 'User\PermissionController@Permission');//Testing Route

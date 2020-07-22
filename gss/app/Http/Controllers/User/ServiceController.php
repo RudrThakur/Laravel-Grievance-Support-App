@@ -5,7 +5,6 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Repositories\ServiceRepositoryInterface;
 use App\Http\Requests\ServiceRequest;
-use App\Http\Requests\ServiceActionRequest;
 use App\Ticket;
 use App\ServiceAction;
 
@@ -33,12 +32,6 @@ class ServiceController extends Controller
         session()->flash('message', 'Your Service Request Has Been Submitted');
 
         return redirect()->to('/tickets');
-
-    }
-
-    public function action(ServiceActionRequest $request){
-
-        $request->persist();
 
     }
 

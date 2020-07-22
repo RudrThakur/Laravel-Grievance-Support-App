@@ -73,7 +73,7 @@ class ServiceRequest extends FormRequest
 
         $service->save();
 
-        $newTicket = TicketController::details($ticket->id);
+        $newTicket = TicketController::detail($ticket->id);
 
         event(new NewTicketAdded($newTicket));
 
