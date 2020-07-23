@@ -43,7 +43,7 @@ Route::get('/get-service-rooms/{block}/{department}/{floor}', 'User\ServiceDropd
 
 Route::get('/index', 'User\UserController@index')->name('index');
 
-Route::get('/ticket-details/{ticketId}', 'User\TicketController@show');
+Route::get('/ticket-details/{ticketId}', 'User\TicketController@detail');
 
 Route::get('/service-action/{serviceActionId}', 'User\ServiceActionController@index');
 

@@ -77,13 +77,13 @@ $(function() {
                 $('#service-floor').html(data.service.floor);
                 $('#service-room').html(data.service.room);
                 $('#service-quantity').html(data.service.quantity);
-                $('#service-assetcode').html(data.service.assetcode);
+                $('#service-assetcode').html(data.service.assetcode ? data.service.assetcode : 'No Data Available');
                 $('#service-created_at').html(data.ticket.created_at);
                 $('#service-updated_at').html(data.ticket.updated_at);
                 $('#service-status').html(data.ticket.status.status);
                 $('#service-userId').html(data.ticket.user.id);
                 $('#service-description').html(data.service.description);
-                $('#service-worker').html(data.serviceAction.worker.name);
+                $('#service-worker').html(data.serviceAction ? data.serviceAction.worker.name : 'No Data Available');
                 $('#service-priority').html(data.service.priority.priority);
 
             },
