@@ -35,18 +35,24 @@ class ServiceController extends Controller
 
     }
 
-    public function index($serviceId){
+    public function index($serviceId, $ticketId){
 
-        $service = $this->serviceRepositoryInterface->findById($serviceId);
+        if($serviceId){
+            $service = $this->serviceRepositoryInterface->findByServiceId($serviceId);
+        }
+
+        else
+        {
+            $service = $this->serviceRepositoryInterface->findByTicketId($ticketId);
+        }
 
         $ticket = Ticket::where('id', $service->ticket_id)->firstOrFail();
-
-        $serviceAction = ServiceAction::where('service_id', $serviceId)->firstOrFail();
+        $serviceAction = ServiceAction::where('service_id', $service->id)->first();
 
         return view('user.service-details', [
                                                     'service' => $service,
                                                     'ticket' => $ticket,
-                                                    'serviceAction' => $serviceAction,
+                                                    'serviceAction' => $serviceAction ? $serviceAction : null,
 
                                                     ]);
 

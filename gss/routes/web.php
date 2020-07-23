@@ -43,12 +43,14 @@ Route::get('/get-service-rooms/{block}/{department}/{floor}', 'User\ServiceDropd
 
 Route::get('/index', 'User\UserController@index')->name('index');
 
-Route::get('/ticket-details/{ticketId}', 'User\TicketController@detail');
+Route::get('/ticket/{ticketId}', 'User\TicketController@detail');
+
+Route::get('/ticket-details/{ticketId}', 'User\TicketController@index');
 
 Route::get('/service-action/{serviceActionId}', 'User\ServiceActionController@index');
 
 Route::post('/service-action/{serviceId}', 'User\ServiceActionController@create');//AJAX Route
 
-Route::get('/service-details/{serviceId}', 'User\ServiceController@index');
+Route::get('/service-details/{serviceId}/{ticketId}', 'User\ServiceController@index');
 
 Route::get('/roles', 'User\PermissionController@Permission');//Testing Route

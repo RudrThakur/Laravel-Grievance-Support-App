@@ -24,6 +24,18 @@ class TicketController extends Controller
 
     }
 
+    public function index($ticketId){
+         $ticket = Ticket::with('authority')
+                                    ->with('user')
+                                    ->with('status')
+                                    ->with('type')
+                                    ->where('id', $ticketId)
+                                    ->firstOrFail();
+
+        return view('user.ticket-details', ['ticket' => $ticket]);
+
+    }
+
     public static function detail($ticketId){
 
          $ticket = Ticket::with('authority')

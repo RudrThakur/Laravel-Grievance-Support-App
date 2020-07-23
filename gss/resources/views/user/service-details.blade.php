@@ -105,6 +105,7 @@
             <div class="card">
                 <div class="card-body row">
                     <div class="col-lg-12 col-xl-12 col-md-12 col-12">
+                        @if($serviceAction)
                         <h6 class="text-center">Prior Service Action</h6>
                         <table id="adminaction-table" class="table data-table">
                             <tbody>
@@ -130,6 +131,7 @@
                                 </tr>
                             </tbody>
                         </table>
+                        @endif
                         <h6 class="text-center">Service - Action</h6>
                         <hr>
                         @include('user.partials.forms.service-action-form')

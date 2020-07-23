@@ -75,6 +75,10 @@ class ServiceRequest extends FormRequest
 
         $newTicket = TicketController::detail($ticket->id);
 
+        // Send Notifications via Helper Function -> notify()
+
+
+        // Send Notifications via Event Handler
         event(new NewTicketAdded($newTicket));
 
     }

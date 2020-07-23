@@ -6,7 +6,9 @@ interface ServiceRepositoryInterface
 {
     public function all();
 
-    public function findById($serviceId);
+    public function findByServiceId($serviceId);
+
+    public function findByTicketId($ticketId);
 
     public function findByCategory($category);
 
