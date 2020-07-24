@@ -17,6 +17,35 @@
       <h6 class="m-0 font-weight-bold text-primary">Tickets Info</h6>
     </div>
     <div class="card-body">
+        <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                  <h6 class="m-0 font-weight-bold text-primary">Filters</h6>
+                </div>
+            <div class="card-body">
+                <form method="GET" action="/tickets">
+                    <h6>Ticket Type</h6>
+                    <hr>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="1" name="type_id[]">
+                      <label class="form-check-label" for="inlineCheckbox1">Services</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="2" name="type_id[]">
+                      <label class="form-check-label" for="inlineCheckbox2">Consumables</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="3" name="type_id[]">
+                      <label class="form-check-label" for="inlineCheckbox3">Capital Equipments</label>
+                    </div>
+                     <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="checkbox" id="inlineCheckbox4" value="4" name="type_id[]">
+                      <label class="form-check-label" for="inlineCheckbox4">Hall Bookings</label>
+                    </div>
+                    <hr>
+                    <button class="btn btn-success" type="submit">Apply</button>
+                </form>
+            </div>
+        </div>
       <div class="table-responsive">
         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
           <thead>
@@ -59,8 +88,15 @@
             </tr>
             @endforeach
           </tbody>
+
         </table>
       </div>
+        <div class="row">
+            <div class="col-12 d-flex justify-content-center">
+                {{ $tickets->links() }}
+            </div>
+        </div>
+
     </div>
   </div>
 

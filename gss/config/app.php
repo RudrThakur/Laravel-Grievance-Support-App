@@ -179,7 +179,6 @@ return [
          * My Service Providers
          */
         App\Providers\DropdownServiceProvider::class,
-        App\Providers\TicketServiceProvider::class,
         App\Providers\CheckboxServiceProvider::class,
         App\Providers\PermissionServiceProvider::class,
         App\Providers\ServiceRepositoryServiceProvider::class,

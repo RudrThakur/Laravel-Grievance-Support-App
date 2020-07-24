@@ -20,7 +20,28 @@ class TicketController extends Controller
 
     public function all(){
 
-        return view('user.tickets');
+        $tickets = new Ticket;
+
+        $queries = [];
+
+        $columns = [
+            'type_id',
+        ];
+
+        foreach($columns as $column){
+            if(request()->has($column)){
+            $tickets = $tickets->where($column, request($column));
+            $queries[$column] = request($column);
+            }
+        }
+
+         $tickets =  $tickets->with('authority')
+                            ->with('user')
+                            ->with('status')
+                            ->paginate(10)
+                            ->appends($queries);
+
+        return view('user.tickets', ['tickets' => $tickets]);
 
     }
 
