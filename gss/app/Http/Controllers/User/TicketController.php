@@ -26,12 +26,13 @@ class TicketController extends Controller
 
         $columns = [
             'type_id',
+            'status_id',
         ];
 
         foreach($columns as $column){
             if(request()->has($column)){
-            $tickets = $tickets->where($column, request($column));
-            $queries[$column] = request($column);
+                $tickets = $tickets->where($column, request($column));
+                $queries[$column] = request($column);
             }
         }
 
