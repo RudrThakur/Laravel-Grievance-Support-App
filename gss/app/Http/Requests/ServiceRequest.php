@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Notifications\TicketRegistration;
 use Illuminate\Foundation\Http\FormRequest;
 
 use App\Service;
@@ -76,10 +77,11 @@ class ServiceRequest extends FormRequest
         $newTicket = TicketController::detail($ticket->id);
 
         // Send Notifications via Helper Function -> notify()
-
+        $user = auth()->user();
+        $user->notify(new TicketRegistration());//Send Notification to User
 
         // Send Notifications via Event Handler
-        event(new NewTicketAdded($newTicket));
+        event(new NewTicketAdded($newTicket));//Send Notification to Admin
 
     }
 }
