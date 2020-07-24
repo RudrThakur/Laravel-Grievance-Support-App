@@ -11,22 +11,22 @@ class Ticket extends Model
         'type_id',
         'authority_id',
         'status_id',
-    ];   
-    
+    ];
+
     public function user(){
-        
+
         return $this->belongsTo('App\User');
-        
+
     }
 
     public function type(){
-        
+
         return $this->belongsTo('App\TicketInfo');
 
     }
 
     public function authority(){
-        
+
         return $this->belongsTo('App\Authority');
 
     }

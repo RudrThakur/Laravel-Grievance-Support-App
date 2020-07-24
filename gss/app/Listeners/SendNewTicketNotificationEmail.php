@@ -8,7 +8,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\NewTicketNotificationEmail;
 
-class SendNewTicketNotificationEmail
+class SendNewTicketNotificationEmail implements ShouldQueue
 {
     /**
      * Create the event listener.
@@ -28,6 +28,9 @@ class SendNewTicketNotificationEmail
      */
     public function handle(NewTicketAdded $event)
     {
+
+        sleep(10);
+
         Mail::to('rudrakshacmkt777@gmail.com')->send(
             new NewTicketNotificationEmail($event->newTicket)
         );
