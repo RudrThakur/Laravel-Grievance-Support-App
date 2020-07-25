@@ -81,9 +81,9 @@
             </div>
         </div>
 
-        @include('user.partials.modals.ticket-filter-modal')
+        @include('user.partials.forms.ticket-filter-modal')
 
-        @include('user.partials.modals.ticket-search-modal')
+        @include('user.partials.forms.ticket-search-modal')
 
         @include('user.partials.modals.service-details-modal')
 
