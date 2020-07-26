@@ -37,7 +37,10 @@ class ServiceController extends Controller
 
     public function index($serviceId, $ticketId){
 
-        if($serviceId){
+        if($serviceId && $ticketId){
+            $service = $this->serviceRepositoryInterface->findByServiceIdAndTicketId($serviceId, $ticketId);
+        }
+        else if($serviceId){
             $service = $this->serviceRepositoryInterface->findByServiceId($serviceId);
         }
 

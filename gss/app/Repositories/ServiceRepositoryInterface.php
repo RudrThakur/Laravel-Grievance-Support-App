@@ -10,6 +10,8 @@ interface ServiceRepositoryInterface
 
     public function findByTicketId($ticketId);
 
+    public function findByServiceIdAndTicketId($serviceId, $ticketId);
+
     public function findByCategory($category);
 
     public function findBySubCategory($category, $subcategory);

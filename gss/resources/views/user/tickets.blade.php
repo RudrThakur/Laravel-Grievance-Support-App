@@ -63,8 +63,14 @@
                                        class="service-show btn btn-outline-primary btn-sm"><i
                                             class="fas fa-eye"></i></a>
                                     <a href="javascript:void(0)" id="{{ $ticket->id }}"
-                                       class="service-action btn btn-outline-primary btn-sm"><i
+                                       class="service-action btn btn-outline-secondary btn-sm"><i
                                             class="fas fa-tasks"></i></a>
+                                    <a href="/ticket-details/{{ $ticket->id }}"
+                                       class="btn btn-outline-success btn-sm"><i
+                                            class="fas fa-table"></i></a>
+                                    <a href="javascript:void(0)" id="{{ $ticket->id }}"
+                                       class="service-delete btn btn-outline-danger btn-sm"><i
+                                            class="fas fa-trash"></i></a>
                                 </td>
                             </tr>
                         @endforeach
@@ -88,6 +94,8 @@
         @include('user.partials.modals.service-details-modal')
 
         @include('user.partials.modals.service-action-modal')
+
+        @include('user.partials.modals.ticket-delete-modal')
 
     </div>
     <!-- /.container-fluid -->

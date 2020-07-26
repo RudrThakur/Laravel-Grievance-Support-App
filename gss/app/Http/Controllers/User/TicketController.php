@@ -44,9 +44,10 @@ class TicketController extends Controller
             $userIds = User::where('name', 'like', '%' . request('user_name') . '%')->get();
 
             $tickets = $tickets->whereIn('user_id', $userIds);
+
         }
 
-        if(request()->has('user_id')){
+        if(request()->has('user_id') && request('user_id') != ''){
 
             $tickets = $tickets->where('user_id', request('user_id'));
 
@@ -117,6 +118,13 @@ class TicketController extends Controller
             'serviceAction' => $serviceAction,
 
         ];
+
+    }
+
+    public function destroy($ticketId){
+
+        $ticket = Ticket::find($ticketId);
+        $deleteAction = $ticket->delete();
 
     }
 }

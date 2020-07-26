@@ -16,15 +16,21 @@ class ServiceRepository implements ServiceRepositoryInterface
 
     public function findByServiceId($serviceId){
 
-        return Service::where('id', $serviceId)->firstOrFail();
+        return Service::where('id', $serviceId)->first();
 
     }
 
     public function findByTicketId($ticketId){
 
-        return Service::where('ticket_id', $ticketId)->firstOrFail();
+        return Service::where('ticket_id', $ticketId)->first();
 
     }
+
+     public function findByServiceIdAndTicketId($serviceId, $ticketId){
+
+        return Service::where('id', $serviceId)->where('ticket_id', $ticketId)->first();
+
+     }
 
     public function findByCategory($category){
 
