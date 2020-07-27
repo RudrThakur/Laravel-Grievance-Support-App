@@ -17,7 +17,7 @@
                     <tbody>
                     <tr>
                         <th>Ticket-ID</th>
-                        <td>{{ $ticket->id }}</td>
+                        <td id="ticket-id">{{ $ticket->id }}</td>
                     </tr>
                     <tr>
                         <th>Ticket Type</th>
@@ -46,8 +46,9 @@
                     </tbody>
                 </table>
                 @if($ticket->type->type == 'Service')
-                    <a class="btn btn-success" href="/service-details/0/{{ $ticket->id }}">View More</a>
+                    <a class="m-2 btn btn-success" href="/service-details/0/{{ $ticket->id }}">View More</a>
                 @endif
+                <button class="service-delete m-2 btn btn-danger">Delete Ticket</button>
             </div>
             <div class="col-xl-7 col-lg-7 col-md-12 col-12 d-block bg-light p-4">
                 <div class="card">
@@ -86,6 +87,7 @@
                     </div>
                 </div>
             </div>
+            @include('user.partials.modals.ticket-delete-modal')
         </div>
     </div>
 

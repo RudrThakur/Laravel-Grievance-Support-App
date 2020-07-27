@@ -168,8 +168,8 @@ $(function () {
                 $("#ticket-delete-errors").html('');
                 $("#ticket-delete-success-box").fadeIn('slow').delay(3000).fadeOut('slow');
 
-                if (document.URL.includes("ticket-delete")) { // If Action was taken from Service-Details Page
-                    setInterval('location.reload()', 5000);
+                if (document.URL.includes("ticket-details")) { // If Action was taken from Service-Details Page
+                    setInterval('window.location.assign("/tickets")', 5000);
                 }
             },
             error: function (error) {
