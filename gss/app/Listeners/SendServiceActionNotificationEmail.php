@@ -8,7 +8,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\ServiceActionNotificationEmail;
 
-class SendServiceActionNotificationEmail
+class SendServiceActionNotificationEmail implements ShouldQueue
 {
     /**
      * Create the event listener.

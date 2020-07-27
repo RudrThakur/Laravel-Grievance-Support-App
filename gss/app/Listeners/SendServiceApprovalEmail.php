@@ -11,7 +11,7 @@ use App\UsersRole;
 use App\User;
 use App\Mail\ServiceApprovalEmail;
 
-class SendServiceApprovalEmail
+class SendServiceApprovalEmail implements ShouldQueue
 {
     /**
      * Create the event listener.
