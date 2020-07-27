@@ -72,7 +72,11 @@ class TicketController extends Controller
             ->where('id', $ticketId)
             ->firstOrFail();
 
-        return view('user.ticket-details', ['ticket' => $ticket]);
+        $serviceId = Service::where('ticket_id', $ticketId)->first()->id;
+
+        $serviceAction = ServiceAction::where('service_id', $serviceId)->first();
+
+        return view('user.ticket-details', ['ticket' => $ticket, 'serviceAction' => $serviceAction]);
 
     }
 
