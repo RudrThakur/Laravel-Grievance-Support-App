@@ -75,7 +75,6 @@
                             </tr>
                         @endforeach
                         </tbody>
-
                     </table>
                 </div>
                 <div class="row">
@@ -83,13 +82,12 @@
                         {{ $tickets->links() }}
                     </div>
                 </div>
-
             </div>
         </div>
 
-        @include('user.partials.forms.ticket-filter-modal')
+        @include('user.partials.modals.ticket-filter-modal')
 
-        @include('user.partials.forms.ticket-search-modal')
+        @include('user.partials.modals.ticket-search-modal')
 
         @include('user.partials.modals.service-details-modal')
 
