@@ -91,7 +91,7 @@
         <div id="collapseRoles" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Roles :</h6>
-                <a class="collapse-item" href="{{ route('service') }}">Create Role</a>
+                <a class="collapse-item" href="/create-role">Create Role</a>
                 <a class="collapse-item" href="utilities-border.html">Manage Roles</a>
             </div>
         </div>

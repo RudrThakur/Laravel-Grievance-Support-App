@@ -55,4 +55,8 @@ Route::get('/service-details/{serviceId}/{ticketId}', 'User\ServiceController@in
 
 Route::post('/ticket-delete/{ticketId}', 'User\TicketController@destroy');
 
+Route::get('/create-role', 'User\RoleController@index');
+
+Route::post('/create-role', 'User\RoleController@create');
+
 Route::get('/roles', 'User\PermissionController@Permission');//Testing Route
