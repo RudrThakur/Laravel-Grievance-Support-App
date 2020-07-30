@@ -3,7 +3,8 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
-use App\Ticket;
+use App\Permission;
+use App\Role;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -16,7 +17,16 @@ class UserController extends Controller
 
     public function index(){
 
-        return view('user.index');
+        $roles = Role::all();
+
+        $permissions = Permission::all();
+
+        return view('user.create-user',
+
+        [
+            'roles' => $roles,
+            'permissions' => $permissions,
+        ]);
 
     }
 }

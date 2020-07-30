@@ -23,7 +23,7 @@ Route::get('/login', 'User\LoginController@create')->name('login');
 
 Route::post('/login', 'User\LoginController@store');
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/index', 'HomeController@index')->name('home');
 
 Route::get('/logout', 'User\LoginController@destroy')->name('logout');
 
@@ -40,8 +40,6 @@ Route::get('/get-service-departments/{block}', 'User\ServiceDropdownController@d
 Route::get('/get-service-floors/{department}', 'User\ServiceDropdownController@floors');//AJAX Route
 
 Route::get('/get-service-rooms/{block}/{department}/{floor}', 'User\ServiceDropdownController@rooms');//AJAX Route
-
-Route::get('/index', 'User\UserController@index')->name('index');
 
 Route::get('/ticket/{ticketId}', 'User\TicketController@detail');
 
@@ -66,3 +64,7 @@ Route::get('/create-permission', 'User\PermissionController@index');
 Route::post('/create-permission', 'User\PermissionController@create');
 
 Route::get('/manage-permissions', 'User\PermissionController@all');
+
+Route::get('/create-user', 'User\UserController@index');
+
+Route::post('/create-user', 'User\UserController@create');

@@ -23,14 +23,14 @@ class LoginController extends Controller
             return back()->withErrors([
                 'message' => 'Invalid Credentials'
             ]);
-        
+
         }
-        
+
         else{
 
             session()->flash('message', 'You Have been Logged In');
 
-            return redirect()->route('index');
+            return redirect()->route('home');
 
         }
     }
