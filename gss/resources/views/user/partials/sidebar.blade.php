@@ -118,7 +118,7 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Users :</h6>
                 <a class="collapse-item" href="/create-user">Create User</a>
-                <a class="collapse-item" href="/manager-users">Manage Users</a>
+                <a class="collapse-item" href="/manage-users">Manage Users</a>
             </div>
         </div>
     </li>

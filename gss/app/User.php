@@ -18,7 +18,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-         'name', 'email', 'password',
+        'name', 'email', 'password',
     ];
 
     /**
@@ -39,13 +39,22 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function setPasswordAttribute($value) {
+    public function setPasswordAttribute($value)
+    {
         $this->attributes['password'] = bcrypt($value);
     }
 
-    public function roles() {
-     
-        return $this->belongsToMany('App\Role','users_roles');
-            
+    public function roles()
+    {
+
+        return $this->belongsToMany('App\Role', 'users_roles');
+
+    }
+
+    public function permissions()
+    {
+
+        return $this->belongsToMany('App\Permission', 'users_permissions');
+
     }
 }

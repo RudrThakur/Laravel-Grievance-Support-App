@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CreateUserRequest;
 use App\Permission;
 use App\Role;
+use App\User;
+use App\UsersPermission;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -26,6 +29,30 @@ class UserController extends Controller
         [
             'roles' => $roles,
             'permissions' => $permissions,
+        ]);
+
+    }
+
+    public function create(CreateUserRequest $request){
+
+        $request->persist();
+
+        session()->flash('message', 'The User Has Been Created');
+
+        return redirect()->to('/manage-users');
+
+    }
+
+    public function all(){
+
+        $users = User::paginate(5);
+
+        return view('user.manage-users',
+
+        [
+
+            'users' => $users,
+
         ]);
 
     }

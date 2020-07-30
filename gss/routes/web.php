@@ -68,3 +68,5 @@ Route::get('/manage-permissions', 'User\PermissionController@all');
 Route::get('/create-user', 'User\UserController@index');
 
 Route::post('/create-user', 'User\UserController@create');
+
+Route::get('/manage-users', 'User\UserController@all');
