@@ -59,4 +59,10 @@ Route::get('/create-role', 'User\RoleController@index');
 
 Route::post('/create-role', 'User\RoleController@create');
 
-Route::get('/roles', 'User\PermissionController@Permission');//Testing Route
+Route::get('/manage-roles', 'User\RoleController@all');
+
+Route::get('/create-permission', 'User\PermissionController@index');
+
+Route::post('/create-permission', 'User\PermissionController@create');
+
+Route::get('/manage-permissions', 'User\PermissionController@all');

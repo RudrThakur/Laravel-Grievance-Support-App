@@ -92,7 +92,7 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Roles :</h6>
                 <a class="collapse-item" href="/create-role">Create Role</a>
-                <a class="collapse-item" href="utilities-border.html">Manage Roles</a>
+                <a class="collapse-item" href="/manage-roles">Manage Roles</a>
             </div>
         </div>
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePermissions"
@@ -104,8 +104,8 @@
             data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Permissions :</h6>
-                <a class="collapse-item" href="{{ route('service') }}">Create Permission</a>
-                <a class="collapse-item" href="utilities-border.html">Manage Permissions</a>
+                <a class="collapse-item" href="/create-permission">Create Permission</a>
+                <a class="collapse-item" href="/manage-permissions">Manage Permissions</a>
             </div>
         </div>
     </li>
