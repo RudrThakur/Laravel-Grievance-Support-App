@@ -46,14 +46,18 @@
                                 @foreach($user->permissions as $userPermission)
                                     {{ $userPermission->id }})
                                     {{ $userPermission->name}}
-                                    <a href="#" class="user-permission-delete"
+                                    <a href="#" class="user-permission-delete-btn"
                                        data-user-id="{{ $user->id }}"
                                        data-permission-id="{{ $userPermission->id }}">
                                         <i class="fas fa-times-circle" style="color: brown;"></i>
                                     </a>
                                     <br>
                                 @endforeach
-                                <a href="#"><i class="fas fa-edit" style="color: teal;"></i></a>
+                                <a href="#" class="user-permissions-edit-btn"
+                                   data-user-id="{{ $user->id }}">
+                                    <i class="fas fa-edit" style="color: teal;">
+                                    </i>
+                                </a>
                             </td>
                             <td>No Data Available<br> <a href="#"><i class="fas fa-edit"
                                                                      style="color: teal;"></i></a></td>
@@ -80,6 +84,9 @@
         </div>
 
         @include('user.partials.modals.user-permission-delete-modal');
+
+        @include('user.partials.modals.user-permissions-edit-modal');
+
     </div>
 
 @endsection

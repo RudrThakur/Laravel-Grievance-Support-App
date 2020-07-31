@@ -33,13 +33,13 @@ Route::get('/service', 'User\ServiceController@create')->name('service');
 
 Route::post('/service-request', 'User\ServiceController@store')->name('service-request');
 
-Route::get('/get-service-categories/{category}', 'User\ServiceDropdownController@subcategories');//AJAX Route
+Route::get('/get-service-categories/{category}', 'User\ServiceDropdownController@subcategories');// AJAX Route
 
-Route::get('/get-service-departments/{block}', 'User\ServiceDropdownController@departments');//AJAX Route
+Route::get('/get-service-departments/{block}', 'User\ServiceDropdownController@departments');// AJAX Route
 
-Route::get('/get-service-floors/{department}', 'User\ServiceDropdownController@floors');//AJAX Route
+Route::get('/get-service-floors/{department}', 'User\ServiceDropdownController@floors');// AJAX Route
 
-Route::get('/get-service-rooms/{block}/{department}/{floor}', 'User\ServiceDropdownController@rooms');//AJAX Route
+Route::get('/get-service-rooms/{block}/{department}/{floor}', 'User\ServiceDropdownController@rooms');// AJAX Route
 
 Route::get('/ticket/{ticketId}', 'User\TicketController@detail');
 
@@ -47,11 +47,11 @@ Route::get('/ticket-details/{ticketId}', 'User\TicketController@index');
 
 Route::get('/service-action/{serviceActionId}', 'User\ServiceActionController@index');
 
-Route::post('/service-action/{serviceId}', 'User\ServiceActionController@create');//AJAX Route
+Route::post('/service-action/{serviceId}', 'User\ServiceActionController@create');// AJAX Route
 
 Route::get('/service-details/{serviceId}/{ticketId}', 'User\ServiceController@index');
 
-Route::post('/ticket-delete/{ticketId}', 'User\TicketController@destroy');
+Route::post('/ticket-delete/{ticketId}', 'User\TicketController@destroy');// AJAX Route
 
 Route::get('/create-role', 'User\RoleController@index');
 
@@ -71,4 +71,6 @@ Route::post('/create-user', 'User\UserController@create');
 
 Route::get('/manage-users', 'User\UserController@all');
 
-Route::post('/user-permission-delete/{userId}/{permissionId}', 'User\UserPermissionController@destroy');
+Route::post('/user-permission-delete/{userId}/{permissionId}', 'User\UserPermissionController@destroy');// AJAX Route
+
+Route::post('/user-permissions-edit/{userId}', 'User\UserPermissionController@create');// AJAX Route

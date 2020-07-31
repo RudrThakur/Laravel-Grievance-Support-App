@@ -45,13 +45,16 @@ class UserController extends Controller
 
     public function all(){
 
-        $users = User::paginate(5);
+        $users = User::with('permissions')->paginate(5);
+
+        $allPermissions = Permission::all();
 
         return view('user.manage-users',
 
         [
 
             'users' => $users,
+            'allPermissions' => $allPermissions,
 
         ]);
 

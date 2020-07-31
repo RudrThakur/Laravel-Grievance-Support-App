@@ -193,10 +193,11 @@ $(function () {
     });
 
     /* ----------------------------------------------------------------------
-                                Permission Delete - Modal
+                           Permission Delete - Modal
     ---------------------------------------------------------------------- */
-    let permissionId, userId;
-    $('.user-permission-delete').on('click', function () {
+
+    var permissionId, userId;
+    $('.user-permission-delete-btn').on('click', function () {
 
         permissionId = $(this).attr('data-permission-id'); // If Triggered from Permission-Delete Modal
         userId = $(this).attr('data-user-id');
@@ -205,7 +206,7 @@ $(function () {
 
     $('#user-permission-delete-btn').click(function (event) {
 
-         $.ajax({
+        $.ajax({
             url: "/user-permission-delete/" + userId + '/' + permissionId,
             type: "post",
             success: function (data) {
@@ -228,6 +229,45 @@ $(function () {
 
         event.preventDefault();
     });
+
+    /* ----------------------------------------------------------------------
+                          Permissions Edit - Modal
+    ---------------------------------------------------------------------- */
+
+    var userId;
+    $('.user-permissions-edit-btn').on('click', function () {
+
+        userId = $(this).attr('data-user-id'); // If Triggered from Edit User Permissions Modal
+        $('#user-permissions-edit-modal').modal('show');
+    });
+
+    $('#user-permissions-edit-form').submit(function (event) {
+
+        $.ajax({
+            url: "/user-permissions-edit/" + userId,
+            type: "post",
+            data: $(this).serialize(),
+            success: function (data) {
+                $('#user-permissions-edit-form')[0].reset();
+                $("#user-permissions-edit-errors-box").hide();
+                $("#user-permissions-edit-errors").html('');
+                $("#user-permissions-edit-success-box").fadeIn('slow').delay(3000).fadeOut('slow');
+
+                setInterval('location.reload()', 5000);
+
+            },
+            error: function (error) {
+                $.each(error.responseJSON.errors, function (field, message) {
+                    $("#user-permissions-edit-errors").html('<li>' + message + '</li>');
+                });
+                $("#user-permissions-edit-success-box").hide();
+                $("#user-permissions-edit-errors-box").fadeIn('slow').delay(3000).fadeOut('slow');
+            }
+        });
+        event.preventDefault();
+
+    });
+
 
 });
 
