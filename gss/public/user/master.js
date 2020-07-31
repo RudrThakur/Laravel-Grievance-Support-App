@@ -203,7 +203,7 @@ $(function () {
         $('#permission-delete-modal').modal('show');
     });
 
-    $('#permission-delete-btn').click(function (event) {
+    $('#user-permission-delete-btn').click(function (event) {
 
          $.ajax({
             url: "/user-permission-delete/" + userId + '/' + permissionId,

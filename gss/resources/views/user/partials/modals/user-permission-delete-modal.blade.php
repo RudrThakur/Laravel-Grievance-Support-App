@@ -5,7 +5,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">You Sure About This Action?</h5>
+                <h5 class="modal-title" id="exampleModalLabel">You Sure About Deleting This User Permission?</h5>
                 <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                 </button>
@@ -21,7 +21,7 @@
             </div>
             <div class="modal-footer">
                 <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                <button id="permission-delete-btn" class="btn btn-primary">Delete</button>
+                <button id="user-permission-delete-btn" class="btn btn-primary">Delete</button>
             </div>
         </div>
     </div>
