@@ -8,7 +8,7 @@
         @include('user.partials.errors');
         <div class="card-body row justify-content-center">
             <div class="col-md-12 col-12">
-                <h6 class="text-center">Manage Roles</h6>
+                <h6 class="text-center">Manage Users</h6>
                 <hr>
                 <table class="table table-bordered" id="manage-roles-table" width="100%" cellspacing="0">
                     <thead>
@@ -44,7 +44,14 @@
                             <td>{{ $user->email }}</td>
                             <td>
                                 @foreach($user->permissions as $userPermission)
-                                    {{ $userPermission->id }}){{ $userPermission->name}}<br>
+                                    {{ $userPermission->id }})
+                                    {{ $userPermission->name}}
+                                    <a href="#" class="user-permission-delete"
+                                       data-user-id="{{ $user->id }}"
+                                       data-permission-id="{{ $userPermission->id }}">
+                                        <i class="fas fa-times-circle" style="color: brown;"></i>
+                                    </a>
+                                    <br>
                                 @endforeach
                                 <a href="#"><i class="fas fa-edit" style="color: teal;"></i></a>
                             </td>
@@ -71,6 +78,8 @@
                 </div>
             </div>
         </div>
+
+        @include('user.partials.modals.user-permission-delete-modal');
     </div>
 
 @endsection

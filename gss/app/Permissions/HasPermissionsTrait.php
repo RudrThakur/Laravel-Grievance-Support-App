@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace App\Permissions;
 
@@ -10,7 +10,7 @@ trait HasPermissionsTrait {
    public function givePermissionsTo(... $permissions) {
 
     $permissions = $this->getAllPermissions($permissions);
- 
+
     if($permissions === null) {
       return $this;
     }
@@ -67,6 +67,13 @@ trait HasPermissionsTrait {
     return $this->belongsToMany(Permission::class,'users_permissions');
 
   }
+
+  public function allPermissions(){
+
+       return Permission::all();
+
+  }
+
   protected function hasPermission($permission) {
 
     return (bool) $this->permissions->where('slug', $permission->slug)->count();
@@ -75,7 +82,7 @@ trait HasPermissionsTrait {
   protected function getAllPermissions(array $permissions) {
 
     return Permission::whereIn('slug',$permissions)->get();
-    
+
   }
 
 }

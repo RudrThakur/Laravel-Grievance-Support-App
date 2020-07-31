@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CreatePermissionRequest;
+use App\Permissions\HasPermissionsTrait;
 use Illuminate\Http\Request;
 use App\Permission;
 use App\Role;
@@ -11,6 +12,9 @@ use App\User;
 
 class PermissionController extends Controller
 {
+
+    use HasPermissionsTrait;
+
     public function index(){
 
         return view('user.create-permission');
@@ -29,7 +33,7 @@ class PermissionController extends Controller
 
     public function all(){
 
-        $permissions = Permission::all();
+        $permissions = $this->allPermissions();
 
         return view('user.manage-permissions',
 

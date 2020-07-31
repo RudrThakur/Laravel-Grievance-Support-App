@@ -192,5 +192,42 @@ $(function () {
         $("#ticket-delete-success-box").hide();
     });
 
+    /* ----------------------------------------------------------------------
+                                Permission Delete - Modal
+    ---------------------------------------------------------------------- */
+    let permissionId, userId;
+    $('.user-permission-delete').on('click', function () {
+
+        permissionId = $(this).attr('data-permission-id'); // If Triggered from Permission-Delete Modal
+        userId = $(this).attr('data-user-id');
+        $('#permission-delete-modal').modal('show');
+    });
+
+    $('#permission-delete-btn').click(function (event) {
+
+         $.ajax({
+            url: "/user-permission-delete/" + userId + '/' + permissionId,
+            type: "post",
+            success: function (data) {
+                $("#user-permission-delete-errors-box").hide();
+                $("#user-permission-delete-errors").html('');
+                $("#user-permission-delete-success-box").fadeIn('slow').delay(3000).fadeOut('slow');
+                setInterval('location.reload()', 5000);
+
+            },
+            error: function (error) {
+                $("#user-permission-delete-errors").html('<li>' + error.statusText + '</li>');
+                $.each(error.responseJSON.errors, function (field, message) {
+                    $("#user-permission-delete-errors").html('<li>' + message + '</li>');
+                });
+
+                $("#user-permission-delete-success-box").hide();
+                $("#user-permission-delete-errors-box").fadeIn('slow').delay(3000);
+            }
+        });
+
+        event.preventDefault();
+    });
+
 });
 

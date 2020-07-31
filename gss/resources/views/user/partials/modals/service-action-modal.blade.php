@@ -9,10 +9,10 @@
                 </button>
             </div>
             <div class="modal-body">
-                <div class="alert alert-danger service-action-alerts" id="service-action-errors-box">
+                <div class="custom-alert alert alert-danger service-action-alerts" id="service-action-errors-box">
                     <ul id="service-action-errors"></ul>
                 </div>
-                <div class="alert alert-success service-action-alerts" id="service-action-success-box">
+                <div class="custom-alert alert alert-success service-action-alerts" id="service-action-success-box">
                     <p>Service Action Was Successful</p>
                 </div>
 

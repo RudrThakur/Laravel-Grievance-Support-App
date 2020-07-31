@@ -3,12 +3,16 @@
 namespace App\Http\Requests;
 
 use App\Permission;
+use App\Permissions\HasPermissionsTrait;
 use App\User;
 use App\UsersPermission;
 use Illuminate\Foundation\Http\FormRequest;
 
 class CreateUserRequest extends FormRequest
 {
+
+    use HasPermissionsTrait;
+
     /**
      * Determine if the user is authorized to make this request.
      *

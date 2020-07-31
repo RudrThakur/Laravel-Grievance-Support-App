@@ -70,3 +70,5 @@ Route::get('/create-user', 'User\UserController@index');
 Route::post('/create-user', 'User\UserController@create');
 
 Route::get('/manage-users', 'User\UserController@all');
+
+Route::post('/user-permission-delete/{userId}/{permissionId}', 'User\UserPermissionController@destroy');

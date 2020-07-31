@@ -10,10 +10,10 @@
                 </button>
             </div>
             <div class="modal-body">
-                <div class="alert alert-danger service-action-alerts" id="ticket-delete-errors-box">
+                <div class="custom-alert alert alert-danger service-action-alerts" id="ticket-delete-errors-box">
                     <ul id="ticket-delete-errors"></ul>
                 </div>
-                <div class="alert alert-success service-action-alerts" id="ticket-delete-success-box">
+                <div class="custom-alert alert alert-success service-action-alerts" id="ticket-delete-success-box">
                     <p>Ticket Deleted Successfully</p>
                 </div>
                 Select "Delete" below if you are sure about deleting this ticket.

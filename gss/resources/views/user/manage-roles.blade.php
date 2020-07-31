@@ -46,8 +46,10 @@
                                 @foreach($role->permissions as $rolePermission)
                                     {{ $rolePermission->id }}){{ $rolePermission->name}}<br>
                                 @endforeach
+                                 <a href="#"><i class="fas fa-edit" style="color: teal;"></i></a>
                             </td>
-                            <td>No Data Available</td>
+                            <td>No Data Available<br>
+                             <a href="#"><i class="fas fa-edit" style="color: teal;"></i></a></td>
                             <td>{{ $role->created_at }}</td>
                             <td>{{ $role->updated_at }}</td>
                             <td>

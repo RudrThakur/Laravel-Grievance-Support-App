@@ -39,7 +39,8 @@
                             <td>{{ $permission->id }}</td>
                             <td>{{ $permission->name }}</td>
                             <td>{{ $permission->slug }}</td>
-                            <td>No Data Available</td>
+                            <td>No Data Available<br>
+                             <a href="#"><i class="fas fa-edit" style="color: teal;"></i></a></td></td>
                             <td>{{ $permission->created_at }}</td>
                             <td>{{ $permission->updated_at }}</td>
                             <td>
