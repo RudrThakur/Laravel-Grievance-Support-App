@@ -63,38 +63,6 @@ class CreateUserRequest extends FormRequest
 
         $user->roles()->attach($this->user_role);
 
-        foreach ($user->roles as $role) {
-
-            if ($role->name == 'Admin') {// Grant All Permissions to Admin
-
-                $permissions = Permission::get()->pluck('id');
-
-                foreach ($permissions as $permission) {
-
-                    $userPermissions = new UsersPermission();// Set User Permissions
-
-                    $userPermissions->user_id = $user->id;
-
-                    $userPermissions->permission_id = $permission;
-
-                    $userPermissions->save();
-
-                }
-            } else {
-
-                foreach ($this->user_permissions as $permission) {
-
-                    $userPermissions = new UsersPermission();// Set User Permissions
-
-                    $userPermissions->user_id = $user->id;
-
-                    $userPermissions->permission_id = $permission;
-
-                    $userPermissions->save();
-
-                }
-
-            }
-        }
+        $user->permissions()->attach($this->user_permissions);
     }
 }
