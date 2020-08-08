@@ -2,10 +2,8 @@
 
 namespace App\Http\Requests;
 
-use App\Permission;
 use App\Permissions\HasPermissionsTrait;
 use App\User;
-use App\UsersPermission;
 use Illuminate\Foundation\Http\FormRequest;
 
 class CreateUserRequest extends FormRequest
@@ -43,9 +41,6 @@ class CreateUserRequest extends FormRequest
     {
         return [
             'user_role.required' => 'The role field is required',
-            'user_name.required' => 'The name field is required',
-            'user_email.required' => 'The email field is required',
-            'user_password.required' => 'The password field is required',
             'user_permissions.required' => 'At least one permission is required',
         ];
     }

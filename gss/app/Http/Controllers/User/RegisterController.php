@@ -41,19 +41,10 @@ class RegisterController extends Controller
 
             if ($role->name == 'Admin') {// Grant All Permissions to Admin
 
-                $permissions = Permission::get()->pluck('id');
+                $permissions = Permission::all();
 
-                foreach ($permissions as $permission) {
+                $user->permissions()->saveMany($permissions);
 
-                    $userPermissions = new UsersPermission();// Set User Permissions
-
-                    $userPermissions->user_id = $user->id;
-
-                    $userPermissions->permission_id = $permission;
-
-                    $userPermissions->save();
-
-                }
             }
         }
 
@@ -61,7 +52,7 @@ class RegisterController extends Controller
 
         session()->flash('message', 'You Account has been Registered Successfully');
 
-        return redirect()->route('index');
+        return redirect()->route('home');
 
     }
 
