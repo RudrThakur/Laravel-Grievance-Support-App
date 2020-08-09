@@ -8,13 +8,13 @@ class Role extends Model
 {
     public function permissions() {
 
-        return $this->belongsToMany('App\Permission','roles_permissions');
-            
+        return $this->belongsToMany('App\Permission','roles_permissions')->withTimestamps();
+
     }
-     
+
     public function users() {
-     
+
         return $this->belongsToMany('App\User','users_roles');
-            
+
     }
 }

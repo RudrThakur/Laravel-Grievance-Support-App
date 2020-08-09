@@ -74,3 +74,7 @@ Route::get('/manage-users', 'User\UserController@all');
 Route::post('/user-permission-delete/{userId}/{permissionId}', 'User\UserPermissionController@destroy');// AJAX Route
 
 Route::post('/user-permissions-edit/{userId}', 'User\UserPermissionController@create');// AJAX Route
+
+Route::get('/profile-details', 'User\ProfileController@index');
+
+Route::get('/edit-profile', 'User\ProfileController@create');

@@ -39,13 +39,13 @@ class RegisterController extends Controller
 
         foreach ($user->roles as $role) {
 
-            if ($role->name == 'Admin') {// Grant All Permissions to Admin
+            $permissions = Permission::all();
 
-                $permissions = Permission::all();
-
+            if ($role->name == 'Admin')// Grant All User Permissions to Admin
                 $user->permissions()->saveMany($permissions);
 
-            }
+            if ($role->permissions->isEmpty())// Grant All Role Permissions to All Roles
+                $role->permissions()->saveMany($permissions);
         }
 
         auth()->login($user);

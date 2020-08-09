@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Profile;
 use App\ServiceAction;
 use App\Ticket;
+use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Throwable;
 
 class HomeController extends Controller
 {
@@ -22,7 +25,7 @@ class HomeController extends Controller
     /**
      * Show the application dashboard.
      *
-     * @return \Illuminate\Contracts\Support\Renderable
+     * @return Renderable
      */
     public function index()
     {
@@ -32,10 +35,13 @@ class HomeController extends Controller
         $pendingTicketsCount = Ticket::where('status_id', '!=', 4)->get()->count();
 
         $currentMonthSpendings = ServiceAction::whereYear('created_at', Carbon::now()->year)
-                                                ->whereMonth('created_at', Carbon::now()->month)
-                                                ->sum('fund');
+            ->whereMonth('created_at', Carbon::now()->month)
+            ->sum('fund');
 
-        $workCompleted = (Ticket::where('status_id', 4)->get()->count())/Ticket::count() * 100;//Percentage of Completed Work
+        if (Ticket::count())
+            $workCompleted = (Ticket::where('status_id', 4)->get()->count()) / Ticket::count() * 100;//Percentage of Completed Work
+        else
+            $workCompleted = 0;
 
         return view('user.index',
 
@@ -47,5 +53,8 @@ class HomeController extends Controller
                 'workCompleted' => $workCompleted,
 
             ]);
+
     }
+
 }
+
