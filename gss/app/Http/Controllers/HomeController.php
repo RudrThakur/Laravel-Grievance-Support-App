@@ -29,30 +29,36 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $userProfile = Profile::where('user_id', auth()->user()->id)->first();
 
-        $allTicketsCount = Ticket::all()->count();
+        if (!$userProfile)// If Profile is not updated
+            return redirect()->to('/edit-profile');
 
-        $pendingTicketsCount = Ticket::where('status_id', '!=', 4)->get()->count();
+        else {
+            $allTicketsCount = Ticket::all()->count();
 
-        $currentMonthSpendings = ServiceAction::whereYear('created_at', Carbon::now()->year)
-            ->whereMonth('created_at', Carbon::now()->month)
-            ->sum('fund');
+            $pendingTicketsCount = Ticket::where('status_id', '!=', 4)->get()->count();
 
-        if (Ticket::count())
-            $workCompleted = (Ticket::where('status_id', 4)->get()->count()) / Ticket::count() * 100;//Percentage of Completed Work
-        else
-            $workCompleted = 0;
+            $currentMonthSpendings = ServiceAction::whereYear('created_at', Carbon::now()->year)
+                ->whereMonth('created_at', Carbon::now()->month)
+                ->sum('fund');
 
-        return view('user.index',
+            if (Ticket::count())
+                $workCompleted = (Ticket::where('status_id', 4)->get()->count()) / Ticket::count() * 100;//Percentage of Completed Work
+            else
+                $workCompleted = 0;
 
-            [
+            return view('user.index',
 
-                'allTicketsCount' => $allTicketsCount,
-                'pendingTicketsCount' => $pendingTicketsCount,
-                'currentMonthSpendings' => $currentMonthSpendings,
-                'workCompleted' => $workCompleted,
+                [
 
-            ]);
+                    'allTicketsCount' => $allTicketsCount,
+                    'pendingTicketsCount' => $pendingTicketsCount,
+                    'currentMonthSpendings' => $currentMonthSpendings,
+                    'workCompleted' => $workCompleted,
+
+                ]);
+        }
 
     }
 
