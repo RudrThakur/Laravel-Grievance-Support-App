@@ -43,6 +43,9 @@
                     </tr>
                     </tbody>
                 </table>
+
+                <a class="btn btn-primary" href="/edit-profile">Edit Profile</a>
+
             </div>
         </div>
     </div>
