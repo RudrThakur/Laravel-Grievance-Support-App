@@ -80,3 +80,7 @@ Route::get('/profile-details', 'User\ProfileController@index');
 Route::get('/edit-profile', 'User\ProfileController@create');
 
 Route::post('/edit-profile', 'User\ProfileController@store');
+
+Route::get('/account-settings', 'User\AccountSettingController@index');
+
+Route::post('/account-delete/{userId}', 'User\UserController@destroy');
