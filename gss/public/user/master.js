@@ -268,6 +268,57 @@ $(function () {
 
     });
 
+    /* ----------------------------------------------------------------------
+                      User Delete - Modal
+---------------------------------------------------------------------- */
+
+    let userToBeDeleted;
+    $('.user-delete').on('click', function () {
+
+        userToBeDeleted = $(this).attr('id');
+        $('#user-delete-modal').modal('show');
+        $('#user-id-delete').html(userToBeDeleted);
+    });
+
+    $('#user-delete-form').submit(function (event) {
+
+        $.ajax({
+            url: "/user-delete/" + userToBeDeleted,
+            type: "post",
+            success: function (response) {
+                $('#user-delete-modal').modal('hide');
+
+                if (response.status) {
+                    $("#manage-users-errors-box").hide();
+                    $("#manage-users-errors").html('');
+                    $("#manage-users-success-box").fadeIn('slow').delay(3000).fadeOut('slow');
+                    $('#manage-users-success').html(response.message);
+
+                    setInterval('location.reload()', 5000);
+                } else {
+                    $("#manage-users-errors").html(
+                        '<li> Some Error Occurred :</li>' +
+                        '<li>' + response.message + '</li>');
+                    console.log(response.errors);
+                    $("#manage-users-success-box").hide();
+                    $("#manage-users-errors-box").fadeIn('slow');
+                }
+            },
+            error: function (error) {
+                $('#user-delete-modal').modal('hide');
+                $.each(error.responseJSON.errors, function (field, message) {
+                    $("#manage-users-errors").html(
+                        '<li> Some Error Occurred :</li>' +
+                        '<li>' + message + '</li>');
+                });
+                $("#manage-users-success-box").hide();
+                $("#manage-users-errors-box").fadeIn('slow');
+            }
+        });
+        event.preventDefault();
+
+    });
+
 
 });
 

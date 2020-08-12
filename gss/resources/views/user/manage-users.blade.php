@@ -5,12 +5,20 @@
 @section('content')
 
     <div class="card">
-        @include('user.partials.errors');
         <div class="card-body row justify-content-center">
             <div class="col-md-12 col-12">
+
+                @include('user.partials.errors')
+
+                <div class="custom-alert alert alert-danger" id="manage-users-errors-box">
+                    <ul id="manage-users-errors"></ul>
+                </div>
+                <div class="custom-alert alert alert-success" id="manage-users-success-box">
+                    <h6 id="manage-users-success"></h6>
+                </div>
                 <h6 class="text-center">Manage Users</h6>
                 <hr>
-                <table class="table table-bordered" id="manage-roles-table" width="100%" cellspacing="0">
+                <table class="table table-bordered" width="100%" cellspacing="0">
                     <thead>
                     <tr>
                         <th>User ID</th>
@@ -65,11 +73,14 @@
                             <td>{{ $user->updated_at->diffForHumans() }}</td>
                             <td>
                                 <a href="javascript:void(0)" id="{{ $user->id }}"
-                                   class="service-action btn btn-outline-primary btn-sm"><i
+                                   class="user-edit btn btn-outline-primary btn-sm"><i
                                         class="fas fa-tasks"></i></a>
-                                <a href="javascript:void(0)" id="{{ $user->id }}"
-                                   class="service-delete btn btn-outline-danger btn-sm"><i
-                                        class="fas fa-trash"></i></a>
+
+                                @if($user->id != auth()->user()->id)
+                                    <a href="javascript:void(0)" id="{{ $user->id }}"
+                                       class="user-delete btn btn-outline-danger btn-sm"><i
+                                            class="fas fa-trash"></i></a>
+                                @endif
                             </td>
                         </tr>
                     @endforeach
@@ -82,6 +93,8 @@
                 </div>
             </div>
         </div>
+
+        @include('user.partials.modals.user-delete-modal');
 
         @include('user.partials.modals.user-permission-delete-modal');
 

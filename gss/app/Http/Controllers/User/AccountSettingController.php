@@ -11,4 +11,17 @@ class AccountSettingController extends Controller
     {
         return view('user.account-settings');
     }
+
+    public function destroy($userId)
+    {
+
+        $user = User::find($userId);
+
+        $user->delete();
+
+        session()->flash('message', 'Account Has Been Deleted Successfully');
+
+        return redirect()->route('login');
+
+    }
 }

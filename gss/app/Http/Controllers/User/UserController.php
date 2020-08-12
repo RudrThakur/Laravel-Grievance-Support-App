@@ -9,16 +9,19 @@ use App\Role;
 use App\User;
 use App\UsersPermission;
 use Illuminate\Http\Request;
+use Throwable;
 
 class UserController extends Controller
 {
-    public function __construct(){
+    public function __construct()
+    {
 
         $this->middleware('auth');
 
     }
 
-    public function index(){
+    public function index()
+    {
 
         $roles = Role::all();
 
@@ -26,14 +29,15 @@ class UserController extends Controller
 
         return view('user.create-user',
 
-        [
-            'roles' => $roles,
-            'permissions' => $permissions,
-        ]);
+            [
+                'roles' => $roles,
+                'permissions' => $permissions,
+            ]);
 
     }
 
-    public function create(CreateUserRequest $request){
+    public function create(CreateUserRequest $request)
+    {
 
         $request->persist();
 
@@ -43,33 +47,61 @@ class UserController extends Controller
 
     }
 
-    public function all(){
+    public function all()
+    {
 
-        $users = User::with('permissions')->paginate(5);
+        if (auth()->user()->can('manage-users')) {
+            $users = User::with('permissions')->paginate(5);
 
-        $allPermissions = Permission::all();
+            $allPermissions = Permission::all();
 
-        return view('user.manage-users',
+            return view('user.manage-users',
 
-        [
+                [
 
-            'users' => $users,
-            'allPermissions' => $allPermissions,
+                    'users' => $users,
+                    'allPermissions' => $allPermissions,
 
-        ]);
+                ]);
+        }
+
+        else{
+
+            return view('user.permission-error-page');
+
+        }
 
     }
 
-    public function destroy($userId){
+    public function destroy($userId)
+    {
 
-        $user = User::find($userId);
+        try {
+            if ($userId == auth()->user()->id) {
+                return array(
+                    'status' => false,
+                    'message' => 'To Delete Your Account Go to Account Settings',
+                    'errors' => 'You Have to use the "Delete Account" Option in Account Settings to
+                    Delete your Account'
+                );
+            } else {
+                $user = User::find($userId);
 
-        $user->delete();
+                $user->delete();
 
-        session()->flash('message', 'Account Has Been Deleted Successfully');
-
-        return redirect()->route('login');
-
+                return array(
+                    'status' => true,
+                    'message' => 'User Has Been Deleted Successfully',
+                    'errors' => ''
+                );
+            }
+        } catch (Throwable $exception) {
+            return array(
+                'status' => false,
+                'message' => 'Some Exception Occurred',
+                'errors' => $exception
+            );
+        }
 
     }
 }

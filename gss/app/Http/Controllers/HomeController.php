@@ -32,7 +32,11 @@ class HomeController extends Controller
         $userProfile = Profile::where('user_id', auth()->user()->id)->first();
 
         if (!$userProfile)// If Profile is not updated
+        {
+            session()->flash('message', 'You Have been Logged In');
+
             return redirect()->to('/edit-profile');
+        }
 
         else {
             $allTicketsCount = Ticket::all()->count();

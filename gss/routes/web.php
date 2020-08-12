@@ -83,4 +83,6 @@ Route::post('/edit-profile', 'User\ProfileController@store');
 
 Route::get('/account-settings', 'User\AccountSettingController@index');
 
-Route::post('/account-delete/{userId}', 'User\UserController@destroy');
+Route::post('/account-delete/{userId}', 'User\AccountSettingController@destroy');
+
+Route::post('/user-delete/{userId}', 'User\UserController@destroy');// AJAX Route

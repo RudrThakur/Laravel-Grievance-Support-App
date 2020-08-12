@@ -56,25 +56,26 @@
     <!-- Nav Item - Utilities Collapse Menu -->
 
     @if(auth()->user()->can('create-ticket'))
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
-            aria-expanded="true" aria-controls="collapseUtilities">
-            <i class="fas fa-fw fa-wrench"></i>
-            <span>Request</span>
-        </a>
-        <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Choose Request Type :</h6>
-                <a class="collapse-item" href="{{ route('service') }}">Services</a>
-                <a class="collapse-item" href="utilities-border.html">Consumables</a>
-                <a class="collapse-item" href="utilities-animation.html">Capital Equipments</a>
-                <a class="collapse-item" href="utilities-other.html">Hall Bookings</a>
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
+               aria-expanded="true" aria-controls="collapseUtilities">
+                <i class="fas fa-fw fa-wrench"></i>
+                <span>Request</span>
+            </a>
+            <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
+                 data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">Choose Request Type :</h6>
+                    <a class="collapse-item" href="{{ route('service') }}">Services</a>
+                    <a class="collapse-item" href="utilities-border.html">Consumables</a>
+                    <a class="collapse-item" href="utilities-animation.html">Capital Equipments</a>
+                    <a class="collapse-item" href="utilities-other.html">Hall Bookings</a>
+                </div>
             </div>
-        </div>
-    </li>
-    @endif
+        </li>
+@endif
 
-    <!-- Divider -->
+<!-- Divider -->
     <hr class="sidebar-divider">
 
     <!-- Heading -->
@@ -84,7 +85,7 @@
 
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseRoles" aria-expanded="true"
-            aria-controls="collapseUtilities">
+           aria-controls="collapseUtilities">
             <i class="fas fa-fw fa-wrench"></i>
             <span>Roles</span>
         </a>
@@ -96,29 +97,31 @@
             </div>
         </div>
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePermissions"
-            aria-expanded="true" aria-controls="collapseUtilities">
+           aria-expanded="true" aria-controls="collapseUtilities">
             <i class="fas fa-fw fa-wrench"></i>
             <span>Permissions</span>
         </a>
         <div id="collapsePermissions" class="collapse" aria-labelledby="headingUtilities"
-            data-parent="#accordionSidebar">
+             data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Permissions :</h6>
                 <a class="collapse-item" href="/create-permission">Create Permission</a>
                 <a class="collapse-item" href="/manage-permissions">Manage Permissions</a>
             </div>
         </div>
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUsers"
-            aria-expanded="true" aria-controls="collapseUtilities">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUsers"
+           aria-expanded="true" aria-controls="collapseUtilities">
             <i class="fas fa-fw fa-wrench"></i>
             <span>Users</span>
         </a>
         <div id="collapseUsers" class="collapse" aria-labelledby="collapseUsers"
-            data-parent="#accordionSidebar">
+             data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Users :</h6>
                 <a class="collapse-item" href="/create-user">Create User</a>
-                <a class="collapse-item" href="/manage-users">Manage Users</a>
+                @if(auth()->user()->can('manage-users'))
+                    <a class="collapse-item" href="/manage-users">Manage Users</a>
+                @endif
             </div>
         </div>
     </li>
@@ -134,7 +137,7 @@
     <!-- Nav Item - Pages Collapse Menu -->
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true"
-            aria-controls="collapsePages">
+           aria-controls="collapsePages">
             <i class="fas fa-fw fa-folder"></i>
             <span>Pages</span>
         </a>

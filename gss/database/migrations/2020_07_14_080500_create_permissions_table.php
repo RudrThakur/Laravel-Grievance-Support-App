@@ -21,16 +21,20 @@ class CreatePermissionsTable extends Migration
             $table->timestamp('updated_at')->useCurrent();
         });
 
-        
+
         // Seed
         DB::table('permissions')->insert(
             [
-                [ 'name' => 'Create Ticket',
-                'slug' => 'create-ticket'],
-                [ 'name' => 'Delete Ticket',
-                'slug' => 'delete-ticket'],
-                [ 'name' => 'Close Ticket',
-                'slug' => 'close-ticket'],
+                ['name' => 'Create Ticket',
+                    'slug' => 'create-ticket'],
+                ['name' => 'Delete Ticket',
+                    'slug' => 'delete-ticket'],
+                ['name' => 'Close Ticket',
+                    'slug' => 'close-ticket'],
+                ['name' => 'Create User',
+                    'slug' => 'create-user'],
+                ['name' => 'Manage Users',
+                    'slug' => 'manage-users'],
             ]
         );
     }
