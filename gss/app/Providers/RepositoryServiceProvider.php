@@ -4,9 +4,11 @@ namespace App\Providers;
 
 use App\Repositories\ServiceRepository;
 use App\Repositories\ServiceRepositoryInterface;
+use App\Repositories\TicketRepository;
+use App\Repositories\TicketRepositoryInterface;
 use Illuminate\Support\ServiceProvider;
 
-class ServiceRepositoryServiceProvider extends ServiceProvider
+class RepositoryServiceProvider extends ServiceProvider
 {
     /**
      * Register services.
@@ -16,6 +18,7 @@ class ServiceRepositoryServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->bind(ServiceRepositoryInterface::class, ServiceRepository::class);
+        $this->app->bind(TicketRepositoryInterface::class, TicketRepository::class);
     }
 
     /**

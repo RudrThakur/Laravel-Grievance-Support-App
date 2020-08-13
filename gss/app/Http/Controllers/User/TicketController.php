@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Repositories\TicketRepositoryInterface;
 use App\ServiceAction;
 use App\User;
 use Illuminate\Http\Request;
@@ -14,8 +15,12 @@ use App\Ticket;
 class TicketController extends Controller
 {
 
-    public function __construct()
+    private $ticketRepositoryInterface;
+
+    public function __construct(TicketRepositoryInterface $ticketRepositoryInterface)
     {
+
+        $this->ticketRepositoryInterface = $ticketRepositoryInterface;
 
         $this->middleware('auth');
     }

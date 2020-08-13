@@ -181,7 +181,7 @@ return [
         App\Providers\DropdownServiceProvider::class,
         App\Providers\CheckboxServiceProvider::class,
         App\Providers\PermissionServiceProvider::class,
-        App\Providers\ServiceRepositoryServiceProvider::class,
+        App\Providers\RepositoryServiceProvider::class,
 
     ],
 
