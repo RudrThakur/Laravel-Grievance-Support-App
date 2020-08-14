@@ -119,7 +119,7 @@ details<br>
 @endcomponent
 
 @component('mail::button', [
-'url' => url('/service-details/'.$newTicket['ticket']->id)
+'url' => url('/ticket-details/'.$newTicket['ticket']->id)
 ])
 Take Action
 @endcomponent

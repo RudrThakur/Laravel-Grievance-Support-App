@@ -79,7 +79,7 @@ class ServiceRequest extends FormRequest
         // Send Notifications via Helper Function -> notify()
         $when = now()->addSeconds(10);
         $user = auth()->user();
-        $user->notify((new TicketRegistration())->delay($when));//Send Notification to User
+        $user->notify((new TicketRegistration($ticket->id))->delay($when));//Send Notification to User
 
         // Send Notifications via Event Handler
         event(new NewTicketAdded($newTicket));//Send Notification to Admin
