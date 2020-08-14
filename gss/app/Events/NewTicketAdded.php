@@ -14,24 +14,24 @@ class NewTicketAdded
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $newTicket;
+    public $ticket;
 
     /**
      * Create a new event instance.
      *
-     * @param $newTicket
+     * @param $ticket
      */
-    public function __construct($newTicket)
+    public function __construct($ticket)
     {
 
-        $this->newTicket = $newTicket;
+        $this->ticket = $ticket;
 
     }
 
     /**
      * Get the channels the event should broadcast on.
      *
-     * @return \Illuminate\Broadcasting\Channel|array
+     * @return void
      */
     public function broadcastOn()
     {

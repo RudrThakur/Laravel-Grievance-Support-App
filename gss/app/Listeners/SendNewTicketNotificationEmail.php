@@ -3,12 +3,15 @@
 namespace App\Listeners;
 
 use App\Events\NewTicketAdded;
+use App\Notifications\TicketRegistration;
+use App\User;
+use App\UsersRole;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\NewTicketNotificationEmail;
 
-class SendNewTicketNotificationEmail implements ShouldQueue
+class SendNewTicketNotificationEmail
 {
     /**
      * Create the event listener.
@@ -23,16 +26,25 @@ class SendNewTicketNotificationEmail implements ShouldQueue
     /**
      * Handle the event.
      *
-     * @param  NewTicketAdded  $event
+     * @param NewTicketAdded $event
      * @return void
      */
     public function handle(NewTicketAdded $event)
     {
 
-        sleep(10);
+        $when = now()->addSeconds(10);
 
-        Mail::to('rudrakshacmkt777@gmail.com')->send(
-            new NewTicketNotificationEmail($event->newTicket)
-        );
+        $admins = UsersRole::where('role_id', 1)->get()->pluck('user_id');
+
+        $currentUser = auth()->user()->id;
+
+        $recipients = User::where('id', $currentUser)
+            ->orWhereIn('id', $admins)
+            ->get();
+
+        foreach ($recipients as $recipient) {
+            $recipient->notify((new TicketRegistration($event->ticket, $recipient))->delay($when));
+        }
+
     }
 }

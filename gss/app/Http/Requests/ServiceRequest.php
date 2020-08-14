@@ -54,9 +54,15 @@ class ServiceRequest extends FormRequest
 
     public function persist(){
 
-        $ticketTypeId = TicketInfo::where('type', 'Service')->first()->id;
+        $ticket = Ticket::create(
 
-        $ticket = Ticket::create(['user_id' => auth()->user()->id, 'type_id' => $ticketTypeId]);
+            array(
+                'user_id' => auth()->user()->id,
+                'type_id' => 1,
+                'authority_id' => 1,
+                'status_id' => 1
+            )
+        );
 
         $service = new Service;
 
@@ -74,15 +80,7 @@ class ServiceRequest extends FormRequest
 
         $service->save();
 
-        $newTicket = TicketController::detail($ticket->id);
-
-        // Send Notifications via Helper Function -> notify()
-        $when = now()->addSeconds(10);
-        $user = auth()->user();
-        $user->notify((new TicketRegistration($ticket->id))->delay($when));//Send Notification to User
-
-        // Send Notifications via Event Handler
-        event(new NewTicketAdded($newTicket));//Send Notification to Admin
+        event(new NewTicketAdded($ticket));
 
     }
 }
