@@ -1,4 +1,4 @@
-<form id="service-action-form">
+<form id="service-action-form" method="POST" action="/service-action/{{ $service->id }}">
     @csrf
     <div class="form-group">
         <label for="recipient-name" class="col-form-label">If Any Funding Required</label>

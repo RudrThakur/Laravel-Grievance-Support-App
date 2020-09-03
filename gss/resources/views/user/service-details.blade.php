@@ -12,31 +12,6 @@
     <div class="card">
         <div class="card-body row">
             <div class="col-lg-5 col-xl-5 col-md-12 col-12">
-                <h6 class="text-center">Ticket - Details</h6>
-                <table id="advanced_table" class="table data-table">
-                    <tbody>
-                    <tr>
-                        <th>Ticket-ID</th>
-                        <td>{{ $ticket->id }}</td>
-                    </tr>
-                    <tr>
-                        <th>User Name</th>
-                        <td>{{ $ticket->user->name }}</td>
-                    </tr>
-                    <tr>
-                        <th>User Id</th>
-                        <td>{{ $ticket->user_id }}</td>
-                    </tr>
-                    <tr>
-                        <th>Created At</th>
-                        <td>{{ $ticket->created_at->toFormattedDateString() }}</td>
-                    </tr>
-                    <tr>
-                        <th>Updated At</th>
-                        <td>{{ $ticket->updated_at->diffForHumans() }}</td>
-                    </tr>
-                    </tbody>
-                </table>
                 <h6 class="text-center">Service - Details</h6>
                 <table id="advanced_table" class="table data-table">
                     <tbody>
@@ -134,7 +109,8 @@
                                                     @if($serviceActionAuthority->approved == 1)
                                                         <i class="fas fa-check-circle" style="color: green;"></i> |
                                                     @elseif(is_null($serviceActionAuthority->approved))
-                                                        <i class="fas fa-exclamation-circle" style="color: black;"></i> |
+                                                        <i class="fas fa-exclamation-circle" style="color: black;"></i>
+                                                        |
                                                     @else
                                                         <i class="fas fa-times-circle" style="color: red;"></i> |
                                                     @endif
@@ -142,7 +118,7 @@
                                             </td>
                                         @endif
                                     </tr>
-                                       <tr>
+                                    <tr>
                                         <th>Admin Remarks</th>
                                         <td>{{ $serviceAction->adminremarks}}</td>
                                     </tr>
@@ -152,17 +128,11 @@
                                     </tr>
                                     </tbody>
                                 </table>
-                            @endif
 
-                            @if(!$serviceAction)
+                            @else
                                 <h6 class="text-center">Service - Action</h6>
                                 <hr>
                                 @include('user.partials.forms.service-action-form')
-                            @else
-                                <button class="service-action btn btn-primary" data-toggle="modal"
-                                        data-target="service-action-modal">
-                                    Update
-                                </button>
                             @endif
 
                         </div>

@@ -11,23 +11,28 @@ use Illuminate\Http\Request;
 
 class ServiceActionController extends Controller
 {
-    public function create(ServiceActionRequest $request){//Listening to AJAX Requests
+    public function create(ServiceActionRequest $request)
+    {
 
         $request->persist();
 
+        session()->flash('message', 'Service Action Was Successful');
+
+        return redirect()->back();
     }
 
-    public function index($serviceActionId){
+    public function index($serviceActionId)
+    {
 
         $serviceAction = ServiceAction::where('id', $serviceActionId)
-                                        ->firstOrFail();
+            ->firstOrFail();
 
         $service = Service::where('id', $serviceAction->service_id)
-                            ->firstOrFail();
+            ->firstOrFail();
 
         return view('user.service-action-details', [
-                                                            'serviceAction' => $serviceAction,
-                                                            'service' => $service,
+            'serviceAction' => $serviceAction,
+            'service' => $service,
         ]);
 
     }
