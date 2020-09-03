@@ -21,13 +21,13 @@ class ServiceApprovalController extends Controller
             'authority_remarks.required' => 'The message field is required'
         ]);
 
-        $authority = Authority::where('id', auth()->user()->roles->first()->id)->first();
-
+        $authority = Authority::where('name', auth()->user()->roles->first()->name)->first();
+       
         $serviceAction = ServiceAction::where('service_id', $serviceId)
             ->first();
 
-        $serviceAction->authorities()
-            ->updateExistingPivot($authority->id, ['approved' => request('approval')]);
+        $serviceApproval = $serviceAction->authorities()
+            ->updateExistingPivot($authority->id, ['approved' => request('approval'), 'remarks' => request('authority_remarks')]);
 
         session()->flash('message', 'Your Action Was Successful');
 
