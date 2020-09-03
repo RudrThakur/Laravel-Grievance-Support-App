@@ -3,12 +3,7 @@
 @section('title','Service Details')
 
 @section('content')
-    <div class="custom-alert alert alert-danger service-action-alerts" id="service-action-errors-box">
-        <ul id="service-action-errors"></ul>
-    </div>
-    <div class="custom-alert alert alert-success service-action-alerts" id="service-action-success-box">
-        <p>Service Action Was Successful</p>
-    </div>
+    @include('user.partials.errors')
     <div class="card">
         <div class="card-body row">
             <div class="col-lg-5 col-xl-5 col-md-12 col-12">
@@ -134,6 +129,9 @@
                                 <hr>
                                 @include('user.partials.forms.service-action-form')
                             @endif
+                            <h6 class="text-center">Service - Approval</h6>
+                            <hr>
+                            @include('user.partials.forms.service-approval-form')
 
                         </div>
                     </div>

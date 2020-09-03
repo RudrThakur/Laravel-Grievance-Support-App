@@ -86,3 +86,5 @@ Route::get('/account-settings', 'User\AccountSettingController@index');
 Route::post('/account-delete/{userId}', 'User\AccountSettingController@destroy');
 
 Route::post('/user-delete/{userId}', 'User\UserController@destroy');// AJAX Route
+
+Route::post('/service-approval/{serviceId}', 'User\ServiceApprovalController@create');

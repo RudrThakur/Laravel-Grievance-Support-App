@@ -17,6 +17,7 @@ class CreateServiceActionsAuthoritiesTable extends Migration
             $table->unsignedBigInteger('service_action_id');
             $table->unsignedBigInteger('authority_id');
             $table->boolean('approved')->nullable();
+            $table->string('remarks');
 
             //FOREIGN KEY CONSTRAINTS
             $table->foreign('service_action_id')->references('id')->on('service_actions')->onDelete('cascade');

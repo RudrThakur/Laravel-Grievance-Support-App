@@ -25,10 +25,10 @@ class ServiceActionController extends Controller
     {
 
         $serviceAction = ServiceAction::where('id', $serviceActionId)
-            ->firstOrFail();
+            ->first();
 
         $service = Service::where('id', $serviceAction->service_id)
-            ->firstOrFail();
+            ->first();
 
         return view('user.service-action-details', [
             'serviceAction' => $serviceAction,

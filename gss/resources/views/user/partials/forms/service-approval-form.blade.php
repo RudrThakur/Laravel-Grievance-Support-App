@@ -1,13 +1,13 @@
-<form id="service-approval-form">
+<form id="service-approval-form" method="POST" action="/service-approval/{{ $service->id }}">
     @csrf
     <div class="form-check">
-      <input class="form-check-input" type="radio" name="approval" id="approve" value="approve" checked>
+      <input class="form-check-input" type="radio" name="approval" id="approve" value="1" checked>
       <label class="form-check-label" for="approve">
         Approve
       </label>
     </div>
     <div class="form-check">
-      <input class="form-check-input" type="radio" name="approval" id="deny" value="deny">
+      <input class="form-check-input" type="radio" name="approval" id="deny" value="0">
       <label class="form-check-label" for="deny">
         Deny
       </label>

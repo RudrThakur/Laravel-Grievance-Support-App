@@ -2,25 +2,36 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Authority;
 use App\Http\Controllers\Controller;
 use App\ServiceAction;
 use Illuminate\Http\Request;
 
 class ServiceApprovalController extends Controller
 {
-       public function create($action, $serviceActionId, $authorityId){
+    public function create($serviceId)
+    {
 
-        $serviceAction = ServiceAction::where('id', $serviceActionId)
-                                      ->firstOrFail();
+        request()->validate([
+           'approval' => 'required',
+           'authority_remarks' => 'required'
+        ],
+        [
+            'approval.required' => 'Please select approve/deny',
+            'authority_remarks.required' => 'The message field is required'
+        ]);
 
-        $updatePivot = $serviceAction->authorities()
-                        ->updateExistingPivot($authorityId, ['approved' => $action]);
+        $authority = Authority::where('id', auth()->user()->roles->first()->id)->first();
 
-        if($updatePivot){
-            return 'Approved';
-        }
-        else{
-            return 'Failed';
-        }
+        $serviceAction = ServiceAction::where('service_id', $serviceId)
+            ->first();
+
+        $serviceAction->authorities()
+            ->updateExistingPivot($authority->id, ['approved' => request('approval')]);
+
+        session()->flash('message', 'Your Action Was Successful');
+
+        return redirect()->back();
+
     }
 }
