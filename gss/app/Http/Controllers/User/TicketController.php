@@ -52,7 +52,7 @@ class TicketController extends Controller
 
         }
 
-        if(request()->has('user_id') && request('user_id') != ''){
+        if (request()->has('user_id') && request('user_id') != '') {
 
             $tickets = $tickets->where('user_id', request('user_id'));
 
@@ -77,11 +77,13 @@ class TicketController extends Controller
             ->where('id', $ticketId)
             ->firstOrFail();
 
-        $serviceId = Service::where('ticket_id', $ticketId)->first()->id;
+        $service = Service::where('ticket_id', $ticketId)->first();
 
-        $serviceAction = ServiceAction::where('service_id', $serviceId)->first();
+        $service ? $serviceAction = ServiceAction::where('service_id', $service->id)->first() : $serviceAction = null;
 
-        return view('user.ticket-details', ['ticket' => $ticket, 'serviceAction' => $serviceAction]);
+        return view('user.ticket-details', ['ticket' => $ticket,
+            'service' => $service ? $service : null,
+            'serviceAction' => $serviceAction]);
 
     }
 
@@ -130,7 +132,8 @@ class TicketController extends Controller
 
     }
 
-    public function destroy($ticketId){
+    public function destroy($ticketId)
+    {
 
         $ticket = Ticket::find($ticketId);
         $deleteAction = $ticket->delete();

@@ -49,7 +49,7 @@ Route::get('/service-action/{serviceActionId}', 'User\ServiceActionController@in
 
 Route::post('/service-action/{serviceId}', 'User\ServiceActionController@create');// AJAX Route
 
-Route::get('/service-details/{serviceId}/{ticketId}', 'User\ServiceController@index');
+Route::get('/service-details/{serviceId}', 'User\ServiceController@index');
 
 Route::post('/ticket-delete/{ticketId}', 'User\TicketController@destroy');// AJAX Route
 

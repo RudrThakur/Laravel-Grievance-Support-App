@@ -165,8 +165,6 @@
                                 </button>
                             @endif
 
-                            @include('user.partials.modals.service-action-modal')
-
                         </div>
                     </div>
                 </div>

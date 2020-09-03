@@ -41,16 +41,9 @@ class ServiceController extends Controller
 
     }
 
-    public function index($serviceId, $ticketId)
+    public function index($serviceId)
     {
-
-        if ($serviceId && $ticketId) {
-            $service = $this->serviceRepositoryInterface->findByServiceIdAndTicketId($serviceId, $ticketId);
-        } else if ($serviceId) {
-            $service = $this->serviceRepositoryInterface->findByServiceId($serviceId);
-        } else {
-            $service = $this->serviceRepositoryInterface->findByTicketId($ticketId);
-        }
+        $service = $this->serviceRepositoryInterface->findByServiceId($serviceId);
 
         $ticket = Ticket::where('id', $service->ticket_id)->firstOrFail();
         $serviceAction = ServiceAction::where('service_id', $service->id)->first();

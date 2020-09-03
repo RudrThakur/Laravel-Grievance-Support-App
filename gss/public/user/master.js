@@ -94,56 +94,6 @@ $(function () {
     });
 
     /* ----------------------------------------------------------------------
-                                Service Action - Modal
-    ---------------------------------------------------------------------- */
-    var serviceId;
-    $('.service-action').on('click', function () {
-
-        serviceId = $(this).attr('id'); // If Triggered from Service-Details Modal
-        $('#service-action-modal').modal('show');
-    });
-
-    $('#service-action-form').submit(function (event) {
-
-        if (!serviceId) { // If Triggered from Service-Details Page
-            serviceId = $('#service-id').html();
-        }
-
-        $.ajax({
-            url: "/service-action/" + serviceId,
-            type: "post",
-            data: $(this).serialize(),
-            success: function (data) {
-                $('#service-action-form')[0].reset();
-                $("#service-action-errors-box").hide();
-                $("#service-action-errors").html('');
-                $("#service-action-success-box").fadeIn('slow').delay(3000).fadeOut('slow');
-
-                if (document.URL.includes("service-details")) { // If Action was taken from Service-Details Page
-                    setInterval('location.reload()', 5000);
-                }
-            },
-            error: function (error) {
-                $.each(error.responseJSON.errors, function (field, message) {
-                    $("#service-action-errors").html('<li>' + message + '</li>');
-                });
-
-                $("#service-action-success-box").hide();
-                $("#service-action-errors-box").fadeIn('slow').delay(3000).fadeOut('slow');
-            }
-        });
-        event.preventDefault();
-
-    });
-
-    $('#service-action-modal').on('hidden.bs.modal', function () {
-        $("#service-action-errors-box").hide();
-        $("#service-action-errors").html('');
-        $("#service-action-success-box").hide();
-        $('#service-action-form')[0].reset();
-    });
-
-    /* ----------------------------------------------------------------------
                                 Ticket Delete - Modal
     ---------------------------------------------------------------------- */
     var ticketId;

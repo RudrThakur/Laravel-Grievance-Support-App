@@ -46,7 +46,7 @@
                     </tbody>
                 </table>
                 @if($ticket->type->type == 'Service')
-                    <a class="m-2 btn btn-success" href="/service-details/0/{{ $ticket->id }}">View More</a>
+                    <a class="m-2 btn btn-success" href="/service-details/{{ $service->id }}">View Service Details</a>
                 @endif
                 <button class="service-delete m-2 btn btn-danger">Delete Ticket</button>
             </div>
