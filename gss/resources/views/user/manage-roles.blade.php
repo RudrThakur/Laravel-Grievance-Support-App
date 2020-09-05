@@ -60,7 +60,7 @@
                                 <a href="javascript:void(0)" id="{{ $role->id }}"
                                    class="service-action btn btn-outline-primary btn-sm"><i
                                         class="fas fa-tasks"></i></a>
-                                <a href="javascript:void(0)" id="{{ $role->id }}"
+                                <a href="/role-delete/{{$role->id}}" id="{{ $role->id }}"
                                    class="service-delete btn btn-outline-danger btn-sm"><i
                                         class="fas fa-trash"></i></a>
                             </td>

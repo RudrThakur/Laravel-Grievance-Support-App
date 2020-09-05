@@ -42,4 +42,16 @@ class RoleController extends Controller
         ]);
 
     }
+
+    public function destroy($roleId){
+
+        $role = Role::where('id',$roleId)->first();
+        
+        $role->delete();
+
+        session()->flash('message','Role Has Been Deleted');
+
+        return redirect()->to('/manage-roles');
+
+    }
 }
