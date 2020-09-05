@@ -25,7 +25,7 @@
     </div>
     <div class="form-group">
         <label for="message-text" class="col-form-label">Message:</label>
-        <textarea class="form-control" id="admin-remarks" name="adminremarks"></textarea>
+        <textarea class="form-control" id="admin-remarks" name="adminremarks" rows = "4" cols="20"></textarea>
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>

@@ -44,7 +44,11 @@
                             <td>{{ $role->slug }}</td>
                             <td>
                                 @foreach($role->permissions as $rolePermission)
-                                    {{ $rolePermission->id }}){{ $rolePermission->name}}<br>
+                                    {{ $rolePermission->id }}){{ $rolePermission->name}}
+                                    <a href="/role-permission-delete/{{ $role->id }}/{{ $rolePermission->id }}" > 
+                                        <i class="fas fa-times-circle" style="color: brown;"></i>
+                                    </a>
+                                    <br>
                                 @endforeach
                                  <a href="#"><i class="fas fa-edit" style="color: teal;"></i></a>
                             </td>
