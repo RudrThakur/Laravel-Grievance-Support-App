@@ -3,3 +3,9 @@
 .custom-alert{
     display: none;
 }
+
+#admin-remarks{
+    resize: none;
+}
+
+
