@@ -34,11 +34,13 @@ class RoleController extends Controller
 
         $roles = Role::with('permissions')
                         ->get();
+        $allPermissions = Permission::all();                
 
         return view('user.manage-roles',
 
         [
             'roles' => $roles,
+            'allPermissions' => $allPermissions,
         ]);
 
     }

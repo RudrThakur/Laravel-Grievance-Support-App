@@ -92,3 +92,5 @@ Route::post('/service-approval/{serviceId}', 'User\ServiceApprovalController@cre
 Route::get('/role-permission-delete/{roleId}/{permissionId}', 'User\RolePermissionController@destroy');
 
 Route::get('/role-delete/{roleId}', 'User\RoleController@destroy');
+
+Route::post('/role-permissions-edit/{roleId}', 'User\RolePermissionController@create');
