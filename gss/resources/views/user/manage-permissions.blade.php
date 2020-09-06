@@ -44,10 +44,8 @@
                             <td>{{ $permission->created_at }}</td>
                             <td>{{ $permission->updated_at }}</td>
                             <td>
-                                <a href="javascript:void(0)" id="{{ $permission->id }}"
-                                   class="service-action btn btn-outline-primary btn-sm"><i
-                                        class="fas fa-tasks"></i></a>
-                                <a href="javascript:void(0)" id="{{ $permission->id }}"
+                                
+                                <a href="/permission-delete/{{$permission->id}}" id="{{ $permission->id }}"
                                    class="service-delete btn btn-outline-danger btn-sm"><i
                                         class="fas fa-trash"></i></a>
                             </td>

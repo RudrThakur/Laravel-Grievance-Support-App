@@ -42,4 +42,16 @@ class PermissionController extends Controller
         ]);
 
     }
+
+    public function destroy($permissionId){
+
+        $permission = Permission::where('id',$permissionId)->first();
+        
+        $permission->delete();
+
+        session()->flash('message','Permission Has Been Deleted');
+
+        return redirect()->to('/manage-permissions');
+
+    }
 }

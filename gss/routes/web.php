@@ -94,3 +94,5 @@ Route::get('/role-permission-delete/{roleId}/{permissionId}', 'User\RolePermissi
 Route::get('/role-delete/{roleId}', 'User\RoleController@destroy');
 
 Route::post('/role-permissions-edit/{roleId}', 'User\RolePermissionController@create');
+
+Route::get('/permission-delete/{permissionId}', 'User\PermissionController@destroy');
