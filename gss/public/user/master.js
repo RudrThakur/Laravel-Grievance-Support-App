@@ -181,7 +181,7 @@ $(function () {
     });
 
     /* ----------------------------------------------------------------------
-                          Permissions Edit - Modal
+                     User  Permissions Edit - Modal
     ---------------------------------------------------------------------- */
 
     var userId;
@@ -268,6 +268,47 @@ $(function () {
         event.preventDefault();
 
     });
+
+        /* ----------------------------------------------------------------------
+                      Role Permission Edit - Modal
+---------------------------------------------------------------------- */
+
+
+var roleId;
+    $('.role-permissions-edit-btn').on('click', function () {
+
+        roleId = $(this).attr('data-role-id'); 
+        $('#role-permissions-edit-modal').modal('show');
+    });
+
+    $('#role-permissions-edit-form').submit(function (event) {
+
+        $.ajax({
+            url: "/role-permissions-edit/" + roleId,
+            type: "post",
+            data: $(this).serialize(),
+            success: function (data) {
+                $('#role-permissions-edit-form')[0].reset();
+                $("#role-permissions-edit-errors-box").hide();
+                $("#role-permissions-edit-errors").html('');
+                $("#role-permissions-edit-success-box").fadeIn('slow').delay(3000).fadeOut('slow');
+                $('#role-permissions-edit-modal').modal('hide');
+               
+                location.reload();
+
+            },
+            error: function (error) {
+                $.each(error.responseJSON.errors, function (field, message) {
+                    $("#role-permissions-edit-errors").html('<li>' + message + '</li>');
+                });
+                $("#role-permissions-edit-success-box").hide();
+                $("#role-permissions-edit-errors-box").fadeIn('slow').delay(3000).fadeOut('slow');
+            }
+        });
+        event.preventDefault();
+
+    });
+
 
 
 });

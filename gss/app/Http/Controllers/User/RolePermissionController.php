@@ -9,8 +9,20 @@ use App\Role;
 
 class RolePermissionController extends Controller
 {
-    //
-    public function destroy($roleId, $permissionId){
+   
+   public function create($roleId){
+    
+    $role = Role::where('id', $roleId)->first();
+
+    $role->permissions()->sync(request('role_permissions'), false);
+
+    session()->flash('message','Role Permissions Updated Successfully');
+
+    return redirect()->to('/manage-roles');
+
+    }   
+
+   public function destroy($roleId, $permissionId){
 
         $role = Role::where('id', $roleId)->first();
 
@@ -21,5 +33,7 @@ class RolePermissionController extends Controller
         return redirect()->to('/manage-roles');
 
     }
+
+
 
 }

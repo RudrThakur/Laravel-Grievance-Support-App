@@ -34,12 +34,26 @@ class RoleController extends Controller
 
         $roles = Role::with('permissions')
                         ->get();
+        $allPermissions = Permission::all();                
 
         return view('user.manage-roles',
 
         [
             'roles' => $roles,
+            'allPermissions' => $allPermissions,
         ]);
+
+    }
+
+    public function destroy($roleId){
+
+        $role = Role::where('id',$roleId)->first();
+        
+        $role->delete();
+
+        session()->flash('message','Role Has Been Deleted');
+
+        return redirect()->to('/manage-roles');
 
     }
 }

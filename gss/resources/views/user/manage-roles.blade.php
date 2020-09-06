@@ -6,6 +6,10 @@
 
     <div class="card">
         @include('user.partials.errors');
+                <div class="custom-alert alert alert-success"
+                     id="role-permissions-edit-success-box">
+                    <p id="manage-roles-success-message"></p>
+                </div>
         <div class="card-body row justify-content-center">
             <div class="col-md-12 col-12">
                 <h6 class="text-center">Manage Roles</h6>
@@ -50,17 +54,17 @@
                                     </a>
                                     <br>
                                 @endforeach
-                                 <a href="#"><i class="fas fa-edit" style="color: teal;"></i></a>
+                                 <a href="#" data-toggle="modal" data-target="#role-permissions-edit-modal"
+                                    data-role-id="{{$role->id}}" class="role-permissions-edit-btn"
+                                 ><i class="fas fa-edit" style="color: teal;"></i></a>
                             </td>
                             <td>No Data Available<br>
                              <a href="#"><i class="fas fa-edit" style="color: teal;"></i></a></td>
                             <td>{{ $role->created_at }}</td>
                             <td>{{ $role->updated_at }}</td>
                             <td>
-                                <a href="javascript:void(0)" id="{{ $role->id }}"
-                                   class="service-action btn btn-outline-primary btn-sm"><i
-                                        class="fas fa-tasks"></i></a>
-                                <a href="javascript:void(0)" id="{{ $role->id }}"
+                               
+                                <a href="/role-delete/{{$role->id}}" id="{{ $role->id }}"
                                    class="service-delete btn btn-outline-danger btn-sm"><i
                                         class="fas fa-trash"></i></a>
                             </td>
@@ -70,6 +74,7 @@
                 </table>
             </div>
         </div>
+        @include('user.partials.modals.role-permissions-edit-modal');
     </div>
 
 @endsection
