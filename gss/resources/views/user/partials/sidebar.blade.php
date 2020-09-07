@@ -67,9 +67,9 @@
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header">Choose Request Type :</h6>
                     <a class="collapse-item" href="{{ route('service') }}">Services</a>
-                    <a class="collapse-item" href="utilities-border.html">Consumables</a>
-                    <a class="collapse-item" href="utilities-animation.html">Capital Equipments</a>
-                    <a class="collapse-item" href="utilities-other.html">Hall Bookings</a>
+                    <a class="collapse-item" href="{{ route('consumable') }}">Consumables</a>
+                    <a class="collapse-item" href="{{ route('capital-equipment') }}">Capital Equipments</a>
+                    <a class="collapse-item" href="{{ route('hall-booking') }}">Hall Bookings</a>
                 </div>
             </div>
         </li>

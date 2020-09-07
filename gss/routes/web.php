@@ -96,3 +96,9 @@ Route::get('/role-delete/{roleId}', 'User\RoleController@destroy');
 Route::post('/role-permissions-edit/{roleId}', 'User\RolePermissionController@create');
 
 Route::get('/permission-delete/{permissionId}', 'User\PermissionController@destroy');
+
+Route::get('/consumable', 'User\ConsumableController@create')->name('consumable');
+
+Route::get('/capital-equipment', 'User\CapitalEquipmentController@create')->name('capital-equipment');
+
+Route::get('/hall-booking', 'User\HallBookingController@create')->name('hall-booking');
