@@ -55,7 +55,7 @@
                 <div class="card">
                     <div class="card-body row">
                         <div class="col-lg-12 col-xl-12 col-md-12 col-12">
-                            <h6 class="text-center">Track Your Ticket</h6>
+                            <h6 class="text-center">Ticket History</h6>
                             <table id="track-ticket-table" class="table data-table">
                                 <tbody>
                                 <tr>
