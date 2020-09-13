@@ -46,7 +46,10 @@
                     </tbody>
                 </table>
                 <button class="service-delete m-2 btn btn-danger">Delete Ticket</button>
-                <a class="m-2 btn btn-success" href="/service-details/{{ $service->id }}">More Info</a>
+
+                @if($ticket->type->id == 1)
+                    <a class="m-2 btn btn-success" href="/service-details/{{ $ticket->service_id }}">More Info</a>
+                @endif
             </div>
             <div class="col-xl-7 col-lg-7 col-md-12 col-12 d-block bg-light p-4">
                 <div class="card">
@@ -61,7 +64,7 @@
                                 </tr>
                                 <tr>
                                     <th>Admin Responded</th>
-                                    <td>{{ $serviceAction ? $serviceAction->created_at->toFormattedDateString() : 'No Data Available'}}</td>
+                                    <td>No Data Available</td>
                                 </tr>
                                 <tr>
                                     <th>Work Started</th>

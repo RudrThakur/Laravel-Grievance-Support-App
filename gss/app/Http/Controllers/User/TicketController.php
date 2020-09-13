@@ -72,13 +72,8 @@ class TicketController extends Controller
     {
         $ticket = $this->ticketRepositoryInterface->findById($ticketId);
 
-        $service = Service::where('ticket_id', $ticketId)->first();
-
-        $service ? $serviceAction = ServiceAction::where('service_id', $service->id)->first() : $serviceAction = null;
-
-        return view('user.ticket-details', ['ticket' => $ticket,
-            'service' => $service ? $service : null,
-            'serviceAction' => $serviceAction]);
+        return view('user.ticket-details', ['ticket' => $ticket]
+        );
 
     }
 

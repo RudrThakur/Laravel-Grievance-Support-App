@@ -65,6 +65,7 @@ class ServiceController extends Controller
             $serviceActionAuthorities = ServiceActionsAuthority::where('service_action_id', $serviceAction->id)->get();
             $serviceActionAuthoritiesIds = $serviceActionAuthorities->pluck('authority_id');
             $authorities = Authority::whereIn('id', $serviceActionAuthoritiesIds)->get();
+
         } else {
             $serviceActionAuthorities = null;
             $authorities = null;
