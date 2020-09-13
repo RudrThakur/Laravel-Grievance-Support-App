@@ -5,7 +5,7 @@
 @section('content')
 
     <div class="card">
-        @include('user.partials.errors');
+        @include('user.partials.errors')
                 <div class="custom-alert alert alert-success"
                      id="role-permissions-edit-success-box">
                     <p id="manage-roles-success-message"></p>
@@ -74,7 +74,7 @@
                 </table>
             </div>
         </div>
-        @include('user.partials.modals.role-permissions-edit-modal');
+        @include('user.partials.modals.role-permissions-edit-modal')
     </div>
 
 @endsection

@@ -129,14 +129,14 @@
                                 <hr>
                                 @include('user.partials.forms.service-action-form')
                             @endif
-                            @if($serviceActionAuthorities &&
+                            {{-- @if($serviceActionAuthorities &&
                                 $serviceActionAuthorities->where('authority_id',$authorities->where
                                 ('name', auth()->user()->roles->first()->name)->first()->id)
                                 ->first()->approved != 1)
+                            @endif --}}
                             <h6 class="text-center">Service - Approval</h6>
                             <hr>
                             @include('user.partials.forms.service-approval-form')
-                            @endif
                         </div>
                     </div>
                 </div>

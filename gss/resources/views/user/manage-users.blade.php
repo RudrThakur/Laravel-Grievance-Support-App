@@ -94,11 +94,11 @@
             </div>
         </div>
 
-        @include('user.partials.modals.user-delete-modal');
+        @include('user.partials.modals.user-delete-modal')
 
-        @include('user.partials.modals.user-permission-delete-modal');
+        @include('user.partials.modals.user-permission-delete-modal')
 
-        @include('user.partials.modals.user-permissions-edit-modal');
+        @include('user.partials.modals.user-permissions-edit-modal')
 
     </div>
 

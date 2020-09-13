@@ -22,6 +22,6 @@
         value="{{ $profile ? $profile->dob : '' }}">
     </div>
     <div class="form-group text-center">
-        <button type="submit" class="btn btn-primary">Update</button>
+        <button type="submit" class="btn btn-warning">Update</button>
     </div>
 </form>

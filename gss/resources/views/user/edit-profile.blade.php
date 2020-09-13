@@ -4,20 +4,16 @@
 
 @section('content')
 
-  <div class="col-6 d-block bg-light p-4 mx-auto">
-            <div class="card">
-                <div class="card-body row">
-                    <div class="col-12">
-                        <h6 class="text-center">Edit Your Profile</h6>
-                        <hr>
-                        <table class="table data-table">
-                            <tbody>
-
-                            @include('user.partials.forms.edit-profile-form')
-
-                            </tbody>
-                        </table>
+  <div class="col-10 d-block bg-light mx-auto">
+            <div class="card p-lg-4 p-2">
+                <h2 class="text-center">Edit Your Profile</h2>
+                <div class="row">
+                    <div class="col-md-6 col-12 my-auto">
+                       <img src="{{ asset('images/edit_profile.svg') }}" class="img-fluid" />
                     </div>
+                    <div class="col-md-6 col-12 mx-auto">
+                        @include('user.partials.forms.edit-profile-form')
+                     </div>
                 </div>
             </div>
         </div>

@@ -102,3 +102,6 @@ Route::get('/consumable', 'User\ConsumableController@create')->name('consumable'
 Route::get('/capital-equipment', 'User\CapitalEquipmentController@create')->name('capital-equipment');
 
 Route::get('/hall-booking', 'User\HallBookingController@create')->name('hall-booking');
+Route::get('intellisense', function () {
+    return view('user.intellisense');
+});
