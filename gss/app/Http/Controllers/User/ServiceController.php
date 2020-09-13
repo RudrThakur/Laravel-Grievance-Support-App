@@ -6,6 +6,7 @@ use App\Authority;
 use App\Http\Controllers\Controller;
 use App\Repositories\ServiceRepositoryInterface;
 use App\Http\Requests\ServiceRequest;
+use App\Repositories\TicketRepositoryInterface;
 use App\ServiceActionsAuthority;
 use App\Ticket;
 use App\ServiceAction;
@@ -15,11 +16,22 @@ class ServiceController extends Controller
 {
 
     private $serviceRepositoryInterface;
+    private $ticketRepositoryInterface;
 
-    public function __construct(ServiceRepositoryInterface $serviceRepositoryInterface)
+    /**
+     *
+     * @param ServiceRepositoryInterface $serviceRepositoryInterface
+     * @param TicketRepositoryInterface $ticketRepositoryInterface
+     */
+
+
+    public function __construct(ServiceRepositoryInterface $serviceRepositoryInterface,
+                                TicketRepositoryInterface $ticketRepositoryInterface)
     {
 
         $this->middleware('auth');
+
+        $this->ticketRepositoryInterface = $ticketRepositoryInterface;
 
         $this->serviceRepositoryInterface = $serviceRepositoryInterface;
 
@@ -43,9 +55,10 @@ class ServiceController extends Controller
 
     public function index($serviceId)
     {
-        $service = $this->serviceRepositoryInterface->findByServiceId($serviceId);
+        $service = $this->serviceRepositoryInterface->findById($serviceId);
 
-        $ticket = Ticket::where('id', $service->ticket_id)->firstOrFail();
+        $ticket = $this->ticketRepositoryInterface->findById($service->ticket_id);
+
         $serviceAction = ServiceAction::where('service_id', $service->id)->first();
 
         if ($serviceAction) {

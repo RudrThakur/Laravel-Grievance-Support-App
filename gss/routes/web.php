@@ -41,8 +41,6 @@ Route::get('/get-service-floors/{department}', 'User\ServiceDropdownController@f
 
 Route::get('/get-service-rooms/{block}/{department}/{floor}', 'User\ServiceDropdownController@rooms');// AJAX Route
 
-Route::get('/ticket/{ticketId}', 'User\TicketController@detail');
-
 Route::get('/ticket-details/{ticketId}', 'User\TicketController@index');
 
 Route::get('/service-action/{serviceActionId}', 'User\ServiceActionController@index');

@@ -130,9 +130,13 @@
                                 @include('user.partials.forms.service-action-form')
                             @endif
 
-                            <h6 class="text-center">Service - Approval</h6>
-                            <hr>
-                            @include('user.partials.forms.service-approval-form')
+                            @if($serviceAction && $serviceActionAuthorities)
+
+                                <h6 class="text-center">Service - Approval</h6>
+                                <hr>
+                                @include('user.partials.forms.service-approval-form')
+
+                            @endif
 
                         </div>
                     </div>

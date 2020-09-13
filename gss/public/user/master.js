@@ -1,15 +1,6 @@
 $(function () {
 
     /* ----------------------------------------------------------------------
-                                ALL PAGES
-    ---------------------------------------------------------------------- */
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    });
-
-    /* ----------------------------------------------------------------------
                                 Service Request - Page
     ---------------------------------------------------------------------- */
 
@@ -49,46 +40,6 @@ $(function () {
             method: 'GET',
             success: function (Response) {
                 $('#room').html(Response.html);
-            }
-        });
-    });
-
-    /* ----------------------------------------------------------------------
-                                Service Details - Modal
-    ---------------------------------------------------------------------- */
-
-    $('.service-show').on('click', function () {
-        var ticketId = $(this).attr('id');
-
-        $.ajax({
-            url: "/ticket/" + ticketId,
-            type: "get",
-            dataType: "json",
-            success: function (data) {
-
-                $('#service-details-modal').modal('show');
-                $('#service-ticketId').html(data.ticket.id);
-                $('#service-category').html(data.service.category);
-                $('#service-user-name').html(data.ticket.user.name);
-                $('#service-department').html(data.service.department);
-                $('#service-subcategory').html(data.service.subcategory);
-                $('#service-holder').html(data.ticket.authority.name);
-                $('#service-block').html(data.service.block);
-                $('#service-floor').html(data.service.floor);
-                $('#service-room').html(data.service.room);
-                $('#service-quantity').html(data.service.quantity);
-                $('#service-assetcode').html(data.service.assetcode ? data.service.assetcode : 'No Data Available');
-                $('#service-created_at').html(data.ticket.created_at);
-                $('#service-updated_at').html(data.ticket.updated_at);
-                $('#service-status').html(data.ticket.status.status);
-                $('#service-userId').html(data.ticket.user.id);
-                $('#service-description').html(data.service.description);
-                $('#service-worker').html(data.serviceAction ? data.serviceAction.worker.name : 'No Data Available');
-                $('#service-priority').html(data.service.priority.priority);
-
-            },
-            error: function (error) {
-                console.log(error);
             }
         });
     });
@@ -220,7 +171,7 @@ $(function () {
 
     /* ----------------------------------------------------------------------
                       User Delete - Modal
----------------------------------------------------------------------- */
+     ---------------------------------------------------------------------- */
 
     let userToBeDeleted;
     $('.user-delete').on('click', function () {
@@ -269,15 +220,15 @@ $(function () {
 
     });
 
-        /* ----------------------------------------------------------------------
-                      Role Permission Edit - Modal
+    /* ----------------------------------------------------------------------
+                  Role Permission Edit - Modal
 ---------------------------------------------------------------------- */
 
 
-var roleId;
+    var roleId;
     $('.role-permissions-edit-btn').on('click', function () {
 
-        roleId = $(this).attr('data-role-id'); 
+        roleId = $(this).attr('data-role-id');
         $('#role-permissions-edit-modal').modal('show');
     });
 
@@ -293,7 +244,7 @@ var roleId;
                 $("#role-permissions-edit-errors").html('');
                 $("#role-permissions-edit-success-box").fadeIn('slow').delay(3000).fadeOut('slow');
                 $('#role-permissions-edit-modal').modal('hide');
-               
+
                 location.reload();
 
             },
@@ -308,8 +259,6 @@ var roleId;
         event.preventDefault();
 
     });
-
-
 
 });
 
