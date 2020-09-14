@@ -7,15 +7,22 @@ use App\Ticket;
 
 class TicketRepository implements TicketRepositoryInterface
 {
-    public function all(){
+    public function all()
+    {
 
         return Ticket::all();
 
     }
 
-    public function findById($ticketId){
+    public function findById($ticketId)
+    {
 
-        return Ticket::where('id', $ticketId)->get();
+        return Ticket::with('user')
+            ->with('type')
+            ->with('authority')
+            ->with('status')
+            ->where('id', $ticketId)
+            ->first();
 
     }
 

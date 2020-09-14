@@ -129,10 +129,14 @@
     <!-- Divider -->
     <hr class="sidebar-divider">
 
-    <!-- Heading -->
-    <div class="sidebar-heading">
-        Addons
-    </div>
+        <!-- Nav Item - Charts -->
+    <li class="nav-item">
+        @if(auth()->user('admin'))
+        <a class="nav-link" href="/intellisense">
+            <i class="fas fa-fw fa-robot"></i>
+        <span>Intellisense</span></a>
+        @endif
+    </li>
 
     <!-- Feedback -->
     <li class="nav-item">

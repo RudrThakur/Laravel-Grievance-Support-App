@@ -8,8 +8,12 @@
         <div class="card-body row">
             <div class="col-lg-5 col-xl-5 col-md-12 col-12">
                 <h6 class="text-center">Service - Details</h6>
-                <table id="advanced_table" class="table data-table">
+                <table class="table data-table">
                     <tbody>
+                    <tr>
+                        <th>Priority</th>
+                        <td>{{ $service->priority->priority }}</td>
+                    </tr>
                     <tr>
                         <th>Department</th>
                         <td>{{ $service->department }}</td>
@@ -77,16 +81,8 @@
                         <div class="col-lg-12 col-xl-12 col-md-12 col-12">
                             @if($serviceAction)
                                 <h6 class="text-center">Prior Service Action</h6>
-                                <table id="adminaction-table" class="table data-table">
+                                <table class="table data-table">
                                     <tbody>
-                                    <tr>
-                                        <th>Current Holder</th>
-                                        <td>{{ $ticket->authority->name }}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Priority</th>
-                                        <td>{{ $service->priority->priority }}</td>
-                                    </tr>
                                     <tr>
                                         <th>Worker Assigned</th>
                                         <td>{{ $serviceAction->worker ? $serviceAction->worker->name : 'No Data Available'}}</td>
@@ -102,13 +98,17 @@
                                                 @foreach($serviceActionAuthorities as $serviceActionAuthority)
                                                     {{ $authorities->where('id', $serviceActionAuthority->authority_id)->first()->name }}
                                                     @if($serviceActionAuthority->approved == 1)
-                                                        <i class="fas fa-check-circle" style="color: green;"></i> |
+                                                        <i class="fas fa-check-circle" style="color: green;"></i>
                                                     @elseif(is_null($serviceActionAuthority->approved))
                                                         <i class="fas fa-exclamation-circle" style="color: black;"></i>
-                                                        |
+
                                                     @else
-                                                        <i class="fas fa-times-circle" style="color: red;"></i> |
+                                                        <i class="fas fa-times-circle" style="color: red;"></i>
                                                     @endif
+
+                                                    <span
+                                                        class="authority-remarks">Remarks: {{ $serviceActionAuthority->remarks }}</span>
+                                                    | <br>
                                                 @endforeach
                                             </td>
                                         @endif
@@ -116,10 +116,6 @@
                                     <tr>
                                         <th>Admin Remarks</th>
                                         <td>{{ $serviceAction->adminremarks}}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Status</th>
-                                        <td>{{ $ticket->status->status }}</td>
                                     </tr>
                                     </tbody>
                                 </table>
@@ -129,14 +125,29 @@
                                 <hr>
                                 @include('user.partials.forms.service-action-form')
                             @endif
-                            @if($serviceActionAuthorities &&
-                                $serviceActionAuthorities->where('authority_id',$authorities->where
-                                ('name', auth()->user()->roles->first()->name)->first()->id)
-                                ->first()->approved != 1)
-                            <h6 class="text-center">Service - Approval</h6>
-                            <hr>
-                            @include('user.partials.forms.service-approval-form')
+
+                            @if($serviceAction && !$isApprovedByCurrentUser
+                                   && $isApprovalRequiredByCurrentUser)
+
+                                <h6 class="text-center">Service - Approval</h6>
+                                <hr>
+                                @include('user.partials.forms.service-approval-form')
+
                             @endif
+
+                            @if($pendingApprovals->isEmpty())
+                                <h6 class="text-center">Work - History</h6>
+                                <hr>
+                                <form action="/" method="POST">
+                                    <div class="form-group">
+                                        <label for="">Select Worker</label>
+                                        <select name="" id="" class="form-control">
+                                            <option value="">Ankur</option>
+                                        </select>
+                                    </div>
+                                </form>
+                            @endif
+
                         </div>
                     </div>
                 </div>

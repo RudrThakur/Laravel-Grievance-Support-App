@@ -32,7 +32,7 @@
         <div class="row">
           <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
           <div class="col-lg-7">
-            <div class="p-5">
+            <div class="p-lg-5 p-2">
 
               @include('user.partials.errors')
 
@@ -73,12 +73,14 @@
                 </button>
               </form>
               <hr>
+            <div class="d-flex justify-content-around">
               <div class="text-center">
                 <a class="small" href="forgot-password.html">Forgot Password?</a>
               </div>
               <div class="text-center">
                 <a class="small" href="{{ route('login') }}">Already have an account? Login!</a>
               </div>
+            </div>
             </div>
           </div>
         </div>

@@ -8,10 +8,12 @@
     <br>
     <div class="form-check-inline my-3">
         @foreach($authorities as $authority)
-        <label class="form-check-label" for="{{ $authority->slug }}">
-            <input type="checkbox" class="form-check-input m-2" id="{{ $authority->slug }}" name="authorities[]"
-                value="{{ $authority->id }}">{{ $authority->name }}
-        </label>
+            @if($authority->slug != 'admin')
+                <label class="form-check-label" for="{{ $authority->slug }}">
+                    <input type="checkbox" class="form-check-input m-2" id="{{ $authority->slug }}" name="authorities[]"
+                           value="{{ $authority->id }}">{{ $authority->name }}
+                </label>
+            @endif
         @endforeach
     </div>
     <div class="form-group">
@@ -19,13 +21,13 @@
         <select class="form-control" id="worker_id" name="worker_id">
             <option value="">Select Worker</option>
             @foreach($workers as $worker)
-            <option value="{{ $worker->id }}">{{ $worker->name }}</option>
+                <option value="{{ $worker->id }}">{{ $worker->name }}</option>
             @endforeach
         </select>
     </div>
     <div class="form-group">
         <label for="message-text" class="col-form-label">Message:</label>
-        <textarea class="form-control" id="admin-remarks" name="adminremarks" rows = "4" cols="20"></textarea>
+        <textarea class="form-control" id="admin-remarks" name="adminremarks" rows="4" cols="20"></textarea>
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>

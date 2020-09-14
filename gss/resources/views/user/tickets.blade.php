@@ -59,9 +59,7 @@
                                 <td>{{ $ticket->authority->name }}</td>
                                 <td>{{ $ticket->status->status }}</td>
                                 <td>{{ $ticket->created_at }}</td>
-                                <td><a href="javascript:void(0)" id="{{ $ticket->id }}"
-                                       class="service-show btn btn-outline-primary btn-sm"><i
-                                            class="fas fa-eye"></i></a>
+                                <td>
                                     <a href="/ticket-details/{{ $ticket->id }}"
                                        class="btn btn-outline-success btn-sm"><i
                                             class="fas fa-tasks"></i></a>
@@ -85,8 +83,6 @@
         @include('user.partials.modals.ticket-filter-modal')
 
         @include('user.partials.modals.ticket-search-modal')
-
-        @include('user.partials.modals.service-details-modal')
 
         @include('user.partials.modals.ticket-delete-modal')
 

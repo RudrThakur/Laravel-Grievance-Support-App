@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <meta name="csrf-token" content="{{ csrf_token() }}" />
+    <meta name="csrf-token" content="{{ csrf_token() }}"/>
 
     <title>@yield('title')</title>
 
@@ -28,61 +28,62 @@
 
 <body id="page-top">
 
-    @include('user.partials.flash')
+@include('user.partials.flash')
 
-    <!-- Page Wrapper -->
-    <div id="wrapper">
+<!-- Page Wrapper -->
+<div id="wrapper">
 
-        @include('user.partials.sidebar')
+@include('user.partials.sidebar')
 
-        <!-- Content Wrapper -->
-        <div id="content-wrapper" class="d-flex flex-column">
+<!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
 
-            <!-- Main Content -->
-            <div id="content">
+        <!-- Main Content -->
+        <div id="content">
 
-                @include('user.partials.navbar')
+            @include('user.partials.navbar')
 
-                @yield('content')
+            @yield('content')
 
-                @include('user.partials.modals.logout-modal')
+            @include('user.partials.modals.logout-modal')
 
-
-            </div>
-            <!-- End of Main Content -->
-
-            @include('user.partials.footer')
 
         </div>
-        <!-- End of Content Wrapper -->
+        <!-- End of Main Content -->
+
+        @include('user.partials.footer')
 
     </div>
-    <!-- End of Page Wrapper -->
+    <!-- End of Content Wrapper -->
 
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fas fa-angle-up"></i>
-    </a>
+</div>
+<!-- End of Page Wrapper -->
 
-    <!-- Bootstrap core JavaScript-->
-    <script src="{{ asset('user/vendor/jquery/jquery.min.js') }}"></script>
-    <script src="{{ asset('user/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
 
-    <!-- Core plugin JavaScript-->
-    <script src="{{ asset('user/vendor/jquery-easing/jquery.easing.min.js') }}"></script>
+<!-- Bootstrap core JavaScript-->
+<script src="{{ asset('user/vendor/jquery/jquery.min.js') }}"></script>
+<script src="{{ asset('user/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 
-    <!-- Custom scripts for all pages-->
-    <script src="{{ asset('user/js/sb-admin-2.min.js') }}"></script>
+<!-- Core plugin JavaScript-->
+<script src="{{ asset('user/vendor/jquery-easing/jquery.easing.min.js') }}"></script>
 
-    <!-- Page level plugins -->
-    <script src="{{ asset('user/vendor/chart.js/Chart.min.js') }}"></script>
+<!-- Custom scripts for all pages-->
+<script src="{{ asset('user/js/sb-admin-2.min.js') }}"></script>
 
-    <!-- Page level custom scripts -->
-    <script src="{{ asset('user/js/demo/chart-area-demo.js') }}"></script>
-    <script src="{{ asset('user/js/demo/chart-pie-demo.js') }}"></script>
+<!-- Page level plugins -->
+<script src="{{ asset('user/vendor/chart.js/Chart.min.js') }}"></script>
 
-    <!-- Master JS -->
-    <script src="{{ asset('user/master.js') }}"></script>
+<!-- Page level custom scripts -->
+<script src="{{ asset('user/js/demo/chart-area-demo.js') }}"></script>
+<script src="{{ asset('user/js/demo/chart-pie-demo.js') }}"></script>
+
+<!-- Master JS -->
+<script src="{{ asset('user/master.js') }}"></script>
+@yield('javascript')
 
 </body>
 

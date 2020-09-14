@@ -24,16 +24,20 @@
                         <td>{{ $ticket->type->type }}</td>
                     </tr>
                     <tr>
-                        <th>Current Holder</th>
-                        <td>{{ $ticket->authority->name }}</td>
-                    </tr>
-                    <tr>
                         <th>Raised By</th>
                         <td>{{ $ticket->user->name }}</td>
                     </tr>
                     <tr>
                         <th>User Id</th>
                         <td>{{ $ticket->user_id }}</td>
+                    </tr>
+                    <tr>
+                        <th>Status</th>
+                        <td>{{ $ticket->status->status }}</td>
+                    </tr>
+                    <tr>
+                        <th>Currently Held By</th>
+                        <td>{{ $ticket->authority->name }}</td>
                     </tr>
                     <tr>
                         <th>Registered At</th>
@@ -45,16 +49,17 @@
                     </tr>
                     </tbody>
                 </table>
-                @if($ticket->type->type == 'Service')
-                    <a class="m-2 btn btn-success" href="/service-details/{{ $service->id }}">View Service Details</a>
-                @endif
                 <button class="service-delete m-2 btn btn-danger">Delete Ticket</button>
+
+                @if($ticket->type->id == 1)
+                    <a class="m-2 btn btn-success" href="/service-details/{{ $ticket->service_id }}">More Info</a>
+                @endif
             </div>
             <div class="col-xl-7 col-lg-7 col-md-12 col-12 d-block bg-light p-4">
                 <div class="card">
                     <div class="card-body row">
                         <div class="col-lg-12 col-xl-12 col-md-12 col-12">
-                            <h6 class="text-center">Track Your Ticket</h6>
+                            <h6 class="text-center">Ticket History</h6>
                             <table id="track-ticket-table" class="table data-table">
                                 <tbody>
                                 <tr>
@@ -63,7 +68,7 @@
                                 </tr>
                                 <tr>
                                     <th>Admin Responded</th>
-                                    <td>{{ $serviceAction ? $serviceAction->created_at->toFormattedDateString() : 'No Data Available'}}</td>
+                                    <td>No Data Available</td>
                                 </tr>
                                 <tr>
                                     <th>Work Started</th>

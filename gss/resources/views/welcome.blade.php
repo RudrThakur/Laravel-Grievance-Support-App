@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>Grievance support system</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
@@ -42,10 +42,12 @@
 
             .content {
                 text-align: center;
+                margin-top: 50px;
             }
 
             .title {
                 font-size: 84px;
+                text-align: center;
             }
 
             .links > a {
@@ -61,38 +63,73 @@
             .m-b-md {
                 margin-bottom: 30px;
             }
+            @media (max-width: 576px){
+                .title{
+                    font-size: 40px;
+                    justify-content: center;
+                }
+            }
+            .container {
+                width: 100%;
+                padding-right: 5px;
+                padding-left: 5px;
+                margin-right: auto;
+                margin-left: auto;
+                }
+
+                @media (min-width: 576px) {
+                .container {
+                    max-width: 540px;
+                }
+                }
+
+                @media (min-width: 768px) {
+                .container {
+                    max-width: 720px;
+                }
+                }
+
+                @media (min-width: 992px) {
+                .container {
+                    max-width: 960px;
+                }
+                }
+
+                @media (min-width: 1200px) {
+                .container {
+                    max-width: 1160px;
+                }
+                }
+            .img-fluid {
+                max-width: 100%;
+                height: auto;
+            }
+
         </style>
     </head>
     <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
+        <div class="container">
+            <div class="flex-center position-ref full-height">
+                @if (Route::has('login'))
+                    <div class="top-right links">
+                        @auth
+                            <a href="{{ url('/home') }}">Home</a>
+                        @else
+                            <a href="{{ route('login') }}">Login</a>
 
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
-                        @endif
-                    @endauth
-                </div>
-            @endif
+                            @if (Route::has('register'))
+                                <a href="{{ route('register') }}">Register</a>
+                            @endif
+                        @endauth
+                    </div>
+                @endif
 
-            <div class="content">
-                <div class="title m-b-md">
-                    Laravel
-                </div>
-
-                <div class="links">
-                    <a href="https://laravel.com/docs">Docs</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://blog.laravel.com">Blog</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://vapor.laravel.com">Vapor</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
+                <div class="content">
+                    <div class="title">
+                        Grievance support system
+                    </div>
+                    <img src="../images/welcome.svg" class="img-fluid" width="400" />
+                    <small>An initiative by Rudraksh,Lekhraj,Ankur(KCG 2016-20 final year)</small>
                 </div>
             </div>
         </div>

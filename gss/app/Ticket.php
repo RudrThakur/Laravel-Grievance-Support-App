@@ -8,6 +8,12 @@ class Ticket extends Model
 {
     protected $guarded = [];
 
+    public function service() {
+
+        return $this->belongsTo('App\Service');
+
+    }
+
     public function user(){
 
         return $this->belongsTo('App\User');

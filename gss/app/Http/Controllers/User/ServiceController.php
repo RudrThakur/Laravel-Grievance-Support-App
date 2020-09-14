@@ -4,24 +4,36 @@ namespace App\Http\Controllers\User;
 
 use App\Authority;
 use App\Http\Controllers\Controller;
+use App\Repositories\ServiceActionsAuthorityRepositoryInterface;
 use App\Repositories\ServiceRepositoryInterface;
 use App\Http\Requests\ServiceRequest;
-use App\ServiceActionsAuthority;
-use App\Ticket;
 use App\ServiceAction;
-use PhpOption\None;
+
 
 class ServiceController extends Controller
 {
 
     private $serviceRepositoryInterface;
 
-    public function __construct(ServiceRepositoryInterface $serviceRepositoryInterface)
+    private $serviceActionsAuthorityRepositoryInterface;
+
+    /**
+     *
+     * @param ServiceRepositoryInterface $serviceRepositoryInterface
+     * @param ServiceActionsAuthorityRepositoryInterface $serviceActionsAuthorityRepositoryInterface
+     */
+
+
+    public function __construct(ServiceRepositoryInterface $serviceRepositoryInterface,
+                                ServiceActionsAuthorityRepositoryInterface $serviceActionsAuthorityRepositoryInterface
+    )
     {
 
         $this->middleware('auth');
 
         $this->serviceRepositoryInterface = $serviceRepositoryInterface;
+
+        $this->serviceActionsAuthorityRepositoryInterface = $serviceActionsAuthorityRepositoryInterface;
 
     }
 
@@ -43,30 +55,46 @@ class ServiceController extends Controller
 
     public function index($serviceId)
     {
-        $service = $this->serviceRepositoryInterface->findByServiceId($serviceId);
+        $service = $this->serviceRepositoryInterface->findById($serviceId);
 
-        $ticket = Ticket::where('id', $service->ticket_id)->firstOrFail();
         $serviceAction = ServiceAction::where('service_id', $service->id)->first();
 
         if ($serviceAction) {
-            $serviceActionAuthorities = ServiceActionsAuthority::where('service_action_id', $serviceAction->id)->get();
+            $serviceActionAuthorities = $this->serviceActionsAuthorityRepositoryInterface->getByServiceActionId($serviceAction->id);
+
             $serviceActionAuthoritiesIds = $serviceActionAuthorities->pluck('authority_id');
+
             $authorities = Authority::whereIn('id', $serviceActionAuthoritiesIds)->get();
+
+            $isApprovedByCurrentUser = $this->serviceActionsAuthorityRepositoryInterface->checkIfApprovedByAuthorityName($serviceAction->id,
+                auth()->user()->roles->first()->name);
+
+            $pendingApprovals = $this->serviceActionsAuthorityRepositoryInterface->getUnApprovedByServiceActionId($serviceAction->id);
+
+            $isApprovalRequiredByCurrentUser = $this->serviceActionsAuthorityRepositoryInterface->checkIfApprovalRequiredByAuthorityName($serviceAction->id,
+                auth()->user()->roles->first()->name);
+
+
         } else {
+
             $serviceActionAuthorities = null;
             $authorities = null;
+            $isApprovedByCurrentUser = null;
+            $pendingApprovals = null;
+            $isApprovalRequiredByCurrentUser = null;
+
         }
 
         return view('user.service-details',
 
             [
                 'service' => $service,
-                'ticket' => $ticket,
-                'serviceAction' => $serviceAction ? $serviceAction : null,
-                'serviceActionAuthorities' => $serviceActionAuthorities ?
-                    $serviceActionAuthorities : null,
-                'authorities' => $authorities ? $authorities : null,
-
+                'serviceAction' => $serviceAction,
+                'serviceActionAuthorities' => $serviceActionAuthorities,
+                'authorities' => $authorities,
+                'isApprovedByCurrentUser' => $isApprovedByCurrentUser,
+                'pendingApprovals' => $pendingApprovals,
+                'isApprovalRequiredByCurrentUser' => $isApprovalRequiredByCurrentUser,
             ]);
 
     }
