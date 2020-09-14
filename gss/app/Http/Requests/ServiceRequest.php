@@ -80,6 +80,8 @@ class ServiceRequest extends FormRequest
 
         $service->save();
 
+        $ticket->update(['service_id' => $service->id]);
+
         event(new NewTicketAdded($ticket));
 
     }

@@ -70,65 +70,10 @@ class TicketController extends Controller
 
     public function index($ticketId)
     {
-        $ticket = Ticket::with('authority')
-            ->with('user')
-            ->with('status')
-            ->with('type')
-            ->where('id', $ticketId)
-            ->firstOrFail();
+        $ticket = $this->ticketRepositoryInterface->findById($ticketId);
 
-        $service = Service::where('ticket_id', $ticketId)->first();
-
-        $service ? $serviceAction = ServiceAction::where('service_id', $service->id)->first() : $serviceAction = null;
-
-        return view('user.ticket-details', ['ticket' => $ticket,
-            'service' => $service ? $service : null,
-            'serviceAction' => $serviceAction]);
-
-    }
-
-    public static function detail($ticketId)
-    {
-
-        $ticket = Ticket::with('authority')
-            ->with('user')
-            ->with('status')
-            ->with('type')
-            ->where('id', $ticketId)
-            ->firstOrFail();
-
-        $service = Service::with('priority')
-            ->where('ticket_id', $ticketId)->firstOrFail();
-
-        return ['ticket' => $ticket,
-            'service' => $service];
-    }
-
-    public static function show($ticketId)
-    {
-
-        $ticket = Ticket::with('authority')
-            ->with('user')
-            ->with('status')
-            ->where('id', $ticketId)
-            ->firstOrFail();
-
-        $service = Service::with('priority')
-            ->where('ticket_id', $ticketId)->firstOrFail();
-
-        $serviceAction = ServiceAction::with('worker')
-            ->where('service_id', $service->id)
-            ->firstOrFail();
-
-        return [
-
-            'service' => $service,
-
-            'ticket' => $ticket,
-
-            'serviceAction' => $serviceAction,
-
-        ];
+        return view('user.ticket-details', ['ticket' => $ticket]
+        );
 
     }
 

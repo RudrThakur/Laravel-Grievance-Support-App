@@ -4,24 +4,41 @@ namespace App\Http\Controllers\User;
 
 use App\Authority;
 use App\Http\Controllers\Controller;
+use App\Repositories\ServiceActionsAuthorityRepositoryInterface;
 use App\Repositories\ServiceRepositoryInterface;
 use App\Http\Requests\ServiceRequest;
-use App\ServiceActionsAuthority;
-use App\Ticket;
+use App\Repositories\TicketRepositoryInterface;
 use App\ServiceAction;
-use PhpOption\None;
+
 
 class ServiceController extends Controller
 {
 
     private $serviceRepositoryInterface;
+    private $ticketRepositoryInterface;
+    private $serviceActionsAuthorityRepositoryInterface;
 
-    public function __construct(ServiceRepositoryInterface $serviceRepositoryInterface)
+    /**
+     *
+     * @param ServiceRepositoryInterface $serviceRepositoryInterface
+     * @param TicketRepositoryInterface $ticketRepositoryInterface
+     * @param ServiceActionsAuthorityRepositoryInterface $serviceActionsAuthorityRepositoryInterface
+     */
+
+
+    public function __construct(ServiceRepositoryInterface $serviceRepositoryInterface,
+                                TicketRepositoryInterface $ticketRepositoryInterface,
+                                ServiceActionsAuthorityRepositoryInterface $serviceActionsAuthorityRepositoryInterface
+    )
     {
 
         $this->middleware('auth');
 
+        $this->ticketRepositoryInterface = $ticketRepositoryInterface;
+
         $this->serviceRepositoryInterface = $serviceRepositoryInterface;
+
+        $this->serviceActionsAuthorityRepositoryInterface = $serviceActionsAuthorityRepositoryInterface;
 
     }
 
@@ -43,18 +60,39 @@ class ServiceController extends Controller
 
     public function index($serviceId)
     {
-        $service = $this->serviceRepositoryInterface->findByServiceId($serviceId);
+        $service = $this->serviceRepositoryInterface->findById($serviceId);
 
-        $ticket = Ticket::where('id', $service->ticket_id)->firstOrFail();
+        $ticket = $this->ticketRepositoryInterface->findById($service->ticket_id);
+
         $serviceAction = ServiceAction::where('service_id', $service->id)->first();
 
+        $permission_ServiceApproval = false;
+
+        $currentUserRoleName = auth()->user()->roles->first()->name;
+
+        $isApproved = false;
+
         if ($serviceAction) {
-            $serviceActionAuthorities = ServiceActionsAuthority::where('service_action_id', $serviceAction->id)->get();
+            $serviceActionAuthorities = $this->serviceActionsAuthorityRepositoryInterface->getByServiceActionId($serviceAction->id);
+
             $serviceActionAuthoritiesIds = $serviceActionAuthorities->pluck('authority_id');
+
             $authorities = Authority::whereIn('id', $serviceActionAuthoritiesIds)->get();
+
+            foreach ($authorities as $authority) {
+                if ($authority->name == $currentUserRoleName) {
+
+                    $permission_ServiceApproval = true;
+
+                } else
+
+                    $permission_ServiceApproval = false;
+            }
         } else {
+
             $serviceActionAuthorities = null;
             $authorities = null;
+            $permission_ServiceApproval = false;
         }
 
         return view('user.service-details',
@@ -66,6 +104,7 @@ class ServiceController extends Controller
                 'serviceActionAuthorities' => $serviceActionAuthorities ?
                     $serviceActionAuthorities : null,
                 'authorities' => $authorities ? $authorities : null,
+                'permission_ServiceApproval' => $permission_ServiceApproval ? $permission_ServiceApproval : false,
 
             ]);
 
