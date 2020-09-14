@@ -8,8 +8,12 @@
         <div class="card-body row">
             <div class="col-lg-5 col-xl-5 col-md-12 col-12">
                 <h6 class="text-center">Service - Details</h6>
-                <table id="advanced_table" class="table data-table">
+                <table class="table data-table">
                     <tbody>
+                    <tr>
+                        <th>Priority</th>
+                        <td>{{ $service->priority->priority }}</td>
+                    </tr>
                     <tr>
                         <th>Department</th>
                         <td>{{ $service->department }}</td>
@@ -77,13 +81,8 @@
                         <div class="col-lg-12 col-xl-12 col-md-12 col-12">
                             @if($serviceAction)
                                 <h6 class="text-center">Prior Service Action</h6>
-                                <table id="adminaction-table" class="table data-table">
+                                <table class="table data-table">
                                     <tbody>
-
-                                    <tr>
-                                        <th>Priority</th>
-                                        <td>{{ $service->priority->priority }}</td>
-                                    </tr>
                                     <tr>
                                         <th>Worker Assigned</th>
                                         <td>{{ $serviceAction->worker ? $serviceAction->worker->name : 'No Data Available'}}</td>
@@ -127,12 +126,26 @@
                                 @include('user.partials.forms.service-action-form')
                             @endif
 
-                            @if($serviceAction && !$serviceActionAuthorities_IsApprovedByCurrentUser)
+                            @if($serviceAction && !$isApprovedByCurrentUser
+                                   && $isApprovalRequiredByCurrentUser)
 
                                 <h6 class="text-center">Service - Approval</h6>
                                 <hr>
                                 @include('user.partials.forms.service-approval-form')
 
+                            @endif
+
+                            @if($pendingApprovals->isEmpty())
+                                <h6 class="text-center">Work - History</h6>
+                                <hr>
+                                <form action="/" method="POST">
+                                    <div class="form-group">
+                                        <label for="">Select Worker</label>
+                                        <select name="" id="" class="form-control">
+                                            <option value="">Ankur</option>
+                                        </select>
+                                    </div>
+                                </form>
                             @endif
 
                         </div>

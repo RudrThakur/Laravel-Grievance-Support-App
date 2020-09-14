@@ -26,7 +26,7 @@ class ServiceActionsAuthorityRepository implements ServiceActionsAuthorityReposi
     public function getUnapproved()
     {
 
-        return ServiceActionsAuthority::where('approved', '!=', 1)->get();
+        return ServiceActionsAuthority::where('approved', null)->get();
 
     }
 
@@ -69,7 +69,7 @@ class ServiceActionsAuthorityRepository implements ServiceActionsAuthorityReposi
 
 
         return ServiceActionsAuthority::where('authority_id', $authority->id)
-            ->where('approved', '!=', 1)->get();
+            ->where('approved', null)->get();
 
     }
 
@@ -83,5 +83,24 @@ class ServiceActionsAuthorityRepository implements ServiceActionsAuthorityReposi
             ->where('approved', 1)->first();
 
         return $serviceActionsAuthority ? true : false;
+    }
+
+    public function checkIfApprovalRequiredByAuthorityName($serviceActionId, $authorityName)
+    {
+
+        $authority = Authority::where('name', $authorityName)->first();
+
+        $serviceActionsAuthority = ServiceActionsAuthority::where('authority_id', $authority->id)
+            ->where('service_action_id', $serviceActionId)
+            ->where('approved', null)->first();
+
+        return $serviceActionsAuthority ? true : false;
+    }
+
+    public function getUnApprovedByServiceActionId($serviceActionId)
+    {
+        return ServiceActionsAuthority::where('service_action_id', $serviceActionId)
+            ->where('approved', null)
+            ->get();
     }
 }

@@ -15,7 +15,7 @@ class AddServicesForeignTicketsTable extends Migration
     {
         Schema::table('tickets', function (Blueprint $table) {
             $table->unsignedBigInteger('service_id')->nullable();
-            $table->foreign('service_id')->references('id')->on('services');
+            $table->foreign('service_id')->references('id')->on('services')->onDelete('cascade');
         });
     }
 

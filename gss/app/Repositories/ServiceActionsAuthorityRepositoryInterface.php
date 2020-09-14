@@ -22,4 +22,8 @@ interface ServiceActionsAuthorityRepositoryInterface
 
     public function checkIfApprovedByAuthorityName($serviceActionId, $authorityName);
 
+    public function checkIfApprovalRequiredByAuthorityName($serviceActionId, $authorityName);
+
+    public function getUnApprovedByServiceActionId($serviceActionId);
+
 }
