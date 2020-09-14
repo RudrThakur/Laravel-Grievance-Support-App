@@ -104,3 +104,8 @@ Route::get('/hall-booking', 'User\HallBookingController@create')->name('hall-boo
 Route::get('intellisense', function () {
     return view('user.intellisense');
 });
+
+Route::get('/ticket-feedback', 'User\TicketFeedbackController@create')->name('ticket-feedback');
+
+Route::post('/ticket-feedback', 'User\TicketFeedbackController@store');
+
