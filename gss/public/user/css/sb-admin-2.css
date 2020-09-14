@@ -11312,7 +11312,7 @@ a:focus {
 }
 
 .bg-login-image {
-  background: url("/public/user/images/logo.png");
+  background: url("/public/images/login.svg");
   background-position: center;
   background-size: cover;
 }

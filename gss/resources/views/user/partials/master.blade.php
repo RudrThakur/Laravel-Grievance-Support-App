@@ -83,6 +83,7 @@
 
     <!-- Master JS -->
     <script src="{{ asset('user/master.js') }}"></script>
+    @yield('javascript')
 
 </body>
 
