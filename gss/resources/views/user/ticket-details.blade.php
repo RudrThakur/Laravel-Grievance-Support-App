@@ -24,16 +24,20 @@
                         <td>{{ $ticket->type->type }}</td>
                     </tr>
                     <tr>
-                        <th>Current Holder</th>
-                        <td>{{ $ticket->authority->name }}</td>
-                    </tr>
-                    <tr>
                         <th>Raised By</th>
                         <td>{{ $ticket->user->name }}</td>
                     </tr>
                     <tr>
                         <th>User Id</th>
                         <td>{{ $ticket->user_id }}</td>
+                    </tr>
+                    <tr>
+                        <th>Status</th>
+                        <td>{{ $ticket->status->status }}</td>
+                    </tr>
+                    <tr>
+                        <th>Currently Held By</th>
+                        <td>{{ $ticket->authority->name }}</td>
                     </tr>
                     <tr>
                         <th>Registered At</th>

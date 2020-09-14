@@ -79,10 +79,7 @@
                                 <h6 class="text-center">Prior Service Action</h6>
                                 <table id="adminaction-table" class="table data-table">
                                     <tbody>
-                                    <tr>
-                                        <th>Current Holder</th>
-                                        <td>{{ $ticket->authority->name }}</td>
-                                    </tr>
+
                                     <tr>
                                         <th>Priority</th>
                                         <td>{{ $service->priority->priority }}</td>
@@ -102,13 +99,17 @@
                                                 @foreach($serviceActionAuthorities as $serviceActionAuthority)
                                                     {{ $authorities->where('id', $serviceActionAuthority->authority_id)->first()->name }}
                                                     @if($serviceActionAuthority->approved == 1)
-                                                        <i class="fas fa-check-circle" style="color: green;"></i> |
+                                                        <i class="fas fa-check-circle" style="color: green;"></i>
                                                     @elseif(is_null($serviceActionAuthority->approved))
                                                         <i class="fas fa-exclamation-circle" style="color: black;"></i>
-                                                        |
+
                                                     @else
-                                                        <i class="fas fa-times-circle" style="color: red;"></i> |
+                                                        <i class="fas fa-times-circle" style="color: red;"></i>
                                                     @endif
+
+                                                    <span
+                                                        class="authority-remarks">Remarks: {{ $serviceActionAuthority->remarks }}</span>
+                                                    | <br>
                                                 @endforeach
                                             </td>
                                         @endif
@@ -116,10 +117,6 @@
                                     <tr>
                                         <th>Admin Remarks</th>
                                         <td>{{ $serviceAction->adminremarks}}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Status</th>
-                                        <td>{{ $ticket->status->status }}</td>
                                     </tr>
                                     </tbody>
                                 </table>
@@ -130,14 +127,14 @@
                                 @include('user.partials.forms.service-action-form')
                             @endif
 
-                            @if($serviceAction && $permission_ServiceApproval)
+                            @if($serviceAction && !$serviceActionAuthorities_IsApprovedByCurrentUser)
 
                                 <h6 class="text-center">Service - Approval</h6>
                                 <hr>
                                 @include('user.partials.forms.service-approval-form')
 
                             @endif
-                            
+
                         </div>
                     </div>
                 </div>

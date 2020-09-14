@@ -16,4 +16,10 @@ interface ServiceActionsAuthorityRepositoryInterface
 
     public function getByAuthorityName($authorityName);
 
+    public function getApprovedByAuthorityName($authorityName);
+
+    public function getUnApprovedByAuthorityName($authorityName);
+
+    public function checkIfApprovedByAuthorityName($serviceActionId, $authorityName);
+
 }
