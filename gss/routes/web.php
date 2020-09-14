@@ -102,3 +102,8 @@ Route::get('/consumable', 'User\ConsumableController@create')->name('consumable'
 Route::get('/capital-equipment', 'User\CapitalEquipmentController@create')->name('capital-equipment');
 
 Route::get('/hall-booking', 'User\HallBookingController@create')->name('hall-booking');
+
+Route::get('/ticket-feedback', 'User\TicketFeedbackController@create')->name('ticket-feedback');
+
+Route::post('/ticket-feedback', 'User\TicketFeedbackController@store');
+

@@ -309,7 +309,38 @@ var roleId;
 
     });
 
+        /* ----------------------------------------------------------------------
+                      Feedback Form -DropDown
+---------------------------------------------------------------------- */
 
+    
+        $('#ticketid').change(function(){
+            if($(this).val()!=''){
+                var ticketId = $(this).val();
+                console.log(ticketId);
+
+
+                $.ajax({
+                    url:"/ticket/" + ticketId,
+                    method:"GET",
+                    success:function(result)
+                    {
+                        console.log(result);
+                        $('#ticket-ticketid').html(result.ticket.id);
+                        $('#ticket-ticketcreatedat').html(result.ticket.status.created_at);
+                        $('#ticket-user').html(result.ticket.user.name);
+                        $('#ticket-ticketcategory').html(result.ticket.type.type);
+                        $('#ticket-ticketclosedat').html(result.ticket.status.updated_at);
+                        $('#ticket-ticketstatus').html(result.ticket.status.status);
+
+
+                    }
+                })
+                
+                
+            }
+        })
+   
 
 });
 
