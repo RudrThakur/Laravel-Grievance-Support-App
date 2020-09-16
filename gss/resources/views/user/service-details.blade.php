@@ -158,7 +158,7 @@
                                             </select>
                                         </div>
                                         <div class="form-group">
-                                            <label for="eta">Estimated Turn Around Time(In Days)</label>
+                                            <label for="eta">Select Estimated Time Amount(In Days)</label>
                                             <select class="form-control" id="eta" name="eta">
                                                 <option value="">Select ETA</option>
                                                 <option value="1">1 Day</option>
@@ -183,6 +183,22 @@
                                             <button type="submit" class="btn btn-primary">Assign</button>
                                         </div>
                                     </form>
+                                @else
+                                    <table class="table data-table">
+                                        <tbody>
+                                        <tr>
+                                            <th>Estimated Time Amount</th>
+                                            <td>{{ $serviceAction ? $serviceAction->eta ? $serviceAction->eta. ' Days' : 'No Data Available' : 'No Data Available'}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Actual TAT</th>
+                                            <td>{{ $serviceAction ? $serviceAction->tat ? $serviceAction->tat. ' Days' : 'No Data Available' : 'No Data Available' }}</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                    <div class="text-center">
+                                        <button class="btn btn-primary">Close Ticket</button>
+                                    </div>
                                 @endif
                             @endif
 
