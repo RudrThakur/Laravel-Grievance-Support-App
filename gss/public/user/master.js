@@ -67,6 +67,7 @@ $(function () {
 
     $('#ticket-delete-btn').click(function (event) {
 
+        $('#ticket-delete-modal').modal('hide');
         if (!ticketId) { // If Triggered from Ticket-Details Page
             ticketId = $('#ticket-id').html();
         }
@@ -76,9 +77,13 @@ $(function () {
             type: "post",
             data: $(this).serialize(),
             success: function (data) {
+
                 $("#ticket-delete-errors-box").hide();
                 $("#ticket-delete-errors").html('');
                 $("#ticket-delete-success-box").fadeIn('slow').delay(3000).fadeOut('slow');
+                localStorage.setItem('successMessage_ticketDelete','Ticket Deleted Successfully');
+                location.reload();
+
 
                 if (document.URL.includes("ticket-details")) { // If Action was taken from Service-Details Page
                     setInterval('window.location.assign("/tickets")', 5000);
@@ -288,12 +293,12 @@ $(function () {
                     success:function(result)
                     {
                         console.log(result);
-                        $('#ticket-ticketid').html(result.ticket.id);
-                        $('#ticket-ticketcreatedat').html(result.ticket.status.created_at);
-                        $('#ticket-user').html(result.ticket.user.name);
-                        $('#ticket-ticketcategory').html(result.ticket.type.type);
-                        $('#ticket-ticketclosedat').html(result.ticket.status.updated_at);
-                        $('#ticket-ticketstatus').html(result.ticket.status.status);
+                        $('#ticket-ticketid').html(result.id);
+                        $('#ticket-ticketcreatedat').html(result.created_at);
+                        $('#ticket-user').html(result.user.name);
+                        $('#ticket-ticketcategory').html(result.type.type);
+                        $('#ticket-ticketclosedat').html(result.updated_at);
+                        $('#ticket-ticketstatus').html(result.status.status);
 
 
                     }
@@ -301,6 +306,19 @@ $(function () {
                 
                 
             }
-        })
+        });
+
+        /* ----------------------------------------------------------------------
+                      Tickets-Page
+---------------------------------------------------------------------- */
+
+        if(localStorage.getItem('successMessage_ticketDelete')){
+            $('#tickets-success').html(localStorage.getItem('successMessage_ticketDelete'));
+            $("#ticket-success").fadeIn('slow').delay(3000).fadeOut('slow');
+            localStorage.removeItem('successMessage_ticketDelete');
+
+        }
+
+
 });
 

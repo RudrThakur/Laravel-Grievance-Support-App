@@ -29,6 +29,8 @@ Route::get('/logout', 'User\LoginController@destroy')->name('logout');
 
 Route::get('/tickets', 'User\TicketController@all')->name('tickets');
 
+Route::get('/ticket/{ticketId}', 'User\TicketController@find');
+
 Route::get('/service', 'User\ServiceController@create')->name('service');
 
 Route::post('/service-request', 'User\ServiceController@store')->name('service-request');
@@ -108,4 +110,6 @@ Route::get('intellisense', function () {
 Route::get('/ticket-feedback', 'User\TicketFeedbackController@create')->name('ticket-feedback');
 
 Route::post('/ticket-feedback', 'User\TicketFeedbackController@store');
+
+Route::get('/feedbacks', 'User\FeedbacksController@all');
 
