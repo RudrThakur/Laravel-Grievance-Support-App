@@ -81,22 +81,31 @@ $(function () {
                 $("#ticket-delete-errors-box").hide();
                 $("#ticket-delete-errors").html('');
                 $("#ticket-delete-success-box").fadeIn('slow').delay(3000).fadeOut('slow');
-                localStorage.setItem('successMessage_ticketDelete','Ticket Deleted Successfully');
-                location.reload();
-
 
                 if (document.URL.includes("ticket-details")) { // If Action was taken from Service-Details Page
                     setInterval('window.location.assign("/tickets")', 5000);
+                } else {
+
+                    $('#tickets-failed').hide();
+                    $("#tickets-success").fadeIn('slow').delay(3000);
+                    $('#tickets-success').html('Ticket Deleted Successfully');
+                    setInterval('location.reload()', 5000);
                 }
             },
             error: function (error) {
-                $("#ticket-delete-errors").html('<li>' + error.statusText + '</li>');
-                $.each(error.responseJSON.errors, function (field, message) {
-                    $("#ticket-delete-errors").html('<li>' + message + '</li>');
-                });
 
-                $("#ticket-delete-success-box").hide();
-                $("#ticket-delete-errors-box").fadeIn('slow').delay(3000);
+                $('#tickets-success').hide();
+                $("#tickets-failed").fadeIn('slow').delay(3000);
+                $('#tickets-failed').html('Some Error Occurred');
+
+
+                // $("#ticket-delete-errors").html('<li>' + error.statusText + '</li>');
+                // $.each(error.responseJSON.errors, function (field, message) {
+                //     $("#ticket-delete-errors").html('<li>' + message + '</li>');
+                // });
+                //
+                // $("#ticket-delete-success-box").hide();
+                // $("#ticket-delete-errors-box").fadeIn('slow').delay(3000);
             }
         });
         event.preventDefault();
@@ -276,49 +285,36 @@ $(function () {
 
     });
 
- /* ----------------------------------------------------------------------
-                      Feedback Form -DropDown
----------------------------------------------------------------------- */
-
-    
-        $('#ticketid').change(function(){
-            if($(this).val()!=''){
-                var ticketId = $(this).val();
-                console.log(ticketId);
+    /* ----------------------------------------------------------------------
+                         Feedback Form -DropDown
+   ---------------------------------------------------------------------- */
 
 
-                $.ajax({
-                    url:"/ticket/" + ticketId,
-                    method:"GET",
-                    success:function(result)
-                    {
-                        console.log(result);
-                        $('#ticket-ticketid').html(result.id);
-                        $('#ticket-ticketcreatedat').html(result.created_at);
-                        $('#ticket-user').html(result.user.name);
-                        $('#ticket-ticketcategory').html(result.type.type);
-                        $('#ticket-ticketclosedat').html(result.updated_at);
-                        $('#ticket-ticketstatus').html(result.status.status);
+    $('#ticketid').change(function () {
+        if ($(this).val() != '') {
+            var ticketId = $(this).val();
+            console.log(ticketId);
 
 
-                    }
-                })
-                
-                
-            }
-        });
+            $.ajax({
+                url: "/ticket/" + ticketId,
+                method: "GET",
+                success: function (result) {
+                    console.log(result);
+                    $('#ticket-ticketid').html(result.id);
+                    $('#ticket-ticketcreatedat').html(result.created_at);
+                    $('#ticket-user').html(result.user.name);
+                    $('#ticket-ticketcategory').html(result.type.type);
+                    $('#ticket-ticketclosedat').html(result.updated_at);
+                    $('#ticket-ticketstatus').html(result.status.status);
 
-        /* ----------------------------------------------------------------------
-                      Tickets-Page
----------------------------------------------------------------------- */
 
-        if(localStorage.getItem('successMessage_ticketDelete')){
-            $('#tickets-success').html(localStorage.getItem('successMessage_ticketDelete'));
-            $("#ticket-success").fadeIn('slow').delay(3000).fadeOut('slow');
-            localStorage.removeItem('successMessage_ticketDelete');
+                }
+            })
+
 
         }
-
+    });
 
 });
 

@@ -82,13 +82,13 @@ class TicketController extends Controller
         try{
             $ticket = Ticket::find($ticketId);
             $deleteAction = $ticket->delete();
+
         }catch(QueryException $ex){
 
             return back()->withErrors([
                 'message' => 'Ticket does not exists'
             ]);
         }
-        
 
     }
 

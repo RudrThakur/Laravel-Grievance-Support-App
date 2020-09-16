@@ -6,9 +6,9 @@
 
     <!-- Begin Page Content -->
     <div class="container-fluid">
-    <div class="alert alert-success d-none" role="alert" id="tickets-success">
-        
-    </div>
+        <div class="alert alert-success" role="alert" id="tickets-success" style="display: none;"></div>
+        <div class="alert alert-danger" role="alert" id="tickets-failed" style="display: none;">
+        </div>
         <!-- Page Heading -->
         <h1 class="h3 mb-2 text-gray-800">Tickets</h1>
         <p class="mb-4">These are the tickets that were raised by you</p>
