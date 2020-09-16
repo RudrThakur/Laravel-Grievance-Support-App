@@ -52,12 +52,12 @@ class DropdownServiceProvider extends ServiceProvider
 
         });
 
-        view()->composer('user.partials.forms.service-action-form', function($view){
+        view()->composer('user.service-details', function($view){
 
             $workerRoleId = Role::where('name', 'Worker')->first()->id;
             $workersIdList = UsersRole::where('role_id', $workerRoleId)->get()->pluck('user_id');
             $workersList = User::whereIn('id', $workersIdList)->get();
-            
+
             $view->with(
                 [
                 'workers' => $workersList

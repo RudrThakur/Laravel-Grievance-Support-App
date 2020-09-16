@@ -5,6 +5,7 @@ namespace App\Http\Requests;
 use App\Permissions\HasPermissionsTrait;
 use App\User;
 use Illuminate\Foundation\Http\FormRequest;
+use App\Worker;
 
 class CreateUserRequest extends FormRequest
 {
@@ -56,8 +57,21 @@ class CreateUserRequest extends FormRequest
 
         $user->save();
 
-        $user->roles()->attach($this->user_role);
+        $user->roles()->attach($this->user_role); // Attach Roles
 
-        $user->permissions()->attach($this->user_permissions);
+        $user->permissions()->attach($this->user_permissions); // Attach User Permissions
+
+        if ($this->user_role == 3) { // RoleID for Worker
+
+            $worker = new Worker();
+
+            $worker->user_id = $user->id;
+            $worker->salary = 0;
+            $worker->type_id = 1;
+
+            $worker->save();
+        }
+
+
     }
 }

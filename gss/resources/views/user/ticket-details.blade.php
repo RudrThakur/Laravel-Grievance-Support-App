@@ -64,11 +64,11 @@
                                 <tbody>
                                 <tr>
                                     <th>Ticket Raised</th>
-                                    <td>{{ $ticket->created_at->toFormattedDateString() }}</td>
+                                    <td>{{ $trackTicket['ticketRaised'] }}</td>
                                 </tr>
                                 <tr>
                                     <th>Admin Responded</th>
-                                    <td>No Data Available</td>
+                                    <td>{{ $trackTicket['adminResponded'] }}</td>
                                 </tr>
                                 <tr>
                                     <th>Work Started</th>

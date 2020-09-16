@@ -70,9 +70,37 @@ class TicketController extends Controller
 
     public function index($ticketId)
     {
+
+        $trackTicket = [
+            'ticketRaised' => '',
+            'adminResponded' => '',
+            'workStarted' => '',
+            'workCompleted' => '',
+            'ticketClosed' => '',
+            'feedbackRecorded' => ''
+        ];
+
         $ticket = $this->ticketRepositoryInterface->findById($ticketId);
 
-        return view('user.ticket-details', ['ticket' => $ticket]
+
+        if ($ticket->type_id == 1) { // Service
+
+            $serviceAction = ServiceAction::where('service_id', $ticket->service_id)->first();
+
+            $trackTicket['ticketRaised'] = $ticket->created_at->toFormattedDateString();
+            $trackTicket['adminResponded'] = $serviceAction ? $serviceAction->created_at->toFormattedDateString() : 'No Data Available';
+            $trackTicket['workStarted'] = '';
+            $trackTicket['workCompleted'] = '';
+            $trackTicket['ticketClosed'] = '';
+            $trackTicket['feedbackRecorded'] = '';
+        }
+
+
+        return view('user.ticket-details',
+            ['ticket' => $ticket,
+                'trackTicket' => $trackTicket,
+            ]
+
         );
 
     }

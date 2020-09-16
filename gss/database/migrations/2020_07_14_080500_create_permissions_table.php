@@ -35,6 +35,10 @@ class CreatePermissionsTable extends Migration
                     'slug' => 'create-user'],
                 ['name' => 'Manage Users',
                     'slug' => 'manage-users'],
+                ['name' => 'Service Action',
+                    'slug' => 'service-action'],
+                ['name' => 'Service Approval',
+                    'slug' => 'service-approval'],
             ]
         );
     }

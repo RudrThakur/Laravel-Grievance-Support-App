@@ -99,16 +99,20 @@
                                                     {{ $authorities->where('id', $serviceActionAuthority->authority_id)->first()->name }}
                                                     @if($serviceActionAuthority->approved == 1)
                                                         <i class="fas fa-check-circle" style="color: green;"></i>
+                                                        <span
+                                                            class="authority-remarks">Remarks: {{ $serviceActionAuthority->remarks }}</span>
+                                                        | <br>
                                                     @elseif(is_null($serviceActionAuthority->approved))
                                                         <i class="fas fa-exclamation-circle" style="color: black;"></i>
+                                                        |
 
                                                     @else
                                                         <i class="fas fa-times-circle" style="color: red;"></i>
+                                                        <span
+                                                            class="authority-remarks">Remarks: {{ $serviceActionAuthority->remarks }}</span>
+                                                        | <br>
                                                     @endif
 
-                                                    <span
-                                                        class="authority-remarks">Remarks: {{ $serviceActionAuthority->remarks }}</span>
-                                                    | <br>
                                                 @endforeach
                                             </td>
                                         @endif
@@ -121,13 +125,16 @@
                                 </table>
 
                             @else
-                                <h6 class="text-center">Service - Action</h6>
-                                <hr>
-                                @include('user.partials.forms.service-action-form')
+                                @if(auth()->user()->can('service-action'))
+                                    <h6 class="text-center">Service - Action</h6>
+                                    <hr>
+                                    @include('user.partials.forms.service-action-form')
+                                @endif
                             @endif
 
                             @if($serviceAction && !$isApprovedByCurrentUser
-                                   && $isApprovalRequiredByCurrentUser)
+                                   && $isApprovalRequiredByCurrentUser
+                                   && auth()->user()->can('service-approval'))
 
                                 <h6 class="text-center">Service - Approval</h6>
                                 <hr>
@@ -135,17 +142,48 @@
 
                             @endif
 
-                            @if($pendingApprovals->isEmpty())
+                            @if($pendingApprovals && $pendingApprovals->isEmpty())
                                 <h6 class="text-center">Work - History</h6>
                                 <hr>
-                                <form action="/" method="POST">
-                                    <div class="form-group">
-                                        <label for="">Select Worker</label>
-                                        <select name="" id="" class="form-control">
-                                            <option value="">Ankur</option>
-                                        </select>
-                                    </div>
-                                </form>
+                                @if(!$serviceAction->worker)
+                                    <form action="/service-action/{{ $service->id }}" method="POST">
+                                        @csrf
+                                        <div class="form-group">
+                                            <label for="worker_id">Assign Worker</label>
+                                            <select class="form-control" id="worker_id" name="worker_id">
+                                                <option value="">Select Worker</option>
+                                                @foreach($workers as $worker)
+                                                    <option value="{{ $worker->id }}">{{ $worker->name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="eta">Estimated Turn Around Time(In Days)</label>
+                                            <select class="form-control" id="eta" name="eta">
+                                                <option value="">Select ETA</option>
+                                                <option value="1">1 Day</option>
+                                                <option value="2">2 Days</option>
+                                                <option value="3">3 Days</option>
+                                                <option value="4">4 Days</option>
+                                                <option value="5">5 Days</option>
+                                                <option value="6">6 Days</option>
+                                                <option value="7">7 Days</option>
+                                                <option value="8">8 Days</option>
+                                                <option value="9">9 Days</option>
+                                                <option value="10">10 Days</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="message-text" class="col-form-label">Message:</label>
+                                            <textarea class="form-control" id="admin-remarks" name="adminremarks"
+                                                      rows="4"
+                                                      cols="20"></textarea>
+                                        </div>
+                                        <div class="text-center">
+                                            <button type="submit" class="btn btn-primary">Assign</button>
+                                        </div>
+                                    </form>
+                                @endif
                             @endif
 
                         </div>

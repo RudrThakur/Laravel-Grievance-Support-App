@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Ticket;
 use Illuminate\Foundation\Http\FormRequest;
 use App\ServiceAction;
 use App\ServiceActionsAuthority;
@@ -31,24 +32,37 @@ class ServiceActionRequest extends FormRequest
         return [
             'fund' => 'required_without:worker_id',
             'worker_id' => 'required_without:fund',
+            'authorities' => 'required_with:fund',
+            'adminremarks' => 'required'
         ];
 
     }
 
-    public function messages(){
+    public function messages()
+    {
 
         return [
             'fund.required_without' => 'The fund field is required if the worker field in not specified',
             'worker_id.required_without' => 'The worker field is required if the fund field in not specified',
+            'authorities.required_with' => 'Approvals are needed for funding',
+            'adminremarks.required' => 'The remarks field is required'
         ];
 
     }
 
-    public function persist(){
+    public function persist()
+    {
 
-        $currentServiceAction = ServiceAction::where('service_id', $this->serviceId)->first();
+        $serviceAction = ServiceAction::where('service_id', $this->serviceId)->first();
 
-        if(empty($currentServiceAction)){
+        if ($serviceAction) {
+
+            $serviceAction->update(['worker_id' => request('worker_id'),
+                'eta' => request('eta'),
+                'adminremarks' => request('adminremarks')]);
+
+        } else {
+
             $serviceAction = new ServiceAction;
 
             $serviceAction->service_id = $this->serviceId;
@@ -57,49 +71,21 @@ class ServiceActionRequest extends FormRequest
             $serviceAction->adminremarks = $this->adminremarks;
             $serviceAction->fund = $this->fund;
 
-            $serviceAction->save();
+            $serviceAction->save(); // Save ServiceAction
 
-            if($this->authorities){
-
-                foreach($this->authorities as $authority){
-                    $serviceAction->authorities()->attach($authority);
-                }
-            }
-            else{
-                ServiceActionsAuthority::where('service_action_id', $serviceAction->id)->delete(); // Delete Existing Entries
-            }
+            $serviceAction->authorities()->attach($this->authorities); // Attach ServiceActionsAuthority
 
             $serviceActionAuthoritiesIds = ServiceActionsAuthority::where('service_action_id', $serviceAction->id)->get()->pluck('authority_id');
             $serviceActionAuthorities = Authority::whereIn('id', $serviceActionAuthoritiesIds)->get()->pluck('name');
 
-            event(new ServiceActionEvent($serviceAction->toArray(), $serviceActionAuthorities->toArray()));
+
+            $ticket = Ticket::where('service_id', $serviceAction->service_id)->first();
+            $ticket->update($this->authorities ? ['status_id' => 3] : ['status_id' => 2]); // Update Status
+
+            event(new ServiceActionEvent($serviceAction->toArray(), $serviceActionAuthorities->toArray())); // Fire Event
+
         }
 
-        else{
-
-            $currentServiceAction->service_id = $this->serviceId;
-            $currentServiceAction->worker_id = $this->worker_id;
-
-            $currentServiceAction->adminremarks = $this->adminremarks;
-            $currentServiceAction->fund = $this->fund;
-
-            $currentServiceAction->save();
-
-            ServiceActionsAuthority::where('service_action_id', $currentServiceAction->id)->delete(); // Delete Existing Entries
-
-            if($this->authorities){
-
-                foreach($this->authorities as $authority){
-                    $currentServiceAction->authorities()->attach($authority);
-                }
-
-            }
-
-            $currentServiceActionAuthoritiesIds = ServiceActionsAuthority::where('service_action_id', $currentServiceAction->id)->get()->pluck('authority_id');
-            $currentServiceActionAuthorities = Authority::whereIn('id', $currentServiceActionAuthoritiesIds)->get()->pluck('name');
-
-            event(new ServiceActionEvent($currentServiceAction->toArray(), $currentServiceActionAuthorities->toArray()));
-        }
 
     }
 }

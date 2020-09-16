@@ -21,6 +21,8 @@ class CreateServiceActionsTable extends Migration
             $table->foreign('worker_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('adminremarks')->nullable();
             $table->string('fund')->nullable();
+            $table->bigInteger('eta')->nullable();
+            $table->bigInteger('tat')->nullable();
             $table->timestamps();
         });
     }

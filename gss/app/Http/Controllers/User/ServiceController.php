@@ -74,7 +74,6 @@ class ServiceController extends Controller
             $isApprovalRequiredByCurrentUser = $this->serviceActionsAuthorityRepositoryInterface->checkIfApprovalRequiredByAuthorityName($serviceAction->id,
                 auth()->user()->roles->first()->name);
 
-
         } else {
 
             $serviceActionAuthorities = null;
