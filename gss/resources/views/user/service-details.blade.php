@@ -84,16 +84,12 @@
                                 <table class="table data-table">
                                     <tbody>
                                     <tr>
-                                        <th>Worker Assigned</th>
-                                        <td>{{ $serviceAction->worker ? $serviceAction->worker->name : 'No Data Available'}}</td>
-                                    </tr>
-                                    <tr>
                                         <th>Fund Amount</th>
                                         <td>{{ $serviceAction->fund ? $serviceAction->fund : 'No Data Available'}}</td>
                                     </tr>
                                     <tr>
                                         <th>Approvals Required</th>
-                                        @if($serviceActionAuthorities)
+                                        @if(!$serviceActionAuthorities->isEmpty())
                                             <td>
                                                 @foreach($serviceActionAuthorities as $serviceActionAuthority)
                                                     {{ $authorities->where('id', $serviceActionAuthority->authority_id)->first()->name }}
@@ -115,11 +111,15 @@
 
                                                 @endforeach
                                             </td>
+                                        @else
+                                            <td>
+                                                No Data Available
+                                            </td>
                                         @endif
                                     </tr>
                                     <tr>
                                         <th>Admin Remarks</th>
-                                        <td>{{ $serviceAction->adminremarks}}</td>
+                                        <td>{{ $serviceAction->adminremarks ? $serviceAction->adminremarks : 'No Data Available'}}</td>
                                     </tr>
                                     </tbody>
                                 </table>
@@ -146,7 +146,7 @@
                                 <h6 class="text-center">Work - History</h6>
                                 <hr>
                                 @if(!$serviceAction->worker)
-                                    <form action="/service-action/{{ $service->id }}" method="POST">
+                                    <form action="/work-history/{{ $serviceAction->id }}" method="POST">
                                         @csrf
                                         <div class="form-group">
                                             <label for="worker_id">Assign Worker</label>
@@ -186,7 +186,12 @@
                                 @else
                                     <table class="table data-table">
                                         <tbody>
+                                                <tr>
+                                        <th>Worker Assigned</th>
+                                        <td>{{ $serviceAction->worker ? $serviceAction->worker->name : 'No Data Available'}}</td>
+                                    </tr>
                                         <tr>
+
                                             <th>Estimated Time Amount</th>
                                             <td>{{ $serviceAction ?
                                                 ($serviceAction->eta ?

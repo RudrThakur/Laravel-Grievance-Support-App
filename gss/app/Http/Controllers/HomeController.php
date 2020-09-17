@@ -48,7 +48,8 @@ class HomeController extends Controller
                 ->sum('fund');
 
             if (Ticket::count())
-                $workCompleted = (Ticket::where('status_id', 4)->get()->count()) / Ticket::count() * 100;//Percentage of Completed Work
+                $workCompleted = number_format((Ticket::where('status_id', 4)->get()->count()) / Ticket::count() * 100
+                    , 2, '.', '');//Percentage of Completed Work
             else
                 $workCompleted = 0;
 

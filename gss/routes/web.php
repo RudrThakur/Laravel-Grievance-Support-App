@@ -115,3 +115,5 @@ Route::get('/feedbacks', 'User\FeedbacksController@all');
 
 Route::get('/close-ticket/{ticketId}', 'User\TicketController@close');
 
+Route::post('/work-history/{serviceActionId}', 'User\WorkHistoryController@store');
+

@@ -30,10 +30,10 @@ class ServiceActionRequest extends FormRequest
     {
 
         return [
-            'fund' => 'required_without:worker_id',
-            'worker_id' => 'required_without:fund',
+            'deny_funding_check' => 'required_without:fund',
+            'fund' => 'required_without:deny_funding_check',
             'authorities' => 'required_with:fund',
-            'adminremarks' => 'required'
+            'adminremarks' => 'required_without:deny_funding_check'
         ];
 
     }
@@ -42,10 +42,10 @@ class ServiceActionRequest extends FormRequest
     {
 
         return [
-            'fund.required_without' => 'The fund field is required if the worker field in not specified',
-            'worker_id.required_without' => 'The worker field is required if the fund field in not specified',
+            'deny_funding_check.required_without' => 'Please confirm that no funding is required',
+            'fund.required_without' => 'The fund field is required if not confirmed that no funding is needed',
             'authorities.required_with' => 'Approvals are needed for funding',
-            'adminremarks.required' => 'The remarks field is required'
+            'adminremarks.required_without' => 'The remarks field is required'
         ];
 
     }
@@ -53,38 +53,24 @@ class ServiceActionRequest extends FormRequest
     public function persist()
     {
 
-        $serviceAction = ServiceAction::where('service_id', $this->serviceId)->first();
+        $serviceAction = new ServiceAction;
 
-        if ($serviceAction) {
+        $serviceAction->service_id = $this->serviceId;
+        $serviceAction->adminremarks = $this->adminremarks;
+        $serviceAction->fund = $this->fund;
 
-            $serviceAction->update(['worker_id' => request('worker_id'),
-                'eta' => request('eta'),
-                'adminremarks' => request('adminremarks')]);
+        $serviceAction->save(); // Save ServiceAction
 
-        } else {
+        $serviceAction->authorities()->attach($this->authorities); // Attach ServiceActionsAuthority
 
-            $serviceAction = new ServiceAction;
-
-            $serviceAction->service_id = $this->serviceId;
-            $serviceAction->worker_id = $this->worker_id;
-
-            $serviceAction->adminremarks = $this->adminremarks;
-            $serviceAction->fund = $this->fund;
-
-            $serviceAction->save(); // Save ServiceAction
-
-            $serviceAction->authorities()->attach($this->authorities); // Attach ServiceActionsAuthority
-
-            $serviceActionAuthoritiesIds = ServiceActionsAuthority::where('service_action_id', $serviceAction->id)->get()->pluck('authority_id');
-            $serviceActionAuthorities = Authority::whereIn('id', $serviceActionAuthoritiesIds)->get()->pluck('name');
+        $serviceActionAuthoritiesIds = ServiceActionsAuthority::where('service_action_id', $serviceAction->id)->get()->pluck('authority_id');
+        $serviceActionAuthorities = Authority::whereIn('id', $serviceActionAuthoritiesIds)->get()->pluck('name');
 
 
-            $ticket = Ticket::where('service_id', $serviceAction->service_id)->first();
-            $ticket->update($this->authorities ? ['status_id' => 3] : ['status_id' => 2]); // Update Status
+        $ticket = Ticket::where('service_id', $serviceAction->service_id)->first();
+        $ticket->update($this->authorities ? ['status_id' => 3] : ['status_id' => 2]); // Update Status
 
-            event(new ServiceActionEvent($serviceAction->toArray(), $serviceActionAuthorities->toArray())); // Fire Event
-
-        }
+        event(new ServiceActionEvent($serviceAction->toArray(), $serviceActionAuthorities->toArray())); // Fire Event
 
 
     }
