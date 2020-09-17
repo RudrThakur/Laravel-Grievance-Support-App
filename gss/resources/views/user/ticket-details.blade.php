@@ -6,6 +6,12 @@
     <div class="custom-alert alert alert-danger service-action-alerts" id="service-action-errors-box">
         <ul id="service-action-errors"></ul>
     </div>
+    
+    <div class="alert alert-success" role="alert" id="tickets-success" style="display: none;"></div>
+
+    <div class="alert alert-danger" role="alert" id="tickets-failed" style="display: none;">
+        </div>
+
     <div class="custom-alert alert alert-success service-action-alerts" id="service-action-success-box">
         <p>Service Action Was Successful</p>
     </div>

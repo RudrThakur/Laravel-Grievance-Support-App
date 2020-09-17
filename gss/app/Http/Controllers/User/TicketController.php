@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Mail;
 
 use App\Service;
 use App\Ticket;
+use Exception;
+
 
 class TicketController extends Controller
 {
@@ -70,8 +72,8 @@ class TicketController extends Controller
 
     public function index($ticketId)
     {
-
-        $trackTicket = [
+        try{
+             $trackTicket = [
             'ticketRaised' => '',
             'adminResponded' => '',
             'workStarted' => '',
@@ -79,6 +81,8 @@ class TicketController extends Controller
             'ticketClosed' => '',
             'feedbackRecorded' => ''
         ];
+
+
 
         $ticket = $this->ticketRepositoryInterface->findById($ticketId);
 
@@ -102,6 +106,12 @@ class TicketController extends Controller
             ]
 
         );
+    }catch(Exception $ex){ 
+
+            return back()->withErrors([
+                'message' => 'Ticket does not exists'
+            ]);
+            }       
 
     }
 
