@@ -107,9 +107,24 @@ class TicketController extends Controller
 
     public function destroy($ticketId)
     {
+        try{
+            $ticket = Ticket::find($ticketId);
+            $deleteAction = $ticket->delete();
 
-        $ticket = Ticket::find($ticketId);
-        $deleteAction = $ticket->delete();
+        }catch(QueryException $ex){
+
+            return back()->withErrors([
+                'message' => 'Ticket does not exists'
+            ]);
+        }
+
+    }
+
+    public function find($ticketId){
+
+        $ticket = $this->ticketRepositoryInterface->findById($ticketId);
+
+        return $ticket;
 
     }
 }

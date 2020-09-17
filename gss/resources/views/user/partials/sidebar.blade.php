@@ -144,6 +144,12 @@
             <i class="fas fa-fw fa-cog"></i>
             <span>Feedback</span></a>
     </li>
+      <!-- User Feedback -->
+    <li class="nav-item">
+        <a class="nav-link" href="/feedbacks">
+            <i class="fas fa-fw fa-cog"></i>
+            <span> Feedbacks</span></a>
+    </li>
 
     <!-- Nav Item - Charts -->
     <li class="nav-item">
