@@ -8,6 +8,7 @@ use App\Repositories\ServiceActionsAuthorityRepositoryInterface;
 use App\Repositories\ServiceRepositoryInterface;
 use App\Http\Requests\ServiceRequest;
 use App\ServiceAction;
+use App\Ticket;
 
 
 class ServiceController extends Controller
@@ -59,6 +60,8 @@ class ServiceController extends Controller
 
         $serviceAction = ServiceAction::where('service_id', $service->id)->first();
 
+        $isClosed = Ticket::where('service_id', $serviceId)->first()->status_id == 4;
+
         if ($serviceAction) {
             $serviceActionAuthorities = $this->serviceActionsAuthorityRepositoryInterface->getByServiceActionId($serviceAction->id);
 
@@ -94,6 +97,7 @@ class ServiceController extends Controller
                 'isApprovedByCurrentUser' => $isApprovedByCurrentUser,
                 'pendingApprovals' => $pendingApprovals,
                 'isApprovalRequiredByCurrentUser' => $isApprovalRequiredByCurrentUser,
+                'isClosed' => $isClosed
             ]);
 
     }

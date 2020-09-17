@@ -5,7 +5,9 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Repositories\TicketRepositoryInterface;
 use App\ServiceAction;
+use App\TicketsFeedback;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
@@ -82,22 +84,25 @@ class TicketController extends Controller
 
         $ticket = $this->ticketRepositoryInterface->findById($ticketId);
 
+        $ticketFeedback = TicketsFeedback::where('ticket_id', $ticket->id)->first();
 
         if ($ticket->type_id == 1) { // Service
 
             $serviceAction = ServiceAction::where('service_id', $ticket->service_id)->first();
 
-            $trackTicket['ticketRaised'] = $ticket->created_at->toFormattedDateString();
-            $trackTicket['adminResponded'] = $serviceAction ? $serviceAction->created_at->toFormattedDateString() : 'No Data Available';
-            $trackTicket['workStarted'] = '';
-            $trackTicket['workCompleted'] = '';
-            $trackTicket['ticketClosed'] = '';
-            $trackTicket['feedbackRecorded'] = '';
+            $trackTicket['ticketRaised'] = $ticket->created_at;
+            $trackTicket['adminResponded'] = $serviceAction ? $serviceAction->created_at : 'No Data Available';
+            $trackTicket['workStarted'] = ($serviceAction ? ($serviceAction->worker_id ? $serviceAction->updated_at : 'No Data Available')
+                : 'No Data Available');
+            $trackTicket['workCompleted'] = ($serviceAction ? ($serviceAction->tat ? $serviceAction->updated_at : 'No Data Available') : 'No Data Available');
+            $trackTicket['ticketClosed'] = $ticket->status_id == 4 ? $ticket->updated_at : 'No Data Available';
+            $trackTicket['feedbackRecorded'] = $ticketFeedback ? $ticketFeedback->created_at : 'No Data Available';
         }
 
 
         return view('user.ticket-details',
-            ['ticket' => $ticket,
+            [
+                'ticket' => $ticket,
                 'trackTicket' => $trackTicket,
             ]
 
@@ -107,11 +112,11 @@ class TicketController extends Controller
 
     public function destroy($ticketId)
     {
-        try{
+        try {
             $ticket = Ticket::find($ticketId);
             $deleteAction = $ticket->delete();
 
-        }catch(QueryException $ex){
+        } catch (QueryException $ex) {
 
             return back()->withErrors([
                 'message' => 'Ticket does not exists'
@@ -120,11 +125,34 @@ class TicketController extends Controller
 
     }
 
-    public function find($ticketId){
+    public function find($ticketId)
+    {
 
         $ticket = $this->ticketRepositoryInterface->findById($ticketId);
 
         return $ticket;
 
+    }
+
+    public function close($ticketId)
+    {
+
+        $ticket = $this->ticketRepositoryInterface->findById($ticketId);
+
+        if ($ticket->type_id == 1) { // Service
+
+            $service = Service::where('ticket_id', $ticketId)->first();
+
+            $serviceAction = ServiceAction::where('service_id', $service->id)->first();
+
+            $serviceAction->update(['tat' => (Carbon::now()->diffInDays($serviceAction->created_at, true) == 0 ?
+                                                 1 : Carbon::now()->diffInDays($serviceAction->created_at, true))]);
+        }
+
+        $ticket->update(['status_id' => 4]);
+
+        session()->flash('message', 'Ticket Closed Successfully');
+
+        return redirect()->to('/ticket-details/' . $ticketId);
     }
 }

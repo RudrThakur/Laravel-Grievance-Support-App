@@ -188,17 +188,29 @@
                                         <tbody>
                                         <tr>
                                             <th>Estimated Time Amount</th>
-                                            <td>{{ $serviceAction ? $serviceAction->eta ? $serviceAction->eta. ' Days' : 'No Data Available' : 'No Data Available'}}</td>
+                                            <td>{{ $serviceAction ?
+                                                ($serviceAction->eta ?
+                                                ($serviceAction->eta == 1 ? $serviceAction->eta.' Day' : $serviceAction->eta.' Days')
+                                                :'No Data Available')
+                                                : 'No Data Available' }}</td>
                                         </tr>
                                         <tr>
                                             <th>Actual TAT</th>
-                                            <td>{{ $serviceAction ? $serviceAction->tat ? $serviceAction->tat. ' Days' : 'No Data Available' : 'No Data Available' }}</td>
+                                            <td>{{ $serviceAction ?
+                                                ($serviceAction->tat ?
+                                                ($serviceAction->tat == 1 ? $serviceAction->tat.' Day' : $serviceAction->tat.' Days')
+                                                :'No Data Available')
+                                                : 'No Data Available' }}</td>
                                         </tr>
                                         </tbody>
                                     </table>
-                                    <div class="text-center">
-                                        <button class="btn btn-primary">Close Ticket</button>
-                                    </div>
+
+                                    @if(!$isClosed)
+                                        <div class="text-center">
+                                            <a class="btn btn-primary" href="/close-ticket/{{ $service->ticket_id }}">Close
+                                                Ticket</a>
+                                        </div>
+                                    @endif
                                 @endif
                             @endif
 

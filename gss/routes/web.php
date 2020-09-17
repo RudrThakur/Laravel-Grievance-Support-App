@@ -113,3 +113,5 @@ Route::post('/ticket-feedback', 'User\TicketFeedbackController@store');
 
 Route::get('/feedbacks', 'User\FeedbacksController@all');
 
+Route::get('/close-ticket/{ticketId}', 'User\TicketController@close');
+

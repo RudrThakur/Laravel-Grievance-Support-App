@@ -72,19 +72,19 @@
                                 </tr>
                                 <tr>
                                     <th>Work Started</th>
-                                    <td>No Data Available</td>
+                                    <td>{{ $trackTicket['workStarted'] }}</td>
                                 </tr>
                                 <tr>
                                     <th>Work Completed</th>
-                                    <td>No Data Available</td>
+                                    <td>{{ $trackTicket['workCompleted'] }}</td>
                                 </tr>
                                 <tr>
                                     <th>Ticket Closed</th>
-                                    <td>No Data Available</td>
+                                    <td>{{ $trackTicket['ticketClosed'] }}</td>
                                 </tr>
                                 <tr>
                                     <th>Feedback Recorded</th>
-                                    <td>No Data Available</td>
+                                    <td>{{ $trackTicket['feedbackRecorded'] }}</td>
                                 </tr>
                                 </tbody>
                             </table>
