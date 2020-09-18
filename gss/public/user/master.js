@@ -82,21 +82,28 @@ $(function () {
                 $("#ticket-delete-errors").html('');
                 $("#ticket-delete-success-box").fadeIn('slow').delay(3000).fadeOut('slow');
 
-                if (document.URL.includes("ticket-details")) { // If Action was taken from Service-Details Page
-                    setInterval('window.location.assign("/tickets")', 5000);
+                if (document.URL.includes("ticket-details")) {
+                $('#tickets-failed').hide();
+                   // If Action was taken from Service-Details Page
+                    
+                    $("#tickets-success").fadeIn('slow').delay(3000);
+                    $('#tickets-success').html('Ticket Deleted Successfully');
+                    setInterval('window.location.assign("/tickets")',1000);
+
                 } else {
 
                     $('#tickets-failed').hide();
                     $("#tickets-success").fadeIn('slow').delay(3000);
                     $('#tickets-success').html('Ticket Deleted Successfully');
-                    setInterval('location.reload()', 5000);
+                    setInterval('location.reload()', 1000);
                 }
             },
             error: function (error) {
-
                 $('#tickets-success').hide();
                 $("#tickets-failed").fadeIn('slow').delay(3000);
-                $('#tickets-failed').html('Some Error Occurred');
+                $('#tickets-failed').html('Ticket does not exists');
+                
+
 
 
                 // $("#ticket-delete-errors").html('<li>' + error.statusText + '</li>');

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Ticket;
 use App\TicketsFeedback;
+use Illuminate\Database\QueryException;
 
 class FeedbacksController extends Controller
 {
