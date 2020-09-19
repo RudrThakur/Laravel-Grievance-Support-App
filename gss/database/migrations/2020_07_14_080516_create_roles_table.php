@@ -19,6 +19,7 @@ class CreateRolesTable extends Migration
             $table->string('slug'); //edit-posts
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();
+            $table->boolean('is_active')->default(true);
         });
 
         // Seed

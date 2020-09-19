@@ -56,4 +56,6 @@ class RoleController extends Controller
         return redirect()->to('/manage-roles');
 
     }
+
+    
 }

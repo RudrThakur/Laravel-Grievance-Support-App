@@ -104,4 +104,29 @@ class UserController extends Controller
         }
 
     }
+
+
+    public function setActive($userId,$active){
+
+        try{
+
+            $user = User::where('id',$userId)->first();
+            $user->update([
+                'is_active' => $active
+            ]);
+
+
+        
+
+
+            return ['status'=>true,'message'=>'Status Changed Successfully'];
+
+        }catch(Throwable $exception){
+            return back()->withErrors([
+                'message' => 'User does not Exists'
+            ]);;
+        }
+
+
+    }
 }

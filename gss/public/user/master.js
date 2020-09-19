@@ -331,5 +331,65 @@ $(function () {
         $('.funding_field').attr('disabled', this.checked);
     });
 
+
+    /* ----------------------------------------------------------------------
+                     Manage User Active - Select
+---------------------------------------------------------------------- */
+
+
+$('#set-user-active').change(function () {
+        if ($(this).val() != '') {
+            var userId = $('#manage-users-user-id').html();
+            var active = $(this).val();
+
+
+
+            $.ajax({
+                url: "/set-user-active/" + userId+ "/" + active,
+                method: "POST",
+                success: function (result) {
+
+                    
+                    $("#tickets-success").fadeIn('slow').delay(3000);
+                    $('#tickets-success').html('Status Changed Successfully');
+                    $('#tickets-success').fadeOut('slow').delay(3000);
+
+                }
+            })
+
+
+        }
+    });
+
+
+ /* ----------------------------------------------------------------------
+                     Manage Role Active - Select
+---------------------------------------------------------------------- */
+
+
+$('#set-role-active').change(function () {
+        if ($(this).val() != '') {
+            var roleId = $('#manage-roles-role-id').html();
+            var active = $(this).val();
+
+
+
+            $.ajax({
+                url: "/set-role-active/" + roleId+ "/" + active,
+                method: "POST",
+                success: function (result) {
+
+                    
+                    $("#role-success").fadeIn('slow').delay(3000);
+                    $('#role-success').html('Status Changed Successfully');
+                    $('#role-success').fadeOut('slow').delay(3000);
+
+                }
+            })
+
+
+        }
+    });
+
 });
 

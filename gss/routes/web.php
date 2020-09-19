@@ -117,3 +117,6 @@ Route::get('/close-ticket/{ticketId}', 'User\TicketController@close');
 
 Route::post('/work-history/{serviceActionId}', 'User\WorkHistoryController@store');
 
+Route::post('/set-user-active/{userId}/{active}', 'User\UserController@setActive');//AJAX Route
+
+
