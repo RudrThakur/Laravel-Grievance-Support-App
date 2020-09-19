@@ -362,34 +362,8 @@ $('#set-user-active').change(function () {
     });
 
 
- /* ----------------------------------------------------------------------
-                     Manage Role Active - Select
----------------------------------------------------------------------- */
+ 
 
-
-$('#set-role-active').change(function () {
-        if ($(this).val() != '') {
-            var roleId = $('#manage-roles-role-id').html();
-            var active = $(this).val();
-
-
-
-            $.ajax({
-                url: "/set-role-active/" + roleId+ "/" + active,
-                method: "POST",
-                success: function (result) {
-
-                    
-                    $("#role-success").fadeIn('slow').delay(3000);
-                    $('#role-success').html('Status Changed Successfully');
-                    $('#role-success').fadeOut('slow').delay(3000);
-
-                }
-            })
-
-
-        }
-    });
 
 });
 
