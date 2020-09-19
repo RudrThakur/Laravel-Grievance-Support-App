@@ -4,11 +4,7 @@
 
 @section('content')
 
-         <div>
-        <div class="alert alert-success" role="alert" id="tickets-success" style="display: none;"></div>
-        <div class="alert alert-danger" role="alert" id="tickets-failed" style="display: none;">
-        </div>
-        </div>
+       
     <div class="card">
         @include('user.partials.errors')
                 <div class="custom-alert alert alert-success"
