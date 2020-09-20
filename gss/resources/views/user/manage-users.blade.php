@@ -5,8 +5,8 @@
 @section('content')
 
      <div>
-        <div class="alert alert-success" role="alert" id="tickets-success" style="display: none;"></div>
-        <div class="alert alert-danger" role="alert" id="tickets-failed" style="display: none;">
+        <div class="alert alert-success" role="alert" id="manage-user-status-success" style="display: none;"></div>
+        <div class="alert alert-danger" role="alert" id="manage-user-status-failed" style="display: none;">
         </div>
     </div>
     <div class="card">

@@ -350,9 +350,9 @@ $('#set-user-active').change(function () {
                 success: function (result) {
 
                     
-                    $("#tickets-success").fadeIn('slow').delay(3000);
-                    $('#tickets-success').html('Status Changed Successfully');
-                    $('#tickets-success').fadeOut('slow').delay(3000);
+                    $("#manage-user-status-success").fadeIn('slow').delay(3000);
+                    $('#manage-user-status-success').html('Status Changed Successfully');
+                    $('#manage-user-status-success').fadeOut('slow').delay(3000);
 
                 }
             })
