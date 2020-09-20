@@ -39,6 +39,8 @@ class CreatePermissionsTable extends Migration
                     'slug' => 'service-action'],
                 ['name' => 'Service Approval',
                     'slug' => 'service-approval'],
+                ['name' => 'View Dashboard',
+                    'slug' => 'view-dashboard'],
             ]
         );
     }

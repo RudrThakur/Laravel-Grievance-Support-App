@@ -150,7 +150,7 @@
                                         @csrf
                                         <div class="form-group">
                                             <label for="worker_id">Assign Worker</label>
-                                            <select class="form-control" id="worker_id" name="worker_id">
+                                            <select class="form-control assign_worker_fields" id="worker_id" name="worker_id">
                                                 <option value="">Select Worker</option>
                                                 @foreach($workers as $worker)
                                                     <option value="{{ $worker->id }}">{{ $worker->name }}</option>
@@ -158,8 +158,17 @@
                                             </select>
                                         </div>
                                         <div class="form-group">
+                                            <div class="form-check">
+                                                <label class="form-check-label">
+                                                    <input type="checkbox" class="form-check-input" value="auto_assign_worker"
+                                                           name="auto_assign_worker"
+                                                           id="auto_assign_worker">Auto Assign
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
                                             <label for="eta">Select Estimated Time Amount(In Days)</label>
-                                            <select class="form-control" id="eta" name="eta">
+                                            <select class="form-control assign_worker_fields" id="eta" name="eta">
                                                 <option value="">Select ETA</option>
                                                 <option value="1">1 Day</option>
                                                 <option value="2">2 Days</option>
@@ -186,10 +195,10 @@
                                 @else
                                     <table class="table data-table">
                                         <tbody>
-                                                <tr>
-                                        <th>Worker Assigned</th>
-                                        <td>{{ $serviceAction->worker ? $serviceAction->worker->name : 'No Data Available'}}</td>
-                                    </tr>
+                                        <tr>
+                                            <th>Worker Assigned</th>
+                                            <td>{{ $serviceAction->worker ? $serviceAction->worker->name : 'No Data Available'}}</td>
+                                        </tr>
                                         <tr>
 
                                             <th>Estimated Time Amount</th>

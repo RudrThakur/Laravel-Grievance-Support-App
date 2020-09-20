@@ -83,12 +83,12 @@ $(function () {
                 $("#ticket-delete-success-box").fadeIn('slow').delay(3000).fadeOut('slow');
 
                 if (document.URL.includes("ticket-details")) {
-                $('#tickets-failed').hide();
-                   // If Action was taken from Service-Details Page
-                    
+                    $('#tickets-failed').hide();
+                    // If Action was taken from Service-Details Page
+
                     $("#tickets-success").fadeIn('slow').delay(3000);
                     $('#tickets-success').html('Ticket Deleted Successfully');
-                    setInterval('window.location.assign("/tickets")',1000);
+                    setInterval('window.location.assign("/tickets")', 1000);
 
                 } else {
 
@@ -102,8 +102,6 @@ $(function () {
                 $('#tickets-success').hide();
                 $("#tickets-failed").fadeIn('slow').delay(3000);
                 $('#tickets-failed').html('Ticket does not exists');
-                
-
 
 
                 // $("#ticket-delete-errors").html('<li>' + error.statusText + '</li>');
@@ -329,6 +327,14 @@ $(function () {
 
     $('#deny_funding_check').click(function () {
         $('.funding_field').attr('disabled', this.checked);
+    });
+
+    /* ----------------------------------------------------------------------
+                 Work History Form - Checkbox
+---------------------------------------------------------------------- */
+
+    $('#auto_assign_worker').click(function () {
+        $('.assign_worker_fields').attr('disabled', this.checked);
     });
 
 });

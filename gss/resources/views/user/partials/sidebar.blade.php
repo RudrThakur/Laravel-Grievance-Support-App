@@ -15,12 +15,14 @@
     <hr class="sidebar-divider my-0">
 
     <!-- Nav Item - Dashboard -->
+
+    @if(auth()->user()->can('view-dashboard'))
     <li class="nav-item active">
         <a class="nav-link" href="/index">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Dashboard</span></a>
     </li>
-
+    @endif
     <!-- Divider -->
     <hr class="sidebar-divider">
 
@@ -73,7 +75,7 @@
                 </div>
             </div>
         </li>
-@endif
+    @endif
 
 <!-- Divider -->
     <hr class="sidebar-divider">
@@ -129,29 +131,35 @@
     <!-- Divider -->
     <hr class="sidebar-divider">
 
-        <!-- Nav Item - Charts -->
+    <!-- Nav Item - Charts -->
     <li class="nav-item">
         @if(auth()->user('admin'))
-        <a class="nav-link" href="/intellisense">
-            <i class="fas fa-fw fa-robot"></i>
-        <span>Intellisense</span></a>
+            <a class="nav-link" href="/intellisense">
+                <i class="fas fa-fw fa-robot"></i>
+                <span>Intellisense</span></a>
         @endif
     </li>
 
     <!-- Feedback -->
-    <li class="nav-item">
-        <a class="nav-link" href="{{ route('ticket-feedback') }}">
-            <i class="fas fa-fw fa-cog"></i>
-            <span>Feedback</span></a>
-    </li>
-      <!-- User Feedback -->
-    <li class="nav-item">
-        <a class="nav-link" href="/feedbacks">
-            <i class="fas fa-fw fa-cog"></i>
-            <span> Feedbacks</span></a>
-    </li>
 
-    <!-- Nav Item - Charts -->
+    @if(auth()->user()->roles->first()->name == 'Faculty')
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('ticket-feedback') }}">
+                <i class="fas fa-fw fa-cog"></i>
+                <span>Feedback</span></a>
+        </li>
+    @endif
+
+    @if(auth()->user()->roles->first()->name == 'Admin')
+        <!-- User Feedback -->
+            <li class="nav-item">
+                <a class="nav-link" href="/feedbacks">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span> Feedbacks</span></a>
+            </li>
+    @endif
+
+<!-- Nav Item - Charts -->
     <li class="nav-item">
         <a class="nav-link" href="charts.html">
             <i class="fas fa-fw fa-chart-area"></i>
