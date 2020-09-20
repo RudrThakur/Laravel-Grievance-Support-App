@@ -1,17 +1,6 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
 use RealRashid\SweetAlert\Facades\Alert;
-
 
 Route::get('/', function () {
     Alert::success('WELCOME', 'TO Advance GSS');
@@ -121,3 +110,46 @@ Route::get('/close-ticket/{ticketId}', 'User\TicketController@close');
 
 Route::post('/work-history/{serviceActionId}', 'User\WorkHistoryController@store');
 
+Route::get('/spendings-overview', 'HomeController@spendingsOverview'); // AJAX Route
+
+Route::get('/tickets-composition', 'HomeController@ticketsComposition'); // AJAX Route
+
+
+/* ------------------------------------------------------------------------------------------------
+
+                                TESTING ROUTE
+
+// DO NOT CODE HERE
+--------------------------------------------------------------------------------------------------- */
+
+use App\Worker;
+use App\Algorithms\Hungarian;
+use App\User;
+
+Route::get('/test', function () {
+
+    $workers = Worker::limit(6)->get();
+
+    $workerTATs = $workers->map(function ($item, $key) {
+
+        return [
+            $item->tat_Painting,
+            $item->tat_Plumbing,
+            $item->tat_HouseKeeping,
+            $item->tat_Airconditioner,
+            $item->tat_Electrical,
+            $item->tat_Interior
+        ];
+    });
+
+    $hungarian = new Hungarian($workerTATs->toArray());
+
+    $hungarianSolution = $hungarian->solve();
+
+    $user = User::first();
+    $worker = Worker::first();
+//    return $workers[$hungarianSolution[1]];
+
+    return $worker->user->name;
+
+});

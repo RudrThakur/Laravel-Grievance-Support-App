@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Worker;
 use Illuminate\Support\ServiceProvider;
 
 use App\User;
@@ -55,12 +56,17 @@ class DropdownServiceProvider extends ServiceProvider
         view()->composer('user.service-details', function($view){
 
             $workerRoleId = Role::where('name', 'Worker')->first()->id;
+
             $workersIdList = UsersRole::where('role_id', $workerRoleId)->get()->pluck('user_id');
-            $workersList = User::whereIn('id', $workersIdList)->get();
+
+            $availableWorkersIdList = Worker::whereIn('user_id', $workersIdList)
+                                            ->where('available', 1)->get()->pluck('user_id');
+
+            $availableWorkers = User::whereIn('id', $availableWorkersIdList)->get();
 
             $view->with(
                 [
-                'workers' => $workersList
+                'workers' => $availableWorkers
                 ]
             );
 

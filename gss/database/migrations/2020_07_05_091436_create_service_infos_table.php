@@ -74,12 +74,8 @@ class CreateServiceInfosTable extends Migration
             'subcategory' => 'Cabin'],
             [ 'category' => 'Interior',
             'subcategory' => 'Workstation'],
-            [ 'category' => 'Carpentry',
-            'subcategory' => Null],
-            [ 'category' => 'Others',
-            'subcategory' => Null]
         ]
-            
+
         );
     }
 

@@ -17,14 +17,22 @@ class CreateWorkersTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->unsignedBigInteger('service_id')->nullable();
+            $table->foreign('service_id')->references('id')->on('services')->onDelete('cascade');
+            $table->unsignedBigInteger('service_actions_id')->nullable();
+            $table->foreign('service_actions_id')->references('id')->on('service_actions')->onDelete('cascade');
             $table->boolean('available')->default(true);
             $table->bigInteger('num_workingdays')->nullable();
             $table->bigInteger('num_leavedays')->nullable();
             $table->bigInteger('salary');
-            $table->unsignedBigInteger('type_id');
-            $table->foreign('type_id')->references('id')->on('ticket_infos')->onDelete('cascade');
-            $table->bigInteger('avg_days')->nullable();
+            $table->bigInteger('avg_tat')->nullable();
             $table->bigInteger('rating')->nullable();
+            $table->bigInteger('tat_Painting')->default(4);
+            $table->bigInteger('tat_Plumbing')->default(6);
+            $table->bigInteger('tat_HouseKeeping')->default(2);
+            $table->bigInteger('tat_Airconditioner')->default(3);
+            $table->bigInteger('tat_Electrical')->default(8);
+            $table->bigInteger('tat_Interior')->default(10);
             $table->timestamps();
         });
     }

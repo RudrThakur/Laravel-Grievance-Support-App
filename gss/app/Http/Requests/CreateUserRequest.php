@@ -67,7 +67,6 @@ class CreateUserRequest extends FormRequest
 
             $worker->user_id = $user->id;
             $worker->salary = 0;
-            $worker->type_id = 1;
 
             $worker->save();
         }
