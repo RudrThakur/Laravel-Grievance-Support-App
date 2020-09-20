@@ -18,8 +18,8 @@ $.ajax({
                 labels: ["Painting", "Plumbing", "HouseKeeping", "Airconditioner", "Electrical", "Interior"],
                 datasets: [{
                     data: data,
-                    backgroundColor: ['#4e73df', '#FDF500', '#36b9cc', '#DE3E1C', '#7B16EC', '#E418F1'],
-                    hoverBackgroundColor: ['#2e59d9', '#17a673', '#2c9faf'],
+                    backgroundColor: ['#4e73df', '#FD0000', '#36b9cc', '#FDBB00', '#7B16EC', '#E418F1'],
+                    hoverBackgroundColor: "rgba(0, 0, 0, 1)",
                     hoverBorderColor: "rgba(234, 236, 244, 1)",
                 }],
             },

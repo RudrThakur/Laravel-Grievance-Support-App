@@ -10,8 +10,9 @@
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800">{{ auth()->user()->roles->first()->name }} Dashboard</h1>
-            <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                    class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+            <button id="generate-report" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                    class="fas fa-download fa-sm text-white-50"></i> Generate Report
+            </button>
         </div>
 
         <!-- Content Row -->
@@ -185,10 +186,12 @@
                     <div class="card-body">
 
                         @foreach($topPerformers as $topPerformer)
-                            <h4 class="small font-weight-bold">{{ $topPerformer['name'] }}<span class="float-right">Rating - {{ $topPerformer['rating'] }}%</span>
+                            <h4 class="small font-weight-bold">{{ $topPerformer['name'] }}
+                                <span class="float-right">Rating - {{ $topPerformer['rating'] }}%</span>
                             </h4>
                             <div class="progress mb-4">
-                                <div class="progress-bar bg-{{ $topPerformer['color'] }}" role="progressbar" style="width: {{ $topPerformer['rating'] }}%"
+                                <div class="progress-bar bg-{{ $topPerformer['color'] }}" role="progressbar"
+                                     style="width: {{ $topPerformer['rating'] }}%"
                                      aria-valuenow="20"
                                      aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
@@ -198,42 +201,28 @@
             </div>
 
             <div class="col-lg-6 mb-4">
+                @if(!$recentFeedbacks->isEmpty())
+                    @foreach($recentFeedbacks as $feedback)
+                        <div class="card shadow mb-4">
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-primary">Recent Feedbacks</h6>
+                                    <span style="font-size: 12px">By <span class="text-primary">{{ $feedback->user->name }}</span></span>
 
-                <!-- Illustrations -->
-                <div class="card shadow mb-4">
-                    <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary">Illustrations</h6>
-                    </div>
-                    <div class="card-body">
-                        <div class="text-center">
-                            {{--            <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;"--}}
-                            {{--              src="{{ asset('img/undraw_posting_photo.svg') }}" alt="">--}}
+                                    <span style="font-size: 12px"><strong>{{ $feedback->created_at->diffForHumans() }}</strong></span>
+
+                            </div>
+                            <div class="card-body">
+                                <p>Rating - <strong><span
+                                            class="text-{{ $feedback->rating >= 5 ? 'success' : 'danger' }}">{{ $feedback->rating }} out of 10</span></strong>
+                                </p>
+                                <hr>
+                                <p>Message - {{ $feedback->message }}</p>
+
+
+                            </div>
                         </div>
-                        <p>Add some quality, svg illustrations to your project courtesy of <a target="_blank"
-                                                                                              rel="nofollow"
-                                                                                              href="https://undraw.co/">unDraw</a>,
-                            a constantly updated collection of beautiful svg images that
-                            you can use completely free and without attribution!</p>
-                        <a target="_blank" rel="nofollow" href="https://undraw.co/">Browse Illustrations on unDraw
-                            &rarr;</a>
-                    </div>
-                </div>
-
-                <!-- Approach -->
-                <div class="card shadow mb-4">
-                    <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary">Development Approach</h6>
-                    </div>
-                    <div class="card-body">
-                        <p>SB Admin 2 makes extensive use of Bootstrap 4 utility classes in order to reduce CSS bloat
-                            and poor
-                            page performance. Custom CSS classes are used to create custom components and custom utility
-                            classes.</p>
-                        <p class="mb-0">Before working with this theme, you should become familiar with the Bootstrap
-                            framework, especially the utility classes.</p>
-                    </div>
-                </div>
-
+                    @endforeach
+                @endif
             </div>
         </div>
 
