@@ -23,7 +23,7 @@
 </head>
 
 <body class="bg-gradient-primary">
-
+  @include('sweetalert::alert')
   @include('user.partials.flash')
 
   <div class="container">
@@ -41,7 +41,7 @@
               <div class="col-lg-6">
                 <div class="p-lg-5 p-2">
 
-                  @include('user.partials.errors')
+                  {{-- @include('user.partials.errors') --}}
 
                   <h1 class="h4 text-gray-900 mb-4 text-center">GRIEVANCE SUPPORT SYSTEM </h1>
                   <div class="text-center">

@@ -3,6 +3,7 @@
 @section('title','Manage Roles')
 
 @section('content')
+  @include('sweetalert::alert')
 
     <div class="card">
         @include('user.partials.errors')
@@ -12,7 +13,7 @@
                 </div>
         <div class="card-body row justify-content-center">
             <div class="col-md-12 col-12">
-                <h6 class="text-center">Manage Roles</h6>
+                <h2 class="text-center text-dark">Manage Roles</h2>
                 <hr>
                 <table class="table table-bordered" id="manage-roles-table" width="100%" cellspacing="0">
                     <thead>

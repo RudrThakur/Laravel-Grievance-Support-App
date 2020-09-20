@@ -283,7 +283,11 @@ fieldset {
     margin: 0;
     border: 0
 }
-
+.notification{
+    overflow-y: scroll!important;
+    max-width: 500px!important;
+    max-height: 400px!important;
+}
 legend {
     display: block;
     width: 100%;

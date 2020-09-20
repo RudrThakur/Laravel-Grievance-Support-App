@@ -27,9 +27,8 @@
 </head>
 
 <body id="page-top">
-
-@include('user.partials.flash')
-
+    {{-- @include('user.partials.flash') --}}
+    @include('sweetalert::alert')
 <!-- Page Wrapper -->
 <div id="wrapper">
 

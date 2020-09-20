@@ -6,6 +6,9 @@ use App\Ticket;
 use Illuminate\Foundation\Http\FormRequest;
 use App\ServiceAction;
 use App\ServiceActionsAuthority;
+use App\Service;
+use App\User;
+use App\Notifications\TicketStatusChange;
 use App\Authority;
 use App\Events\ServiceActionEvent;
 
@@ -70,7 +73,10 @@ class ServiceActionRequest extends FormRequest
         $ticket = Ticket::where('service_id', $serviceAction->service_id)->first();
         $ticket->update($this->authorities ? ['status_id' => 3] : ['status_id' => 2]); // Update Status
 
+
         event(new ServiceActionEvent($serviceAction->toArray(), $serviceActionAuthorities->toArray())); // Fire Event
+        $user = User::where('id',$ticket->user_id)->first();
+        $user->notify(new TicketStatusChange($ticket->id,$ticket->status->status));
 
 
     }

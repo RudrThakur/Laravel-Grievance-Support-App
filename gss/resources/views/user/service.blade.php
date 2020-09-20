@@ -6,7 +6,7 @@
 
 <!-- Begin Page Content -->
 <div class="container-fluid">
-
+  @include('sweetalert::alert')
   <!-- Page Heading -->
   <h1 class="h3 mb-1 text-gray-800">Services</h1>
   <p class="mb-4">Fill the form below to make a Service Request.
@@ -17,8 +17,6 @@
     <div id="messages"></div>
     <div class="card border-0 shadow">
       <div class="card-body">
-
-        @include('user.partials.errors')
 
         <form method="POST" action="/service-request">
           @csrf

@@ -18,7 +18,7 @@ class FeedbacksController extends Controller
             return view('user.feedbacks',
         [
             'feedbacks' => $feedbacks,
-        ]);
+        ])->with('toast_success','Thankyou your feedback is submitted successfully');
         }catch(QueryException $ex){ 
 
             return back()->withErrors([

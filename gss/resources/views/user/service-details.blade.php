@@ -4,6 +4,7 @@
 
 @section('content')
     @include('user.partials.errors')
+    @include('sweetalert::alert')
     <div class="card">
         <div class="card-body row">
             <div class="col-lg-5 col-xl-5 col-md-12 col-12">

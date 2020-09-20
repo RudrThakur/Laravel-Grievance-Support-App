@@ -40,8 +40,12 @@
         </div>
     @endforeach
     <hr>
-    <div class="form-group text-center">
-        <button class="btn btn-primary" type="submit">Create</button>
+    <div class="row mt-5">
+        <div class="col-md-4 col-12 ml-auto">
+            <div class="text-center">
+                <button class="btn btn-primary btn-block" type="submit">Create</button>
+            </div>
+        </div>
     </div>
 </form>
 

@@ -5,6 +5,9 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Service;
 use App\ServiceAction;
+use App\User;
+use App\Ticket;
+use App\Notifications\JobAssign;
 use Exception;
 use App\Algorithms\Hungarian;
 use App\Worker;
@@ -32,6 +35,15 @@ class WorkHistoryController extends Controller
             $serviceAction = ServiceAction::where('id', $serviceActionId)->first();
 
             $service = Service::where('id', $serviceAction->service_id)->first();
+
+
+            $ticket = Ticket::where('id', $service->ticket_id)->first();
+
+            $serviceAction->update([
+                'worker_id' => request('worker_id'),
+                'eta' => request('eta'),
+                'adminremarks' => request('adminremarks')
+            ]);
 
 
             if (!request('auto_assign_worker')) {
@@ -106,9 +118,17 @@ class WorkHistoryController extends Controller
 
             }
 
-            session()->flash('message', 'Worker Assigned');
 
-            return redirect()->to('/service-details/' . $service->id);
+            $worker = User::where('id', $serviceAction->worker_id)->first();
+            $user = User::where('id',$ticket->user_id)->first();
+            $user->notify(new JobAssign($ticket->id,$worker->name));
+
+
+            // session()->flash('message', 'Worker Assigned');
+
+
+            return redirect()->to('/service-details/'.$service->id)->with('toast_success','Worker Assigned');
+
 
         } catch (Exception $ex) {
             return $ex;

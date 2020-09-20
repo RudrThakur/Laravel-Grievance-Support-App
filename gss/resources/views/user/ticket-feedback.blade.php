@@ -9,7 +9,7 @@
 
 <!-- Begin Page Content -->
 <div class="container-fluid">
-
+    @include('sweetalert::alert')
   <!-- Page Heading -->
   <h1 class="h3 mb-1 text-gray-800">Feedback</h1>
   <p class="mb-4">Fill the form below to give Feedback.
