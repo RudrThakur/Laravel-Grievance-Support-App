@@ -27,7 +27,6 @@ class ProfileController extends Controller
                 'user' => $user,
                 'profile' => $profile
             ]);
-
     }
 
     public function create()

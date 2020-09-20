@@ -10,8 +10,12 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+use RealRashid\SweetAlert\Facades\Alert;
+
 
 Route::get('/', function () {
+    Alert::success('WELCOME', 'TO Advance GSS');
+
     return view('welcome');
 });
 

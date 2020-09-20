@@ -3,10 +3,9 @@
 @section('title', 'Tickets Feedback')
 
 @section('content')
-
     <!-- Begin Page Content -->
     <div class="container-fluid">
-
+        @include('sweetalert::alert')
         <!-- Page Heading -->
         <h1 class="h3 mb-2 text-gray-800">Tickets Feedback</h1>
         <p class="mb-4">These are the Feedbacks given by the users for their tickets</p>

@@ -16,9 +16,7 @@ class RolePermissionController extends Controller
 
     $role->permissions()->sync(request('role_permissions'), false);
 
-    session()->flash('message','Role Permissions Updated Successfully');
-
-    return redirect()->to('/manage-roles');
+    return redirect()->to('/manage-roles')->with('toast_success', 'Role Permissions Updated Successfully');
 
     }   
 
@@ -28,9 +26,7 @@ class RolePermissionController extends Controller
 
         $role->permissions()->detach($permissionId);
 
-        session()->flash('message','Role Permission Updated');
-
-        return redirect()->to('/manage-roles');
+        return redirect()->to('/manage-roles')->with('toast_success', 'Role Permissions Updated');
 
     }
 

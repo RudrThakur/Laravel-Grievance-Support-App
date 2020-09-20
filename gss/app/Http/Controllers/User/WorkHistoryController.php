@@ -5,6 +5,9 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Service;
 use App\ServiceAction;
+use App\User;
+use App\Ticket;
+use App\Notifications\JobAssign;
 use Exception;
 use Illuminate\Http\Request;
 
@@ -30,15 +33,22 @@ class WorkHistoryController extends Controller
 
             $service = Service::where('id', $serviceAction->service_id)->first();
 
+            $ticket = Ticket::where('id', $service->ticket_id)->first();
+
             $serviceAction->update([
                 'worker_id' => request('worker_id'),
                 'eta' => request('eta'),
                 'adminremarks' => request('adminremarks')
             ]);
 
-            session()->flash('message', 'Worker Assigned');
+            $worker = User::where('id', $serviceAction->worker_id)->first();
+            $user = User::where('id',$ticket->user_id)->first();
+            $user->notify(new JobAssign($ticket->id,$worker->name));
 
-            return redirect()->to('/service-details/'.$service->id);
+
+            // session()->flash('message', 'Worker Assigned');
+
+            return redirect()->to('/service-details/'.$service->id)->with('toast_success','Worker Assigned');
 
         } catch (Exception $ex) {
             return $ex;

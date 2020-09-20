@@ -3,6 +3,7 @@
 @section('title','Profile')
 
 @section('content')
+@include('sweetalert::alert')
     <div class="row">
         <div class="col-11 mx-auto">
             <div class="card">

@@ -15,6 +15,7 @@
     <div class="custom-alert alert alert-success service-action-alerts" id="service-action-success-box">
         <p>Service Action Was Successful</p>
     </div>
+    @include('sweetalert::alert')
     <div class="card">
         <div class="card-body row">
             <div class="col-lg-5 col-xl-5 col-md-12 col-12">

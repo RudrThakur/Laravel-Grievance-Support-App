@@ -7,6 +7,7 @@ use App\Repositories\TicketRepositoryInterface;
 use App\ServiceAction;
 use App\TicketsFeedback;
 use App\User;
+use App\Notifications\TicketClosed;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -160,9 +161,9 @@ class TicketController extends Controller
         }
 
         $ticket->update(['status_id' => 4]);
+        $user = User::where('id',$ticket->user_id)->first();
+        $user->notify(new TicketClosed($ticket->id));
 
-        session()->flash('message', 'Ticket Closed Successfully');
-
-        return redirect()->to('/ticket-details/' . $ticketId);
+        return redirect()->to('/ticket-details/' . $ticketId)->with('toast_success','Ticket Closed Successfully');
     }
 }

@@ -249,6 +249,7 @@
   </div>
 
 </div>
+@include('sweetalert::alert')
 <!-- /.container-fluid -->
 
 @endsection
