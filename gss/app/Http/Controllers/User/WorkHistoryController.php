@@ -54,7 +54,7 @@ class WorkHistoryController extends Controller
             } else { // Auto Assign Worker
 
 
-                $workers = Worker::limit(6)->get();
+                $workers = Worker::where('available', 1)->limit(6)->get();
 
                 $workerTATs = $workers->map(function ($item, $key) {
 
@@ -76,33 +76,32 @@ class WorkHistoryController extends Controller
 
                 if ($service->category == 'Painting') {
                     $solvedTAT = $hungarianSolution[0];
-                }
-                else if($service->category == 'Plumbing') {
+                } else if ($service->category == 'Plumbing') {
 
                     $solvedTAT = $hungarianSolution[1];
-                }
-
-                else if($service->category == 'HouseKeeping') {
+                } else if ($service->category == 'HouseKeeping') {
                     $solvedTAT = $hungarianSolution[2];
-                }
-
-                else if($service->category == 'Airconditioner') {
+                } else if ($service->category == 'Airconditioner') {
 
                     $solvedTAT = $hungarianSolution[3];
-                }
-
-                else if($service->category == 'Electrical') {
+                } else if ($service->category == 'Electrical') {
                     $solvedTAT = $hungarianSolution[4];
-                }
-
-                else {
+                } else {
                     $solvedTAT = $hungarianSolution[5];
                 }
 
                 $serviceAction->update([
-                    'worker_id' => $workers[$solvedTAT]->id,
-                    'eta' => 4,
+                    'worker_id' => $workers[$solvedTAT]->user_id,
+                    'eta' => $workers[$solvedTAT]->avg_tat,
                     'adminremarks' => request('adminremarks')
+                ]);
+
+                $worker = Worker::where('user_id', $serviceAction->worker_id)->first();
+
+                $worker->update([
+                    'service_id' => $service->id,
+                    'service_actions_id' => $serviceAction->id,
+                    'available' => 0
                 ]);
 
             }
