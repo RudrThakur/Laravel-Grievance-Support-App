@@ -110,6 +110,8 @@ Route::get('/close-ticket/{ticketId}', 'User\TicketController@close');
 
 Route::post('/work-history/{serviceActionId}', 'User\WorkHistoryController@store');
 
+Route::post('/set-user-active/{userId}/{active}', 'User\UserController@setActive');//AJAX Route
+
 Route::get('/spendings-overview', 'HomeController@spendingsOverview'); // AJAX Route
 
 Route::get('/tickets-composition', 'HomeController@ticketsComposition'); // AJAX Route
@@ -160,3 +162,4 @@ Route::get('/test', function () {
     return $worker->user->name;
 
 });
+

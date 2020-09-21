@@ -5,6 +5,7 @@
 @section('content')
   @include('sweetalert::alert')
 
+       
     <div class="card">
         @include('user.partials.errors')
                 <div class="custom-alert alert alert-success"

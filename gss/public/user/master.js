@@ -329,6 +329,36 @@ $(function () {
         $('.funding_field').attr('disabled', this.checked);
     });
 
+
+    /* ----------------------------------------------------------------------
+                     Manage User Active - Select
+---------------------------------------------------------------------- */
+
+
+$('#set-user-active').change(function () {
+        if ($(this).val() != '') {
+            var userId = $('#manage-users-user-id').html();
+            var active = $(this).val();
+
+
+
+            $.ajax({
+                url: "/set-user-active/" + userId+ "/" + active,
+                method: "POST",
+                success: function (result) {
+
+                    
+                    $("#manage-user-status-success").fadeIn('slow').delay(3000);
+                    $('#manage-user-status-success').html('Status Changed Successfully');
+                    $('#manage-user-status-success').fadeOut('slow').delay(3000);
+
+                }
+            })
+
+
+        }
+    });
+
     /* ----------------------------------------------------------------------
                  Work History Form - Checkbox
 ---------------------------------------------------------------------- */

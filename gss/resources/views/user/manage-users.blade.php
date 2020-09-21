@@ -4,6 +4,11 @@
 
 @section('content')
 
+     <div>
+        <div class="alert alert-success" role="alert" id="manage-user-status-success" style="display: none;"></div>
+        <div class="alert alert-danger" role="alert" id="manage-user-status-failed" style="display: none;">
+        </div>
+    </div>
     <div class="card">
         <div class="card-body row justify-content-center">
             <div class="col-md-12 col-12">
@@ -25,7 +30,7 @@
                         <th>Name</th>
                         <th>Email</th>
                         <th>Permissions</th>
-                        <th>Status</th>
+                        <th>Current Status</th>
                         <th>Created On</th>
                         <th>Last Modified</th>
                         <th>Actions</th>
@@ -37,7 +42,7 @@
                         <th>Name</th>
                         <th>Email</th>
                         <th>Permissions</th>
-                        <th>Status</th>
+                        <th>Current Status</th>
                         <th>Created On</th>
                         <th>Last Modified</th>
                         <th>Actions</th>
@@ -47,7 +52,7 @@
 
                     @foreach($users as $user)
                         <tr>
-                            <td>{{ $user->id }}</td>
+                            <td id="manage-users-user-id">{{ $user->id }}</td>
                             <td>{{ $user->name }}</td>
                             <td>{{ $user->email }}</td>
                             <td>
@@ -67,8 +72,16 @@
                                     </i>
                                 </a>
                             </td>
-                            <td>No Data Available<br> <a href="#"><i class="fas fa-edit"
-                                                                     style="color: teal;"></i></a></td>
+                            <td>
+                                <div class="form-group">
+                                    <span >{{ $user->is_active ? 'Active' : 'Inative' }}</span>
+                                        <select id='set-user-active' name='set_user_active' class="form-control">
+                                          <option value="">-- Select Status --</option>
+                                          <option value="1">Active</option>
+                                          <option value="0">Inactive</option>
+                                        </select>
+                                    </div>
+                            </td>
                             <td>{{ $user->created_at->toFormattedDateString() }}</td>
                             <td>{{ $user->updated_at->diffForHumans() }}</td>
                             <td>

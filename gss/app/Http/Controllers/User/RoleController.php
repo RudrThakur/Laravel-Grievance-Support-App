@@ -54,4 +54,6 @@ class RoleController extends Controller
         return redirect()->to('/manage-roles')->with('toast_success', 'Role Has Been Deleted');
 
     }
+
+    
 }
