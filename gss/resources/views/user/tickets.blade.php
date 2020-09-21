@@ -37,7 +37,11 @@
                             <th>Current Holder</th>
                             <th>Status</th>
                             <th>Raised On</th>
+                        @if(auth()->user()->can('service-approval')||
+                                    auth()->user()->can('view-ticket-details')||auth()->user()->can('manage-tickets')
+                                    )
                             <th>Action</th>
+                        @endif
                         </tr>
                         </thead>
                         <tfoot>
@@ -48,7 +52,11 @@
                             <th>Current Holder</th>
                             <th>Status</th>
                             <th>Raised On</th>
+                         @if(auth()->user()->can('service-approval')||
+                                    auth()->user()->can('view-ticket-details')||auth()->user()->can('manage-tickets')
+                                    )
                             <th>Action</th>
+                        @endif
                         </tr>
                         </tfoot>
                         <tbody>
@@ -61,14 +69,22 @@
                                 <td>{{ $ticket->authority->name }}</td>
                                 <td>{{ $ticket->status->status }}</td>
                                 <td>{{ $ticket->created_at }}</td>
+                            @if(auth()->user()->can('manage-tickets'))
                                 <td>
+                                     @if(auth()->user()->can('service-approval')||
+                                    auth()->user()->can('view-ticket-details')
+                                    )
                                     <a href="/ticket-details/{{ $ticket->id }}"
                                        class="btn btn-outline-success btn-sm"><i
                                             class="fas fa-tasks"></i></a>
+                                    @endif
+                                    @if(auth()->user()->can('delete-ticket'))
                                     <a href="javascript:void(0)" id="{{ $ticket->id }}"
                                        class="service-delete btn btn-outline-danger btn-sm"><i
                                             class="fas fa-trash"></i></a>
+                                    @endif
                                 </td>
+                                @endif
                             </tr>
                         @endforeach
                         </tbody>

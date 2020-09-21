@@ -142,7 +142,7 @@
                                 @include('user.partials.forms.service-approval-form')
 
                             @endif
-
+                            @if(auth()->user()->roles->first()->name == 'Admin')
                             @if($pendingApprovals && $pendingApprovals->isEmpty())
                                 <h6 class="text-center">Work - History</h6>
                                 <hr>
@@ -228,7 +228,7 @@
                                     @endif
                                 @endif
                             @endif
-
+                            @endif
                         </div>
                     </div>
                 </div>

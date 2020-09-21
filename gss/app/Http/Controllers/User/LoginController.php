@@ -26,8 +26,11 @@ class LoginController extends Controller
         else{
 
             // session()->flash('message', 'You Have been Logged In');
+            if(auth()->user()->roles->first()->name == 'Faculty' || auth()->user()->roles->first()->name == 'Worker'){
 
-            return redirect()->route('home')->with('success', 'Login Successfully!');
+                return redirect()->to('/tickets')->with('success', 'Login Successfully!');
+            }else
+                return redirect()->route('home')->with('success', 'Login Successfully!');
 
         }
     }

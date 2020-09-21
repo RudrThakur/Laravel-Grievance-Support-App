@@ -36,7 +36,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $userProfile = Profile::where('user_id', auth()->user()->id)->first();
+        if (auth()->user()->can('view-dashboard')){
+
+            $userProfile = Profile::where('user_id', auth()->user()->id)->first();
 
         if (!$userProfile)// If Profile is not updated
         {
@@ -49,8 +51,8 @@ class HomeController extends Controller
             $pendingTicketsCount = Ticket::where('status_id', '!=', 4)->get()->count();
 
             $currentMonthSpendings = ServiceAction::whereYear('created_at', Carbon::now()->year)
-                ->whereMonth('created_at', Carbon::now()->month)
-                ->sum('fund');
+            ->whereMonth('created_at', Carbon::now()->month)
+            ->sum('fund');
 
             if (Ticket::count())
                 $workCompleted = number_format((Ticket::where('status_id', 4)->get()->count()) / Ticket::count() * 100
@@ -106,61 +108,65 @@ class HomeController extends Controller
 
                 ]);
         }
-
-    }
-
-    public function spendingsOverview()
-    {
-
-        $serviceActions = ServiceAction::select(
-            DB::raw('sum(fund) as sums'),
-            DB::raw("DATE_FORMAT(created_at,'%M %Y') as months"),
-            DB::raw("DATE_FORMAT(created_at,'%m') as monthKey")
-        )
-            ->groupBy('months', 'monthKey')
-            ->orderBy('created_at', 'ASC')
-            ->get();
-
-        $data = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-
-        foreach ($serviceActions as $serviceAction) {
-            $data[$serviceAction->monthKey - 1] = $serviceAction->sums;
+        
+    }else{
+            return view('user.permission-error-page');
         }
 
-        return $data;
+}
 
+public function spendingsOverview()
+{
+
+    $serviceActions = ServiceAction::select(
+        DB::raw('sum(fund) as sums'),
+        DB::raw("DATE_FORMAT(created_at,'%M %Y') as months"),
+        DB::raw("DATE_FORMAT(created_at,'%m') as monthKey")
+    )
+    ->groupBy('months', 'monthKey')
+    ->orderBy('created_at', 'ASC')
+    ->get();
+
+    $data = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+
+    foreach ($serviceActions as $serviceAction) {
+        $data[$serviceAction->monthKey - 1] = $serviceAction->sums;
     }
 
-    public function ticketsComposition()
-    {
+    return $data;
 
-        $paintingServiceCount = Service::where('category', 'Painting')->get()->count();
+}
 
-        $plumbingServiceCount = Service::where('category', 'Plumbing')->get()->count();
+public function ticketsComposition()
+{
 
-        $houseKeepingServiceCount = Service::where('category', 'HouseKeeping')->get()->count();
+    $paintingServiceCount = Service::where('category', 'Painting')->get()->count();
 
-        $airconditioningServiceCount = Service::where('category', 'Airconditioning')->get()->count();
+    $plumbingServiceCount = Service::where('category', 'Plumbing')->get()->count();
 
-        $electricalServiceCount = Service::where('category', 'Electrical')->get()->count();
+    $houseKeepingServiceCount = Service::where('category', 'HouseKeeping')->get()->count();
 
-        $interiorServiceCount = Service::where('category', 'Interior')->get()->count();
+    $airconditioningServiceCount = Service::where('category', 'Airconditioning')->get()->count();
 
-        return $data = [
-            $paintingServiceCount,
-            $plumbingServiceCount,
-            $houseKeepingServiceCount,
-            $airconditioningServiceCount,
-            $electricalServiceCount,
-            $interiorServiceCount
-        ];
-    }
+    $electricalServiceCount = Service::where('category', 'Electrical')->get()->count();
 
-    public function markAllRead()
-    {
-        $user = auth()->user();
-        $user->unreadNotifications->markAsRead();
-        return redirect()->back();
-    }
+    $interiorServiceCount = Service::where('category', 'Interior')->get()->count();
+
+    return $data = [
+        $paintingServiceCount,
+        $plumbingServiceCount,
+        $houseKeepingServiceCount,
+        $airconditioningServiceCount,
+        $electricalServiceCount,
+        $interiorServiceCount
+    ];
+}
+
+public function markAllRead()
+{
+    $user = auth()->user();
+    $user->unreadNotifications->markAsRead();
+    return redirect()->back();
+}
 }
 
