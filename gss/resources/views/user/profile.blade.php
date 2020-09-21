@@ -31,15 +31,15 @@
                                     </tr>
                                      <tr>
                                         <th>Phone</th>
-                                        <td>{{ $profile->phone }}</td>
+                                        <td>{{ $profile ? $profile->phone: "No Data Available"}}</td>
                                     </tr>
                                        <tr>
                                         <th>Department</th>
-                                        <td>{{ $profile->department }}</td>
+                                        <td>{{ $profile ? $profile->department: "No Data Available"}}</td>
                                     </tr>
                                        <tr>
                                         <th>Date of Birth</th>
-                                        <td>{{ $profile->dob }}</td>
+                                        <td>{{ $profile? $profile->dob: "No Data Available" }}</td>
                                     </tr>
                                        <tr>
                                         <th>Account Created On</th>
@@ -47,7 +47,7 @@
                                     </tr>
                                        <tr>
                                         <th>Last Updated</th>
-                                        <td>{{ $profile->updated_at->diffForHumans() }}</td>
+                                        <td>{{ $profile? $profile->updated_at->diffForHumans(): "No Data Available" }}</td>
                                     </tr>
                                     </tbody>
                                 </table>

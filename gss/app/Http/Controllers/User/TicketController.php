@@ -64,11 +64,21 @@ class TicketController extends Controller
 
             }
 
-            $tickets = $tickets->with('authority')
-            ->with('user')
-            ->with('status')
-            ->paginate(10)
-            ->appends($queries);
+            if(auth()->user()->roles->first()->name=='Admin'){
+                $tickets = $tickets->with('authority')
+                ->with('user')
+                ->with('status')
+                ->paginate(10)
+                ->appends($queries);
+            }
+            else{
+                $tickets = $tickets->with('authority')
+                ->with('user')
+                ->with('status')
+                ->where('user_id',auth()->user()->id)
+                ->paginate(10)
+                ->appends($queries);
+            }
 
             return view('user.tickets', ['tickets' => $tickets]);
         }else{
