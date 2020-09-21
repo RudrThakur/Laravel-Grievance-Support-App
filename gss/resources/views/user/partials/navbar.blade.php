@@ -51,9 +51,9 @@
                 aria-haspopup="true" aria-expanded="false">
                 <i class="fas fa-bell fa-fw"></i>
                 <!-- Counter - Alerts -->
-                @foreach (auth()->user()->unreadNotifications as $notification )
-                <span class="badge badge-danger badge-counter">{{ $notification->count() }}</span>
-                @endforeach
+                {{-- @foreach (auth()->user()->unreadNotifications as $notification ) --}}
+                <span class="badge badge-danger badge-counter">{{ auth()->user()->unreadNotifications->count() }}</span>
+                {{-- @endforeach --}}
             </a>
             <!-- Dropdown - Alerts -->
             <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in notification"
@@ -61,20 +61,51 @@
                 <h6 class="dropdown-header">
                     Notifications (unread)
                 </h6>
+                @if(!auth()->user()->unreadNotifications->isEmpty())
                 @foreach (auth()->user()->unreadNotifications as $notification )
-                    <a class="dropdown-item d-flex align-items-center" href="#">
-                        <div class="mr-3">
-                            <div class="icon-circle bg-primary">
-                                <i class="fas fa-file-alt text-white"></i>
+                    <a class="dropdown-item d-flex align-items-center" href="#" >
+                        @if($notification->data['type'] ==="ticket-status-change")
+                            <div class="mr-3">
+                                <div class="icon-circle bg-primary">
+                                    <i class="fas fa-file-alt text-white"></i>
+                                </div>
                             </div>
-                        </div>
-                        <div>
-                            <div class="small text-gray-500">{{ $notification->created_at }}</div>
-                            <span class="font-weight-bold">Ticket ID : {{ $notification->data['ticketId'] }} status has been changed to {{ $notification->type }} </span>
-                        </div>
+                            <div>
+                                <div class="small text-gray-500">{{ $notification->created_at->diffForHumans() }}</div>
+                                <span class="font-weight-bold">Ticket ID : <span class="font-weight-bold text-danger">{{ $notification->data['ticketId'] }}</span> status has been changed to <span class="font-weight-bold text-danger">{{ $notification->data['ticketStatus'] }}</span> </span>
+                            </div>
+
+                        @elseif($notification->data['type'] ==="job-assign")
+                            <div class="mr-3">
+                                <div class="icon-circle bg-dark">
+                                    <i class="fas fa-exchange-alt text-white"></i>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="small text-gray-500">{{ $notification->created_at }}</div>
+                                <span class="font-weight-bold">For Ticket ID : <span class="font-weight-bold text-danger">{{ $notification->data['ticketId'] }}</span> worker <span class="font-weight-bold text-danger">{{ $notification->data['workerName'] }}</span> has been assigned</span>
+                            </div>
+                            
+                        @elseif($notification->data['type'] ==="ticket-closed")
+                            <div class="mr-3">
+                                <div class="icon-circle bg-light">
+                                    <i class="far fa-check-circle fa-2x text-success"></i>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="small text-gray-500">{{ $notification->created_at }}</div>
+                                <span class="font-weight-bold">Ticket ID : <span class="font-weight-bold text-danger">{{ $notification->data['ticketId'] }}</span> has been closed </span>
+                            </div> 
+                        @endif
                     </a>
                 @endforeach
-                <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
+                @else
+                <div class="my-auto">
+                    <img src="{{ asset('images/empty.svg') }}" class="img-fluid" />
+                    <h1 class="text-danger text-center">Nothing found</h1>
+                </div> 
+                @endif
+                <a class="dropdown-item text-center small text-gray-500" href="/mark-all-read">Mark All as Read</a>
             </div>
         </li>
 

@@ -46,15 +46,12 @@
 
             @include('user.partials.modals.logout-modal')
 
-
         </div>
         <!-- End of Main Content -->
-
         @include('user.partials.footer')
-
+       
     </div>
     <!-- End of Content Wrapper -->
-
 </div>
 <!-- End of Page Wrapper -->
 
