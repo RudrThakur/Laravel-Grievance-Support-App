@@ -12,9 +12,14 @@ class TicketFeedbackController extends Controller
 {
     public function create(){
 
+        if (auth()->user()->can('feedback-permission')){
+
         $tickets = Ticket::with('type')->with('user')->where('user_id',auth()->user()->id)
                                         ->where('status_id',4)->get();
         return view('user.ticket-feedback',[ 'tickets' => $tickets ]);
+    }else{
+        return view('user.permission-error-page');
+    }
     }
 
 

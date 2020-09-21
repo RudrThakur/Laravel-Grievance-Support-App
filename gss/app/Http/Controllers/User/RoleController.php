@@ -12,50 +12,66 @@ class RoleController extends Controller
 {
     public function index(){
 
-        $permissions = Permission::all();
+        if (auth()->user()->can('manage-roles')){
 
-        return view('user.create-role',
-        [
-            'permissions' => $permissions,
-        ]);
+            $permissions = Permission::all();
 
-    }
+            return view('user.create-role',
+                [
+                    'permissions' => $permissions,
+                ]);
+        }else{
+                return view('user.permission-error-page');
+            }
 
-    public function create(CreateRoleRequest $request){
+        }
 
-        $request->persist();
+        public function create(CreateRoleRequest $request){
 
-        session()->flash('message', 'The Role has been Created');
+            if (auth()->user()->can('manage-roles')){
 
-        return redirect()->to('/manage-roles');
-    }
+                $request->persist();
 
-    public function all(){
+                session()->flash('message', 'The Role has been Created');
 
-        $roles = Role::with('permissions')
-                        ->get();
-        $allPermissions = Permission::all();                
+                return redirect()->to('/manage-roles');
+            }else{
+                return view('user.permission-error-page');
+            }
+        }
 
-        return view('user.manage-roles',
+        public function all(){
 
-        [
-            'roles' => $roles,
-            'allPermissions' => $allPermissions,
-        ]);
+            if (auth()->user()->can('manage-roles')){
 
-    }
+                $roles = Role::with('permissions')
+                ->get();
+                $allPermissions = Permission::all();                
 
-    public function destroy($roleId){
+                return view('user.manage-roles',
 
-        $role = Role::where('id',$roleId)->first();
-        
-        $role->delete();
+                    [
+                        'roles' => $roles,
+                        'allPermissions' => $allPermissions,
+                    ]);}
+                else{
 
-        session()->flash('message','Role Has Been Deleted');
+                    return view('user.permission-error-page');
+                }
 
-        return redirect()->to('/manage-roles');
+            }
 
-    }
+            public function destroy($roleId){
 
-    
-}
+                $role = Role::where('id',$roleId)->first();
+
+                $role->delete();
+
+                session()->flash('message','Role Has Been Deleted');
+
+                return redirect()->to('/manage-roles');
+
+            }
+
+
+        }

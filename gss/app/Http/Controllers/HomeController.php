@@ -29,7 +29,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $userProfile = Profile::where('user_id', auth()->user()->id)->first();
+        if (auth()->user()->can('view-dashboard')){
+
+            $userProfile = Profile::where('user_id', auth()->user()->id)->first();
 
         if (!$userProfile)// If Profile is not updated
         {
@@ -44,8 +46,8 @@ class HomeController extends Controller
             $pendingTicketsCount = Ticket::where('status_id', '!=', 4)->get()->count();
 
             $currentMonthSpendings = ServiceAction::whereYear('created_at', Carbon::now()->year)
-                ->whereMonth('created_at', Carbon::now()->month)
-                ->sum('fund');
+            ->whereMonth('created_at', Carbon::now()->month)
+            ->sum('fund');
 
             if (Ticket::count())
                 $workCompleted = number_format((Ticket::where('status_id', 4)->get()->count()) / Ticket::count() * 100
@@ -62,10 +64,16 @@ class HomeController extends Controller
                     'currentMonthSpendings' => $currentMonthSpendings,
                     'workCompleted' => $workCompleted,
 
-                ]);
-        }
+                ]);}
+        }else{
 
-    }
+           return view('user.permission-error-page');
+       }
+
+       
+       
+
+   }
 
 }
 

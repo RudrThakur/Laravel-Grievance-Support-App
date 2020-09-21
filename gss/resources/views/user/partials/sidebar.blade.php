@@ -15,27 +15,32 @@
     <hr class="sidebar-divider my-0">
 
     <!-- Nav Item - Dashboard -->
+    @if(auth()->user()->can('view-dashboard'))
     <li class="nav-item active">
         <a class="nav-link" href="/index">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Dashboard</span></a>
     </li>
-
+    @endif
     <!-- Divider -->
     <hr class="sidebar-divider">
 
     <!-- Heading -->
+    @if(auth()->user()->can('view-tickets') || auth()->user()->can('create-tikcet')))
     <div class="sidebar-heading">
         Interface
     </div>
+    @endif
 
 
     <!-- Nav Item - Tables -->
+    @if(auth()->user()->can('view-tickets'))
     <li class="nav-item">
         <a class="nav-link" href="{{ route('tickets') }}">
             <i class="fas fa-fw fa-cog"></i>
             <span>Tickets</span></a>
     </li>
+    @endif
 
     <!-- Nav Item - Pages Collapse Menu -->
     <!-- <li class="nav-item">
@@ -73,17 +78,19 @@
                 </div>
             </div>
         </li>
-@endif
+    @endif
 
 <!-- Divider -->
+@if(auth()->user()->can('manage-roles') || auth()->user()->can('manage-permissions') || auth()->user()->can('manage-users'))
     <hr class="sidebar-divider">
 
     <!-- Heading -->
     <div class="sidebar-heading">
         Settings
     </div>
-
+@endif
     <li class="nav-item">
+        @if(auth()->user()->can('manage-roles'))
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseRoles" aria-expanded="true"
            aria-controls="collapseUtilities">
             <i class="fas fa-fw fa-wrench"></i>
@@ -96,6 +103,9 @@
                 <a class="collapse-item" href="/manage-roles">Manage Roles</a>
             </div>
         </div>
+        @endif
+
+        @if(auth()->user()->can('manage-permissions'))
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePermissions"
            aria-expanded="true" aria-controls="collapseUtilities">
             <i class="fas fa-fw fa-wrench"></i>
@@ -109,6 +119,8 @@
                 <a class="collapse-item" href="/manage-permissions">Manage Permissions</a>
             </div>
         </div>
+        @endif
+        @if(auth()->user()->can('manage-users'))
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUsers"
            aria-expanded="true" aria-controls="collapseUtilities">
             <i class="fas fa-fw fa-wrench"></i>
@@ -119,39 +131,46 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Users :</h6>
                 <a class="collapse-item" href="/create-user">Create User</a>
-                @if(auth()->user()->can('manage-users'))
                     <a class="collapse-item" href="/manage-users">Manage Users</a>
-                @endif
+                
             </div>
         </div>
+        @endif
     </li>
 
     <!-- Divider -->
+    @if(auth()->user()->roles->first()->name == 'Admin')
     <hr class="sidebar-divider">
 
         <!-- Nav Item - Charts -->
     <li class="nav-item">
-        @if(auth()->user('admin'))
+        
         <a class="nav-link" href="/intellisense">
             <i class="fas fa-fw fa-robot"></i>
         <span>Intellisense</span></a>
-        @endif
+       
     </li>
+     @endif
 
     <!-- Feedback -->
+    @if(auth()->user()->can('feedback-permission'))
     <li class="nav-item">
         <a class="nav-link" href="{{ route('ticket-feedback') }}">
             <i class="fas fa-fw fa-cog"></i>
             <span>Feedback</span></a>
     </li>
+    @endif
       <!-- User Feedback -->
+    @if(auth()->user()->can('manage-feedbacks'))
     <li class="nav-item">
         <a class="nav-link" href="/feedbacks">
             <i class="fas fa-fw fa-cog"></i>
             <span> Feedbacks</span></a>
     </li>
+    @endif
 
     <!-- Nav Item - Charts -->
+    @if(auth()->user()->can('analyse-statistics'))
     <li class="nav-item">
         <a class="nav-link" href="charts.html">
             <i class="fas fa-fw fa-chart-area"></i>
@@ -164,6 +183,7 @@
             <i class="fas fa-fw fa-table"></i>
             <span>Tables</span></a>
     </li>
+    @endif
 
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">

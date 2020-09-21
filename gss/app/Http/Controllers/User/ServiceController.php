@@ -26,7 +26,7 @@ class ServiceController extends Controller
 
 
     public function __construct(ServiceRepositoryInterface $serviceRepositoryInterface,
-                                ServiceActionsAuthorityRepositoryInterface $serviceActionsAuthorityRepositoryInterface
+        ServiceActionsAuthorityRepositoryInterface $serviceActionsAuthorityRepositoryInterface
     )
     {
 
@@ -39,67 +39,73 @@ class ServiceController extends Controller
     }
 
     public function create()
-    {
-        return view('user.service');
-    }
+    {   
+        if (auth()->user()->can('create-ticket')){
+            return view('user.service');}
+            else{
+                return view('user.permission-error-page');
+            }
+        }
 
-    public function store(ServiceRequest $request)
-    {
+        public function store(ServiceRequest $request)
+        {
 
-        $request->persist();
+            $request->persist();
 
-        session()->flash('message', 'Your Service Request Has Been Submitted');
+            session()->flash('message', 'Your Service Request Has Been Submitted');
 
-        return redirect()->to('/tickets');
-
-    }
-
-    public function index($serviceId)
-    {
-        $service = $this->serviceRepositoryInterface->findById($serviceId);
-
-        $serviceAction = ServiceAction::where('service_id', $service->id)->first();
-
-        $isClosed = Ticket::where('service_id', $serviceId)->first()->status_id == 4;
-
-        if ($serviceAction) {
-            $serviceActionAuthorities = $this->serviceActionsAuthorityRepositoryInterface->getByServiceActionId($serviceAction->id);
-
-            $serviceActionAuthoritiesIds = $serviceActionAuthorities->pluck('authority_id');
-
-            $authorities = Authority::whereIn('id', $serviceActionAuthoritiesIds)->get();
-
-            $isApprovedByCurrentUser = $this->serviceActionsAuthorityRepositoryInterface->checkIfApprovedByAuthorityName($serviceAction->id,
-                auth()->user()->roles->first()->name);
-
-            $pendingApprovals = $this->serviceActionsAuthorityRepositoryInterface->getUnApprovedByServiceActionId($serviceAction->id);
-
-            $isApprovalRequiredByCurrentUser = $this->serviceActionsAuthorityRepositoryInterface->checkIfApprovalRequiredByAuthorityName($serviceAction->id,
-                auth()->user()->roles->first()->name);
-
-        } else {
-
-            $serviceActionAuthorities = null;
-            $authorities = null;
-            $isApprovedByCurrentUser = null;
-            $pendingApprovals = null;
-            $isApprovalRequiredByCurrentUser = null;
+            return redirect()->to('/tickets');
 
         }
 
-        return view('user.service-details',
+        public function index($serviceId)
+        {
+            $service = $this->serviceRepositoryInterface->findById($serviceId);
 
-            [
-                'service' => $service,
-                'serviceAction' => $serviceAction,
-                'serviceActionAuthorities' => $serviceActionAuthorities,
-                'authorities' => $authorities,
-                'isApprovedByCurrentUser' => $isApprovedByCurrentUser,
-                'pendingApprovals' => $pendingApprovals,
-                'isApprovalRequiredByCurrentUser' => $isApprovalRequiredByCurrentUser,
-                'isClosed' => $isClosed
-            ]);
+            $serviceAction = ServiceAction::where('service_id', $service->id)->first();
+
+            $isClosed = Ticket::where('service_id', $serviceId)->first()->status_id == 4;
+
+            if ($serviceAction) {
+                $serviceActionAuthorities = $this->serviceActionsAuthorityRepositoryInterface->getByServiceActionId($serviceAction->id);
+
+                $serviceActionAuthoritiesIds = $serviceActionAuthorities->pluck('authority_id');
+
+                $authorities = Authority::whereIn('id', $serviceActionAuthoritiesIds)->get();
+
+                
+                if(!auth()->user()->roles->first()->name == "Faculty")
+                $isApprovedByCurrentUser = $this->serviceActionsAuthorityRepositoryInterface->checkIfApprovedByAuthorityName($serviceAction->id,
+                    auth()->user()->roles->first()->name);
+
+                $pendingApprovals = $this->serviceActionsAuthorityRepositoryInterface->getUnApprovedByServiceActionId($serviceAction->id);
+
+                $isApprovalRequiredByCurrentUser = $this->serviceActionsAuthorityRepositoryInterface->checkIfApprovalRequiredByAuthorityName($serviceAction->id,
+                    auth()->user()->roles->first()->name);
+
+            } else {
+
+                $serviceActionAuthorities = null;
+                $authorities = null;
+                $isApprovedByCurrentUser = null;
+                $pendingApprovals = null;
+                $isApprovalRequiredByCurrentUser = null;
+
+            }
+
+            return view('user.service-details',
+
+                [
+                    'service' => $service,
+                    'serviceAction' => $serviceAction,
+                    'serviceActionAuthorities' => $serviceActionAuthorities,
+                    'authorities' => $authorities,
+                    'isApprovedByCurrentUser' => $isApprovedByCurrentUser,
+                    'pendingApprovals' => $pendingApprovals,
+                    'isApprovalRequiredByCurrentUser' => $isApprovalRequiredByCurrentUser,
+                    'isClosed' => $isClosed
+                ]);
+
+        }
 
     }
-
-}

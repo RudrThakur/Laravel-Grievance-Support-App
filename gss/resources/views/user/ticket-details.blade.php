@@ -55,7 +55,9 @@
                     </tr>
                     </tbody>
                 </table>
+                @if(auth()->user()->can('delete-ticket'))
                 <button class="service-delete m-2 btn btn-danger">Delete Ticket</button>
+                @endif
 
                 @if($ticket->type->id == 1)
                     <a class="m-2 btn btn-success" href="/service-details/{{ $ticket->service_id }}">More Info</a>

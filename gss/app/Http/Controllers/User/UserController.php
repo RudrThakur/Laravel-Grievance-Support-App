@@ -10,6 +10,7 @@ use App\User;
 use App\UsersPermission;
 use Illuminate\Http\Request;
 use Throwable;
+use Illuminate\Database\QueryException;
 
 class UserController extends Controller
 {
@@ -22,7 +23,7 @@ class UserController extends Controller
 
     public function index()
     {
-
+        if(auth()->user()->can('create-user')){
         $roles = Role::all();
 
         $permissions = Permission::all();
@@ -33,17 +34,28 @@ class UserController extends Controller
                 'roles' => $roles,
                 'permissions' => $permissions,
             ]);
+    }else{
+        return view('user.permission-error-page');
+    }
 
     }
 
     public function create(CreateUserRequest $request)
     {
+        try{
 
-        $request->persist();
+                $request->persist();
 
-        session()->flash('message', 'The User Has Been Created');
+                session()->flash('message', 'The User Has Been Created');
 
-        return redirect()->to('/manage-users');
+                return redirect()->to('/manage-users');
+            }catch(QueryException $ex){ 
+
+            return redirect()->back()->withErrors([
+                'message' => 'Account Already Exists'
+            ]);
+             
+           }
 
     }
 
@@ -76,7 +88,9 @@ class UserController extends Controller
     public function destroy($userId)
     {
 
+
         try {
+            if(auth()->user()->can('delete-user')){
             if ($userId == auth()->user()->id) {
                 return array(
                     'status' => false,
@@ -94,6 +108,12 @@ class UserController extends Controller
                     'message' => 'User Has Been Deleted Successfully',
                     'errors' => ''
                 );
+            }}else{
+                 return array(
+                'status' => false,
+                'message' => 'You do not have permission for this action' ,
+                'errors' => 'Permission Error'
+            );
             }
         } catch (Throwable $exception) {
             return array(

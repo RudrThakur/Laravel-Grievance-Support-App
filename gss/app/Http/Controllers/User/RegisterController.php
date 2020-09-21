@@ -42,11 +42,37 @@ class RegisterController extends Controller
     
                 $permissions = Permission::all();
     
-                if ($role->name == 'Admin')// Grant All User Permissions to Admin
+                if ($role->name == 'Admin')
+                // Grant All User Permissions to Admin
+
+                {
                     $user->permissions()->saveMany($permissions);
-    
-                if ($role->permissions->isEmpty())// Grant All Role Permissions to All Roles
+                
+                    if ($role->permissions->isEmpty())// Grant All Role Permissions to All Roles
                     $role->permissions()->saveMany($permissions);
+                }elseif ($role->name == 'Registrar') //Grant Permissions to Registrar
+                {
+
+                    $registrarPermissions = ['service-approval','manage-tickets','view-dashboard','view-tickets'];
+                    $permissionsScoped = Permission::whereIn('slug',$registrarPermissions)->get();
+
+                    $role->permissions()->saveMany($permissionsScoped);
+                }elseif ($role->name == 'Faculty') //Grant Permissions to Faculty
+                {
+
+                    $facultyPermissions = ['create-ticket','view-tickets','feedback-permission','view-ticket-details','manage-tickets';
+                    $permissionsScoped = Permission::whereIn('slug',$facultyPermissions)->get();
+
+                    $role->permissions()->saveMany($permissionsScoped);
+                }elseif($role->name == 'Worker')//Grant Permissions to Worker
+                {
+                    $workerPermissions = ['view-tickets','manage-tickets'];
+
+                    $permissionsScoped = Permission::whereIn('slug',$workerPermissions)->get();
+
+                    $role->permissions()->saveMany($permissionsScoped);
+
+                }
             }
     
             auth()->login($user);

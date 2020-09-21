@@ -32,6 +32,9 @@ class TicketController extends Controller
     public function all()
     {
 
+
+      if (auth()->user()->can('view-tickets')){
+
         $tickets = new Ticket;
 
         $queries = [];
@@ -69,8 +72,13 @@ class TicketController extends Controller
             ->appends($queries);
 
         return view('user.tickets', ['tickets' => $tickets]);
+    }else{
 
-    }
+            return view('user.permission-error-page');
+
+        }
+
+     }
 
     public function index($ticketId)
     {

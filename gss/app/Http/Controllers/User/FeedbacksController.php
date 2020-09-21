@@ -14,18 +14,23 @@ class FeedbacksController extends Controller
     public function all(){
 
         try{
-            $feedbacks = TicketsFeedback::all();
-            return view('user.feedbacks',
-        [
-            'feedbacks' => $feedbacks,
-        ]);
+            if (auth()->user()->can('manage-users')) {
+                $feedbacks = TicketsFeedback::all();
+                return view('user.feedbacks',
+                    [
+                        'feedbacks' => $feedbacks,
+                    ]);
+            }else{
+                return view('user.permission-error-page');
+
+            }
         }catch(QueryException $ex){ 
 
             return back()->withErrors([
                 'message' => 'No Feedbacks Available'
             ]);
-            }
-        
-
         }
+
+
+    }
 }

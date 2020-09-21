@@ -88,12 +88,13 @@
                                 <a href="javascript:void(0)" id="{{ $user->id }}"
                                    class="user-edit btn btn-outline-primary btn-sm"><i
                                         class="fas fa-tasks"></i></a>
-
+                            @if(auth()->user()->can('delete-user'))
                                 @if($user->id != auth()->user()->id)
                                     <a href="javascript:void(0)" id="{{ $user->id }}"
                                        class="user-delete btn btn-outline-danger btn-sm"><i
                                             class="fas fa-trash"></i></a>
                                 @endif
+                            @endif
                             </td>
                         </tr>
                     @endforeach
