@@ -272,7 +272,7 @@
                                 <h6 class="sub-title">Fetching All Workers</h6>
                             </div>
                             <div class="col-sm-6 py-4" style="display: none" id="pendingtickets-done">
-                                <div class="feeds-left font-weight-bolder"><i class="fas fa-check-circle text-success fa-2x"></i> Total-{{ $workers->count() }}
+                                <div class="feeds-left font-weight-bolder"><i class="fas fa-check-circle text-success fa-2x"></i> Available workers-{{ $workers->count() }}
                                 </div>
                             </div>
                         </div>
