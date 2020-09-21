@@ -82,7 +82,7 @@
                     </div>
                     <div class="col-sm-6 pb-4"  id="setpriorities-done" style="display: none">
                         <div class="feeds-left font-weight-bolder"><i class="fas fa-check-circle text-success fa-2x"></i>
-                            <a href="http://localhost:5000" target="_blank" class="btn btn-outline-danger btn-sm ml-3">Check Report</a>
+                            <a href="http://localhost:5000/predict" target="_blank" class="btn btn-outline-danger btn-sm ml-3">Check Report</a>
                         </div>
                     </div>
                 </div>
