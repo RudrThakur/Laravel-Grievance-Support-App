@@ -3,7 +3,7 @@
 use RealRashid\SweetAlert\Facades\Alert;
 
 Route::get('/', function () {
-    Alert::success('WELCOME', 'TO Advance GSS');
+    Alert::success('WELCOME', 'Complaint Management System');
 
     return view('welcome');
 });
