@@ -25,9 +25,7 @@ class PermissionController extends Controller
 
         $request->persist();
 
-        session()->flash('message', 'The Permission has been Created');
-
-        return redirect()->to('/manage-permissions');
+        return redirect()->to('/manage-permissions')->with('toast_success', 'The Permission has been Created');
 
     }
 
@@ -49,9 +47,7 @@ class PermissionController extends Controller
         
         $permission->delete();
 
-        session()->flash('message','Permission Has Been Deleted');
-
-        return redirect()->to('/manage-permissions');
+        return redirect()->to('/manage-permissions')->with('toast_success', 'The Permission has been Deleted');;
 
     }
 }

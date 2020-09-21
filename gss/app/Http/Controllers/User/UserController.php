@@ -41,9 +41,7 @@ class UserController extends Controller
 
         $request->persist();
 
-        session()->flash('message', 'The User Has Been Created');
-
-        return redirect()->to('/manage-users');
+        return redirect()->to('/manage-users')->with('toast_success', 'The User Has Been Created Successfully');;
 
     }
 

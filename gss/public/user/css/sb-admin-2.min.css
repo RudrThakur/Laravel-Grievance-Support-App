@@ -50,6 +50,35 @@ html {
     -webkit-tap-highlight-color: transparent
 }
 
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(transparent, #1b1b2b);
+    border-radius: 12px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(#D7DBDD, #1C2833);
+}
+.title{
+  font-size: 32px;
+}
+@media (max-width: 576px) {
+  ::-webkit-scrollbar {
+    width: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(transparent, #1C2833);
+    border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(#D7DBDD, #1C2833);
+}
+}
 article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
     display: block
 }
@@ -283,7 +312,11 @@ fieldset {
     margin: 0;
     border: 0
 }
-
+.notification{
+    overflow-y: scroll!important;
+    max-width: 500px!important;
+    max-height: 400px!important;
+}
 legend {
     display: block;
     width: 100%;
@@ -3292,7 +3325,7 @@ input[type=button].btn-block, input[type=reset].btn-block, input[type=submit].bt
     z-index: 1000;
     display: none;
     float: left;
-    min-width: 10rem;
+    min-width: 15rem;
     padding: .5rem 0;
     margin: .125rem 0 0;
     font-size: .85rem;
@@ -11893,7 +11926,7 @@ form.user .btn-user {
 }
 
 footer.sticky-footer {
-    padding: 2rem 0;
+    /* padding: 2rem 0; */
     flex-shrink: 0
 }
 

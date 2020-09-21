@@ -48,12 +48,9 @@ class RegisterController extends Controller
                 if ($role->permissions->isEmpty())// Grant All Role Permissions to All Roles
                     $role->permissions()->saveMany($permissions);
             }
-    
             auth()->login($user);
     
-            session()->flash('message', 'You Account has been Registered Successfully');
-    
-            return redirect()->route('home');
+            return redirect()->route('home')->with('success', 'You Account has been Registered Successfully');
             }catch(QueryException $ex){ 
 
             return redirect()->back()->withErrors([

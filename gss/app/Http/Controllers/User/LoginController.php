@@ -4,7 +4,6 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
 use App\User;
 use App\RoleInfo;
 
@@ -20,17 +19,15 @@ class LoginController extends Controller
 
         if(!auth()->attempt(request(['email', 'password']))){
 
-            return back()->withErrors([
-                'message' => 'Invalid Credentials'
-            ]);
+             return back()->with('toast_error', 'Invalid Credentials');
 
         }
 
         else{
 
-            session()->flash('message', 'You Have been Logged In');
+            // session()->flash('message', 'You Have been Logged In');
 
-            return redirect()->route('home');
+            return redirect()->route('home')->with('success', 'Login Successfully!');
 
         }
     }
@@ -39,9 +36,9 @@ class LoginController extends Controller
 
         auth()->logout();
 
-        session()->flash('message', 'You Have been Logged Out Successfully');
+        // session()->flash('message', 'You Have been Logged Out Successfully');
 
-        return redirect()->route('login');
+        return redirect()->route('login')->with('success', 'You Have been Logged Out Successfully');
 
     }
 }

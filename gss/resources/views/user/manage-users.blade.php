@@ -21,7 +21,7 @@
                 <div class="custom-alert alert alert-success" id="manage-users-success-box">
                     <h6 id="manage-users-success"></h6>
                 </div>
-                <h6 class="text-center">Manage Users</h6>
+                <h2 class="text-center text-dark">Manage Users</h2>
                 <hr>
                 <table class="table table-bordered" width="100%" cellspacing="0">
                     <thead>

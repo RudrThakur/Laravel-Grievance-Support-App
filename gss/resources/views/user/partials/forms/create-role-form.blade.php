@@ -15,6 +15,12 @@
         </div>
     @endforeach
     <hr>
-    <button class="btn btn-primary" type="submit">Create</button>
+    <div class="row">
+        <div class="col-md-4 col-12 ml-auto">
+            <div class="text-center">
+                <button class="btn btn-danger btn-block" type="submit">Create</button>
+            </div>
+        </div>
+    </div>
 </form>
 

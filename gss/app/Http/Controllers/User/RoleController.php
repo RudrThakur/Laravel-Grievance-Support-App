@@ -25,9 +25,9 @@ class RoleController extends Controller
 
         $request->persist();
 
-        session()->flash('message', 'The Role has been Created');
+        // session()->flash('message', 'The Role has been Created');
 
-        return redirect()->to('/manage-roles');
+        return redirect()->to('/manage-roles')->with('toast_success', 'The Role has been Created');
     }
 
     public function all(){
@@ -46,14 +46,12 @@ class RoleController extends Controller
     }
 
     public function destroy($roleId){
-
+        
         $role = Role::where('id',$roleId)->first();
         
         $role->delete();
 
-        session()->flash('message','Role Has Been Deleted');
-
-        return redirect()->to('/manage-roles');
+        return redirect()->to('/manage-roles')->with('toast_success', 'Role Has Been Deleted');
 
     }
 

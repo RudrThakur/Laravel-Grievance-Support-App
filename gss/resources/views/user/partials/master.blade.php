@@ -27,9 +27,8 @@
 </head>
 
 <body id="page-top">
-
-@include('user.partials.flash')
-
+    {{-- @include('user.partials.flash') --}}
+    @include('sweetalert::alert')
 <!-- Page Wrapper -->
 <div id="wrapper">
 
@@ -47,15 +46,12 @@
 
             @include('user.partials.modals.logout-modal')
 
-
         </div>
         <!-- End of Main Content -->
-
         @include('user.partials.footer')
-
+       
     </div>
     <!-- End of Content Wrapper -->
-
 </div>
 <!-- End of Page Wrapper -->
 

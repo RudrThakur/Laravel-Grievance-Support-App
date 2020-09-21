@@ -3,12 +3,13 @@
 @section('title','Manage Permissions')
 
 @section('content')
+@include('sweetalert::alert')
 
     <div class="card">
         @include('user.partials.errors');
         <div class="card-body row justify-content-center">
             <div class="col-md-12 col-12">
-                <h6 class="text-center">Manage Permissions</h6>
+                <h2 class="text-center text-dark">Manage Permissions</h2>
                 <hr>
                 <table class="table table-bordered" id="manage-permissions-table" width="100%" cellspacing="0">
                     <thead>

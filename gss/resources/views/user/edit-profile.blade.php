@@ -3,6 +3,7 @@
 @section('title','Edit Profile')
 
 @section('content')
+@include('sweetalert::alert')
 
   <div class="col-10 d-block bg-light mx-auto">
             <div class="card p-lg-4 p-2">

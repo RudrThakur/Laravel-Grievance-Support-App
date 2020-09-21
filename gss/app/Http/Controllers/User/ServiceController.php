@@ -48,9 +48,12 @@ class ServiceController extends Controller
 
         $request->persist();
 
-        session()->flash('message', 'Your Service Request Has Been Submitted');
+        // session()->flash('message', 'Your Service Request Has Been Submitted');
 
-        return redirect()->to('/tickets');
+        return redirect()->to('/tickets')->with('toast_success', 'Your Service Request Has Been Submitted');
+        // else{
+        //     return back()->with('toast_error', 'Error While submitting form');
+        // }
 
     }
 
