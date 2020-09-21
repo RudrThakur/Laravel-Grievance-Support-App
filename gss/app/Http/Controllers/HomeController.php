@@ -156,5 +156,12 @@ class HomeController extends Controller
           $interiorServiceCount
         ];
     }
+
+    public function markAllRead()
+    {
+        $user = auth()->user();
+        $user->unreadNotifications->markAsRead();
+        return redirect()->back();
+    }
 }
 

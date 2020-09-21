@@ -114,6 +114,8 @@ Route::get('/spendings-overview', 'HomeController@spendingsOverview'); // AJAX R
 
 Route::get('/tickets-composition', 'HomeController@ticketsComposition'); // AJAX Route
 
+Route::get('/mark-all-read', 'HomeController@markAllRead'); // AJAX Route
+
 
 /* ------------------------------------------------------------------------------------------------
 

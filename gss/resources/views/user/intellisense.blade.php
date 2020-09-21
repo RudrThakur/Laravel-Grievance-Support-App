@@ -24,12 +24,7 @@
         </div>
       </div>
     </div>
-    {{-- progress bar --}}
-    <div class="progress my-3" style="display: none;" id="intellisenseprogress-box">
-        <div id='animate' class="progress-bar progress-bar-striped active" style="width:0%">
-            <span class="text-dark">Initiating</span>
-        </div>
-    </div>
+
 
     {{-- alerts --}}
     <div class="row fixed-bottom ml-auto" id="success-alert">
@@ -56,14 +51,29 @@
     <div id="intellisense">
         <div id="messages"></div>
         <div class="card p-3" id="analysis-box" style="display: none;">
-            <h2 class="text-center">Analysing</h2>
+            <div class="d-flex justify-content-around">
+                <h2 class="text-center" id="analysis-header">Analysing</h2>
+                <div class="align-self-end" id="blinkers">
+                  <div class="spinner-grow text-primary ml-auto" role="status">
+                    <span class="sr-only">Loading...</span>
+                  </div>
+                  <div class="spinner-grow text-danger ml-auto" role="status">
+                    <span class="sr-only">Loading...</span>
+                  </div>
+                  <div class="spinner-grow text-success ml-auto" role="status">
+                    <span class="sr-only">Loading...</span>
+                  </div>
+                </div>
+              </div>
             <div class="d-inline-block float-right">
                 <div class="row">
                     <div class="col-sm-6 py-4" id="pendingtickets-box" style="display: none">
                         <h6 class="sub-title">Analysing Pending Tickets </h6>
                     </div>
                     <div class="col-sm-6 py-4" style="display: none" id="pendingtickets-done">
-                        <div class="feeds-left font-weight-bolder"><i class="fas fa-check-circle text-success h3"></i></div>
+                        <div class="feeds-left font-weight-bolder"><i class="fas fa-check-circle text-success fa-2x"></i>
+                            <a href="http://localhost:5000" target="_blank" class="btn btn-outline-danger btn-sm ml-3">Check Report</a>
+                        </div>
                     </div>
                 </div>
                 <div class="row">
@@ -71,7 +81,9 @@
                         <h6 class="sub-title">Setting Up Priorities</h6>
                     </div>
                     <div class="col-sm-6 pb-4"  id="setpriorities-done" style="display: none">
-                        <div class="feeds-left font-weight-bolder"><i class="fas fa-check-circle text-success h3"></i></div>
+                        <div class="feeds-left font-weight-bolder"><i class="fas fa-check-circle text-success fa-2x"></i>
+                            <a href="http://localhost:5000" target="_blank" class="btn btn-outline-danger btn-sm ml-3">Check Report</a>
+                        </div>
                     </div>
                 </div>
                 <div class="row">
@@ -79,7 +91,9 @@
                         <h6 class="sub-title">Assigning Jobs </h6>
                     </div>
                     <div class="col-sm-6 pb-4" id="jobassignment-done" style="display: none">
-                        <div class="feeds-left font-weight-bolder"><i class="fas fa-check-circle text-success h3"></i></div>
+                        <div class="feeds-left font-weight-bolder"><i class="fas fa-check-circle text-success fa-2x"></i>
+                            <a href="http://localhost:5000" target="_blank" class="btn btn-outline-danger btn-sm ml-3">Check Report</a>
+                        </div>
                     </div>
                 </div>
                 <div class="row">
@@ -87,7 +101,9 @@
                         <h6 class="sub-title">Generating Report </h6>
                     </div>
                     <div class="col-sm-6 pb-4" id="generatereport-done" style="display: none">
-                        <div class="feeds-left font-weight-bolder"><i class="fas fa-check-circle text-success h3"></i></div>
+                        <div class="feeds-left font-weight-bolder"><i class="fas fa-check-circle text-success fa-2x"></i>
+                            <a href="http://localhost:5000" target="_blank" class="btn btn-outline-danger btn-sm ml-3">Check Report</a>
+                        </div>
                     </div>
                 </div>
                 <div class="row">
@@ -95,13 +111,19 @@
                         <h6 class="sub-title">Finishing Up</h6>
                     </div>
                     <div class="col-sm-6 pb-4" id="finishingup-done" style="display: none">
-                        <div class="feeds-left font-weight-bolder"><i class="fas fa-check-circle text-success h3"></i></div>
+                        <div class="feeds-left font-weight-bolder"><i class="fas fa-check-circle text-success fa-2x"></i>
+                            <a href="http://localhost:5000" target="_blank" class="btn btn-outline-danger btn-sm ml-3">Check Report</a>
+                        </div>
                     </div>
                 </div>
-                <div id="view-report" class=" col-8 text-center mx-auto p-4"  style="display: none">
-                    <a href="http://localhost:5000" target="_blank" class="btn btn-danger btn-sm d-block">Check Report</a>
-                </div>
             </div>
+        </div>
+    </div>
+
+    {{-- progress bar --}}
+    <div class="progress my-3" style="display: none;" id="intellisenseprogress-box">
+        <div id='animate' class="progress-bar progress-bar-striped active" style="width:0%">
+            <span class="text-dark">Initiating</span>
         </div>
     </div>
 </div>
@@ -124,7 +146,8 @@
             var intellisenceProgress = setInterval(function () {
                 if (w == 100) {
                     $('#finishingup-done').show();
-                    $('#view-report').show();
+                    $('#blinkers').hide();
+                    $('#analysis-header').html("Analysis Complete");
 
                     $("#complete-alert").fadeTo(2000, 500).slideUp(500, function() {
                     $("#complete-alert").slideUp(500);
