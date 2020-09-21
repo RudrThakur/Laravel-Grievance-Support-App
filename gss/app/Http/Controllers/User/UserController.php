@@ -10,6 +10,7 @@ use App\User;
 use App\UsersPermission;
 use Illuminate\Http\Request;
 use Throwable;
+use Illuminate\Database\QueryException;
 
 class UserController extends Controller
 {
@@ -23,25 +24,36 @@ class UserController extends Controller
     public function index()
     {
 
-        $roles = Role::all();
+        if(auth()->user()->can('create-user')){
 
-        $permissions = Permission::all();
+            $roles = Role::all();
 
-        return view('user.create-user',
+            $permissions = Permission::all();
 
-            [
-                'roles' => $roles,
-                'permissions' => $permissions,
-            ]);
+            return view('user.create-user',
+
+                [
+                    'roles' => $roles,
+                    'permissions' => $permissions,
+                ]);
+        }else{
+            return view('user.permission-error-page');
+        }
 
     }
 
     public function create(CreateUserRequest $request)
     {
 
-        $request->persist();
+        try{
 
-        return redirect()->to('/manage-users')->with('toast_success', 'The User Has Been Created Successfully');;
+            $request->persist();
+            return redirect()->to('/manage-users')->with('toast_success', 'The User Has Been Created Successfully');
+        }catch(QueryException $ex){ 
+            return redirect()->back()->withErrors([
+                'message' => 'Account Already Exists'
+            ]);
+        }
 
     }
 
@@ -75,6 +87,9 @@ class UserController extends Controller
     {
 
         try {
+
+         if(auth()->user()->can('delete-user')){
+
             if ($userId == auth()->user()->id) {
                 return array(
                     'status' => false,
@@ -82,7 +97,7 @@ class UserController extends Controller
                     'errors' => 'You Have to use the "Delete Account" Option in Account Settings to
                     Delete your Account'
                 );
-            } else {
+                } else {
                 $user = User::find($userId);
 
                 $user->delete();
@@ -92,8 +107,14 @@ class UserController extends Controller
                     'message' => 'User Has Been Deleted Successfully',
                     'errors' => ''
                 );
-            }
-        } catch (Throwable $exception) {
+            }}
+            else{
+               return array(
+                'status' => false,
+                'message' => 'You do not have permission for this action' ,
+                'errors' => 'Permission Error'
+            );
+           } }catch (Throwable $exception) {
             return array(
                 'status' => false,
                 'message' => 'Some Exception Occurred',
@@ -114,7 +135,7 @@ class UserController extends Controller
             ]);
 
 
-        
+
 
 
             return ['status'=>true,'message'=>'Status Changed Successfully'];

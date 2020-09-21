@@ -14,18 +14,20 @@ class FeedbacksController extends Controller
     public function all(){
 
         try{
-            $feedbacks = TicketsFeedback::all();
-            return view('user.feedbacks',
-        [
-            'feedbacks' => $feedbacks,
-        ])->with('toast_success','Thankyou your feedback is submitted successfully');
+            
+                $feedbacks = TicketsFeedback::all();
+                return view('user.feedbacks',
+                    [
+                        'feedbacks' => $feedbacks,
+                    ])->with('toast_success','Thankyou your feedback is submitted successfully');
+            
         }catch(QueryException $ex){ 
 
             return back()->withErrors([
                 'message' => 'No Feedbacks Available'
             ]);
-            }
+        }
         
 
-        }
+    }
 }

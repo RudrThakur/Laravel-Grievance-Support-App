@@ -26,7 +26,7 @@ class ServiceController extends Controller
 
 
     public function __construct(ServiceRepositoryInterface $serviceRepositoryInterface,
-                                ServiceActionsAuthorityRepositoryInterface $serviceActionsAuthorityRepositoryInterface
+        ServiceActionsAuthorityRepositoryInterface $serviceActionsAuthorityRepositoryInterface
     )
     {
 
@@ -40,7 +40,12 @@ class ServiceController extends Controller
 
     public function create()
     {
-        return view('user.service');
+        if (auth()->user()->can('create-ticket')){
+            return view('user.service');
+        }
+        else{
+            return view('user.permission-error-page');
+        }
     }
 
     public function store(ServiceRequest $request)

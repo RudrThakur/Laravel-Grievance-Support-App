@@ -11,42 +11,55 @@ use Illuminate\Http\Request;
 class RoleController extends Controller
 {
     public function index(){
+        if (auth()->user()->can('manage-roles')){
+            $permissions = Permission::all();
 
-        $permissions = Permission::all();
-
-        return view('user.create-role',
-        [
-            'permissions' => $permissions,
-        ]);
+            return view('user.create-role',
+                [
+                    'permissions' => $permissions,
+                ]);
+        }else{
+            return view('user.permission-error-page');
+        }
 
     }
 
     public function create(CreateRoleRequest $request){
-
+        if (auth()->user()->can('manage-roles')){
         $request->persist();
 
         // session()->flash('message', 'The Role has been Created');
 
         return redirect()->to('/manage-roles')->with('toast_success', 'The Role has been Created');
+        }else{
+                return view('user.permission-error-page');
+            }
     }
 
     public function all(){
 
+if (auth()->user()->can('manage-roles')){
         $roles = Role::with('permissions')
-                        ->get();
+        ->get();
         $allPermissions = Permission::all();                
 
         return view('user.manage-roles',
 
-        [
-            'roles' => $roles,
-            'allPermissions' => $allPermissions,
-        ]);
+            [
+                'roles' => $roles,
+                'allPermissions' => $allPermissions,
+            ]);
+        }
+                else{
+
+                    return view('user.permission-error-page');
+
+                }
 
     }
 
     public function destroy($roleId){
-        
+
         $role = Role::where('id',$roleId)->first();
         
         $role->delete();

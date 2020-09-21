@@ -17,7 +17,13 @@ class PermissionController extends Controller
 
     public function index(){
 
-        return view('user.create-permission');
+        if (auth()->user()->can('manage-permissions')){
+
+
+            return view('user.create-permission');
+        }else{
+            return view('user.permission-error-page');
+        }
 
     }
 
@@ -31,13 +37,18 @@ class PermissionController extends Controller
 
     public function all(){
 
-        $permissions = $this->allPermissions();
+        if(auth()->user()->can('manage-permissions')){
 
-        return view('user.manage-permissions',
+            $permissions = $this->allPermissions();
 
-        [
-            'permissions' => $permissions,
-        ]);
+            return view('user.manage-permissions',
+
+                [
+                    'permissions' => $permissions,
+                ]);
+        }else{
+            return view('user.permission-error-page');
+        }
 
     }
 
