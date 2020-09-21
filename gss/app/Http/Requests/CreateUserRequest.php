@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests;
 
+use App\Permission;
 use App\Permissions\HasPermissionsTrait;
+use App\RolesPermission;
 use App\User;
 use Illuminate\Foundation\Http\FormRequest;
 use App\Worker;
@@ -48,7 +50,6 @@ class CreateUserRequest extends FormRequest
 
     public function persist()
     {
-
         $user = new User();
 
         $user->name = $this->user_name;
@@ -61,7 +62,39 @@ class CreateUserRequest extends FormRequest
 
         $user->permissions()->attach($this->user_permissions); // Attach User Permissions
 
-        if ($this->user_role == 3) { // RoleID for Worker
+        $rolePermissions = RolesPermission::where('role_id', $this->user_role)->get(); // Check Existing Role Permissions
+
+        if ($rolePermissions->isEmpty()) // Attach Role Permissions
+        {
+            foreach ($user->roles as $role) {
+
+                if ($role->name == 'Faculty') {
+
+                    $facultyDefaultPermissions = ['create-ticket', 'view-tickets', 'feedback-permission', 'view-ticket-details', 'manage-tickets'];
+                    $scopedPermissions = Permission::whereIn('slug', $facultyDefaultPermissions)->get();
+                    $role->permissions()->saveMany($scopedPermissions);
+
+                } else if ($role->name == 'Worker') {
+
+                    $workerDefaultPermissions = ['view-tickets', 'manage-tickets'];
+                    $scopedPermissions = Permission::whereIn('slug', $workerDefaultPermissions)->get();
+                    $role->permissions()->saveMany($scopedPermissions);
+
+                } else if ($role->name == 'Registrar') {
+
+                    $registrarDefaultPermissions = ['service-approval', 'manage-tickets', 'view-dashboard', 'view-tickets'];
+                    $scopedPermissions = Permission::whereIn('slug', $registrarDefaultPermissions)->get();
+                    $role->permissions()->saveMany($scopedPermissions);
+
+                } else {
+                    $role->permissions()->saveMany(Permission::all());
+                }
+
+            }
+        }
+
+
+        if ($this->user_role == 3) { // Insert Worker Data
 
             $worker = new Worker();
 
