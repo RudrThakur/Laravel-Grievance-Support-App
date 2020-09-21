@@ -1,6 +1,7 @@
 @extends('user.partials.master')
 @section('title', 'Dashboard')
 @section('content')
+
 <!-- Begin Page Content -->
 <div class="container-fluid">
     <!-- Page Heading -->
@@ -17,6 +18,33 @@
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Total Tickets
+
+    <!-- Begin Page Content -->
+    <div class="container-fluid">
+
+        <!-- Page Heading -->
+        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">{{ auth()->user()->roles->first()->name }} Dashboard</h1>
+            <button id="generate-report" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                    class="fas fa-download fa-sm text-white-50"></i> Generate Report
+            </button>
+        </div>
+
+        <!-- Content Row -->
+        <div class="row">
+
+            <!-- Earnings (Monthly) Card Example -->
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card border-left-primary shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Total Tickets
+                                </div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $allTicketsCount }}</div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-calendar fa-2x text-gray-300"></i>
                             </div>
                             <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $allTicketsCount }}</div>
                         </div>
@@ -162,6 +190,30 @@
                     </h4>
                     <div class="progress mb-4">
                         <div class="progress-bar bg-{{ $topPerformer['color'] }}" role="progressbar" style="width: {{ $topPerformer['rating'] }}%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
+        <!-- Content Row -->
+        <div class="row">
+
+            <!-- Content Column -->
+            <div class="col-lg-6 mb-4">
+
+                <!-- Project Card Example -->
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">Top 5 Performers of this Month</h6>
+                    </div>
+                    <div class="card-body">
+
+                        @foreach($topPerformers as $topPerformer)
+                            <h4 class="small font-weight-bold">{{ $topPerformer['name'] }}
+                                <span class="float-right">Rating - {{ $topPerformer['rating'] }}%</span>
+                            </h4>
+                            <div class="progress mb-4">
+                                <div class="progress-bar bg-{{ $topPerformer['color'] }}" role="progressbar"
+                                     style="width: {{ $topPerformer['rating'] }}%"
+                                     aria-valuenow="20"
+                                     aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        @endforeach
                     </div>
                     @endforeach
                 </div>
@@ -197,6 +249,25 @@
                             framework, especially the utility classes.</p>
                     </div>
                 </div>
+            <div class="col-lg-6 mb-4">
+                @if(!$recentFeedbacks->isEmpty())
+                    @foreach($recentFeedbacks as $feedback)
+                        <div class="card shadow mb-4">
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-primary">Recent Feedbacks</h6>
+                                    <span style="font-size: 12px">By <span class="text-primary">{{ $feedback->user->name }}</span></span>
+                                    <span style="font-size: 12px"><strong>{{ $feedback->created_at->diffForHumans() }}</strong></span>
+                            </div>
+                            <div class="card-body">
+                                <p>Rating - <strong><span
+                                            class="text-{{ $feedback->rating >= 5 ? 'success' : 'danger' }}">{{ $feedback->rating }} out of 10</span></strong>
+                                </p>
+                                <hr>
+                                <p>Message - {{ $feedback->message }}</p>
+                            </div>
+                        </div>
+                    @endforeach
+                @endif
             </div>
         </div>
     </div>

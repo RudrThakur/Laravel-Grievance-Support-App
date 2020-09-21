@@ -161,16 +161,16 @@
 
 <!-- Nav Item - Charts -->
     <li class="nav-item">
-        <a class="nav-link" href="charts.html">
+        <a class="nav-link" href="/analysis">
             <i class="fas fa-fw fa-chart-area"></i>
-            <span>Charts</span></a>
+            <span>Analysis</span></a>
     </li>
 
     <!-- Nav Item - Tables -->
     <li class="nav-item">
-        <a class="nav-link" href="tables.html">
+        <a class="nav-link" href="/statistics">
             <i class="fas fa-fw fa-table"></i>
-            <span>Tables</span></a>
+            <span>Statistics</span></a>
     </li>
 
     <!-- Divider -->

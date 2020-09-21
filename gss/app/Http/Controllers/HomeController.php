@@ -7,6 +7,7 @@ use App\Role;
 use App\Service;
 use App\ServiceAction;
 use App\Ticket;
+use App\TicketsFeedback;
 use App\User;
 use App\UsersRole;
 use App\Worker;
@@ -58,7 +59,6 @@ class HomeController extends Controller
                 $workCompleted = 0;
 
 
-
             // Top Performers of the Month
 
             $workerRoleId = Role::where('name', 'Worker')->first()->id;
@@ -71,19 +71,15 @@ class HomeController extends Controller
 
             $topPerformers = [];
 
-            foreach($workers as $worker) {
+            foreach ($workers as $worker) {
 
-                foreach($workerData as $workerDatum) {
+                foreach ($workerData as $workerDatum) {
 
-                    if($workerDatum->rating >= 80){
+                    if ($workerDatum->rating >= 80) {
                         $color = 'success';
-                    }
-
-                    else if($workerDatum->rating >= 40 && $workerDatum->rating < 80) {
+                    } else if ($workerDatum->rating >= 40 && $workerDatum->rating < 80) {
                         $color = 'primary';
-                    }
-
-                    else {
+                    } else {
                         $color = 'danger';
                     }
 
@@ -95,6 +91,8 @@ class HomeController extends Controller
                 }
             }
 
+            $recentFeedbacks = TicketsFeedback::limit(2)->get();
+
             return view('user.index',
 
                 [
@@ -103,7 +101,8 @@ class HomeController extends Controller
                     'pendingTicketsCount' => $pendingTicketsCount,
                     'currentMonthSpendings' => $currentMonthSpendings,
                     'workCompleted' => $workCompleted,
-                    'topPerformers' => $topPerformers
+                    'topPerformers' => $topPerformers,
+                    'recentFeedbacks' => $recentFeedbacks
 
                 ]);
         }
@@ -148,12 +147,12 @@ class HomeController extends Controller
         $interiorServiceCount = Service::where('category', 'Interior')->get()->count();
 
         return $data = [
-          $paintingServiceCount,
-          $plumbingServiceCount,
-          $houseKeepingServiceCount,
-          $airconditioningServiceCount,
-          $electricalServiceCount,
-          $interiorServiceCount
+            $paintingServiceCount,
+            $plumbingServiceCount,
+            $houseKeepingServiceCount,
+            $airconditioningServiceCount,
+            $electricalServiceCount,
+            $interiorServiceCount
         ];
     }
 

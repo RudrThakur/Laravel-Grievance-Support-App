@@ -337,5 +337,15 @@ $(function () {
         $('.assign_worker_fields').attr('disabled', this.checked);
     });
 
+        /* ----------------------------------------------------------------------
+                 Dashboard Generate Report
+---------------------------------------------------------------------- */
+
+       $("#generate-report").on("click", function () {
+
+            window.print();
+
+        });
+
 });
 
