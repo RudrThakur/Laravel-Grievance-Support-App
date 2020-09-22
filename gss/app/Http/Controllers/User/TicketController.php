@@ -64,18 +64,21 @@ class TicketController extends Controller
 
             }
 
-            if(auth()->user()->roles->first()->name=='Admin'){
+            
+            if(auth()->user()->roles->first()->name=='Faculty'){
+
                 $tickets = $tickets->with('authority')
                 ->with('user')
                 ->with('status')
+                ->where('user_id',auth()->user()->id)
                 ->paginate(10)
                 ->appends($queries);
+              
             }
             else{
                 $tickets = $tickets->with('authority')
                 ->with('user')
                 ->with('status')
-                ->where('user_id',auth()->user()->id)
                 ->paginate(10)
                 ->appends($queries);
             }

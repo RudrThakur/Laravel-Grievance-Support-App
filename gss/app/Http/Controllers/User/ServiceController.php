@@ -78,29 +78,28 @@ class ServiceController extends Controller
             $authorities = Authority::whereIn('id', $serviceActionAuthoritiesIds)->get();
 
             
-            if(!auth()->user()->roles->first()->name == "Faculty"){ $isApprovedByCurrentUser = $this->serviceActionsAuthorityRepositoryInterface->checkIfApprovedByAuthorityName($serviceAction->id,
+            if(!(auth()->user()->roles->first()->name == "Faculty")){ $isApprovedByCurrentUser = $this->serviceActionsAuthorityRepositoryInterface->checkIfApprovedByAuthorityName($serviceAction->id,
                 auth()->user()->roles->first()->name);
-            } 
+            }
             else{
                 $isApprovedByCurrentUser = null;
             }  
 
             $pendingApprovals = $this->serviceActionsAuthorityRepositoryInterface->getUnApprovedByServiceActionId($serviceAction->id);
 
-            if(!auth()->user()->roles->first()->name == "Faculty"){
-                 $isApprovalRequiredByCurrentUser = $this->serviceActionsAuthorityRepositoryInterface->checkIfApprovalRequiredByAuthorityName($serviceAction->id,
+            if(!(auth()->user()->roles->first()->name == "Faculty")){$isApprovalRequiredByCurrentUser = $this->serviceActionsAuthorityRepositoryInterface->checkIfApprovalRequiredByAuthorityName($serviceAction->id,
                 auth()->user()->roles->first()->name);
             }
             else{
-               $isApprovalRequiredByCurrentUser = null;
-            }
-
+                $isApprovalRequiredByCurrentUser = null;
+             }
+           
         } else {
 
             $serviceActionAuthorities = null;
             $authorities = null;
-            $isApprovedByCurrentUser = null;
             $pendingApprovals = null;
+            $isApprovedByCurrentUser = null;
             $isApprovalRequiredByCurrentUser = null;
 
         }
