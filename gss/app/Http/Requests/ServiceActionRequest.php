@@ -55,7 +55,7 @@ class ServiceActionRequest extends FormRequest
 
     public function persist()
     {
-
+    
         $serviceAction = new ServiceAction;
 
         $serviceAction->service_id = $this->serviceId;
