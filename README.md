@@ -1,2 +1,2 @@
 # Laravel-Grievance-Support-App
-Ticketing System built in Laravel
+An Advanced Ticketing System built in Laravel
